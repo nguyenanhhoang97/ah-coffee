@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from '@/router';
 import store from '@/store';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import './assets/scss/element-variables.scss';
 import { i18n, loadLanguageAsync } from '@/locales';
 
 Vue.config.productionTip = false;

@@ -15,5 +15,4 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/app.scss';
-@import './assets/css/nucleo-icons.css';
 </style>

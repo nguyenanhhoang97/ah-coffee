@@ -13,20 +13,50 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="javascript:void(0)" class="simple-text logo-mini">AH</a>
-          <a href="javascript:void(0)" class="simple-text logo-normal">CoffeeShop</a>
+          <a href="javascript:void(0)" class="simple-text logo-normal">Coffee</a>
         </div>
         <ul class="nav">
-          <li v-for="tab in menus" :key="tab.route" class="nav-item">
-            <a :href="{ name: tab.route }" v-if="!tab.isParent" active-class="active">
+          <el-menu
+            class="nav"
+            background-color="transparent"
+            active-text-color="white"
+            text-color="#DADADA"
+          >
+            <div v-for="tab in menus" :key="tab.route">
+              <el-menu-item v-if="!tab.isParent" :index="tab.index">
+                <div class="custom-nav-item">
+                  <i :class="tab.icon"></i>
+                  <p>{{ tab.name }}</p>
+                </div>
+              </el-menu-item>
+              <el-submenu v-if="tab.isParent" :index="tab.index">
+                <template slot="title" class="nav-item">
+                  <div class="custom-nav-item">
+                    <i :class="tab.icon"></i>
+                    <p>{{ tab.name }}</p>
+                    <b class="caret"></b>
+                  </div>
+                </template>
+                <div v-for="child in tab.childs" :key="child.route">
+                  <el-menu-item :index="tab.index">
+                    <span>{{ child.name }}</span>
+                  </el-menu-item>
+                </div>
+              </el-submenu>
+            </div>
+          </el-menu>
+          <!-- <li v-for="tab in menus" :key="tab.route" class="nav-item">
+            <router-link :to="{ name: tab.route }" v-if="!tab.isParent" active-class="active">
               <i :class="tab.icon"></i>
               <p>{{ tab.name }}</p>
-            </a>
+            </router-link>
             <a
               data-toggle="collapse"
-              :href="{ name: tab.route }"
+              href="#"
               v-if="tab.isParent"
-              aria-expanded="true"
+              v-bind:aria-expanded=" tab.expand1? 'true' : 'false' "
               active-class="active"
+              @click="handleSubMenu(tab)"
             >
               <i :class="tab.icon"></i>
               <p>
@@ -34,7 +64,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse show" id="pagesExamples">
+            <div class="collapse" v-bind:class="{ show: tab.expand2 }" id="pagesExamples">
               <ul class="nav" v-if="tab.isParent">
                 <li v-for="child in tab.childs" :key="child.route">
                   <a :href="{ name: child.route }">
@@ -44,7 +74,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
@@ -60,30 +90,64 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
         {
           icon: 'fas fa-tachometer-alt',
           name: this.$t('dashboard'),
-          route: 'dashboard'
+          route: 'dashboard',
+          index: '1'
         },
         {
           icon: 'fas fa-file',
           name: this.$t('page'),
           isParent: true,
           route: 'contact.create',
+          // expand1: false,
+          // expand2: 'collapse',
+          // expand2: false,
+          index: '2',
           childs: [
             {
               name: this.$t('pricing'),
-              route: 'contact.create'
+              route: 'contact.create',
+              index: '2-1'
             },
             {
               name: this.$t('timeline'),
-              route: 'contact.list'
+              route: 'contact.list',
+              index: '2-2'
             }
           ]
         }
       ];
+    }
+  },
+  methods: {
+    handleSubMenu(tab) {
+      // if (tab.expand1 === false) {
+      //   tab.expand1 = true;
+      // } else {
+      //   tab.expand1 = false;
+      // }
+      // if (tab.expand2 === 'collapse') {
+      //   tab.expand2 = 'collapse show';
+      // } else {
+      //   tab.expand2 = 'collapse';
+      // }
+      tab.expand1 = !tab.expand1;
+      tab.expand2 = !tab.expand2;
+      // console.log(tab);
     }
   }
 })
 export default class Sidebar extends Vue {}
 </script>
 
-<style>
+<style lang="scss">
+.el-submenu__icon-arrow {
+  display: none;
+}
+.caret {
+  top: 1.8rem !important;
+}
+.custom-nav-item {
+  padding-top: 0.7rem;
+}
 </style>
+
