@@ -9,7 +9,8 @@
             data-original-title="Sidebar toggle"
             data-placement="right"
           >
-            <i class="el-icon-more"></i>
+            <i class="fas fa-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="fas fa-align-justify visible-on-sidebar-mini text-muted"></i>
           </button>
         </div>
         <div class="navbar-toggle d-inline">
@@ -19,7 +20,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+        <p class="navbar-brand">AdminCP</p>
       </div>
       <button
         class="navbar-toggler"
@@ -35,47 +36,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="navbar-nav ml-auto">
-          <li class="search-bar input-group">
-            <button
-              class="btn btn-link"
-              id="search-button"
-              data-toggle="modal"
-              data-target="#searchModal"
-            >
-              <!-- <i class="tim-icons icon-zoom-split"></i> -->
-              <i class="el-icon-search"></i>
-              <span class="d-lg-none d-md-block">Search</span>
-            </button>
-          </li>
-          <li class="dropdown nav-item">
-            <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <div class="notification d-none d-lg-block d-xl-block"></div>
-              <!-- <i class="tim-icons icon-sound-wave"></i> -->
-              <i class="el-icon-bell"></i>
-              <p class="d-lg-none">Notifications</p>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a>
-              </li>
-              <li class="nav-link">
-                <a
-                  href="javascript:void(0)"
-                  class="nav-item dropdown-item"
-                >Your friend Michael is in town</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown nav-item">
+          <el-dropdown trigger="click">
+            <span class="el-dropdown-link">
+              <div class="photo">
+                <img src="../assets/img/mike.jpg" alt="Profile Photo">
+              </div>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>Profile</el-dropdown-item>
+              <el-dropdown-item>Log out</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+
+          <!-- <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <div class="photo">
                 <img src="../assets/img/mike.jpg" alt="Profile Photo">
@@ -95,7 +68,7 @@
                 <a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="separator d-lg-none"></li>
         </ul>
       </div>

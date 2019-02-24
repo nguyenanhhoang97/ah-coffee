@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Sidebar/>
-    <div class="main-panel">
+    <div class="main-panel" data="blue">
       <Navbar/>
       <!-- <div id="nav">
         <router-link to="/">Home</router-link>|
