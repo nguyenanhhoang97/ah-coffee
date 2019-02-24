@@ -18,13 +18,16 @@
         <ul class="nav">
           <li class="active">
             <a href="../examples/dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
+              <!-- <i class="tim-icons icon-chart-pie-36"></i> -->
+              <i class="el-icon-menu"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
             <a data-toggle="collapse" href="#pagesExamples">
-              <i class="tim-icons icon-image-02"></i>
+              <!-- <i class="tim-icons icon-image-02"></i> -->
+              <i class="el-icon-document"></i>
+
               <p>
                 Pages
                 <b class="caret"></b>
@@ -79,7 +82,9 @@
           </li>
           <li>
             <a data-toggle="collapse" href="#componentsExamples">
-              <i class="tim-icons icon-molecule-40"></i>
+              <!-- <i class="tim-icons icon-molecule-40"></i> -->
+              <i class="el-icon-star-on"></i>
+
               <p>
                 Components
                 <b class="caret"></b>
@@ -153,7 +158,9 @@
           </li>
           <li>
             <a data-toggle="collapse" href="#formsExamples">
-              <i class="tim-icons icon-notes"></i>
+              <!-- <i class="tim-icons icon-notes"></i> -->
+              <i class="el-icon-tickets"></i>
+
               <p>
                 Forms
                 <b class="caret"></b>
@@ -190,7 +197,9 @@
           </li>
           <li>
             <a data-toggle="collapse" href="#tablesExamples">
-              <i class="tim-icons icon-puzzle-10"></i>
+              <!-- <i class="tim-icons icon-puzzle-10"></i> -->
+              <i class="el-icon-date"></i>
+
               <p>
                 Tables
                 <b class="caret"></b>
@@ -221,7 +230,9 @@
           </li>
           <li>
             <a data-toggle="collapse" href="#mapsExamples">
-              <i class="tim-icons icon-pin"></i>
+              <!-- <i class="tim-icons icon-pin"></i> -->
+              <i class="el-icon-location"></i>
+
               <p>
                 Maps
                 <b class="caret"></b>
@@ -252,19 +263,25 @@
           </li>
           <li>
             <a href="../examples/widgets.html">
-              <i class="tim-icons icon-settings"></i>
+              <!-- <i class="tim-icons icon-settings"></i> -->
+              <i class="el-icon-setting"></i>
+
               <p>Widgets</p>
             </a>
           </li>
           <li>
             <a href="../examples/charts.html">
-              <i class="tim-icons icon-chart-bar-32"></i>
+              <!-- <i class="tim-icons icon-chart-bar-32"></i> -->
+              <i class="el-icon-news"></i>
+
               <p>Charts</p>
             </a>
           </li>
           <li>
             <a href="../examples/calendar.html">
-              <i class="tim-icons icon-time-alarm"></i>
+              <!-- <i class="tim-icons icon-time-alarm"></i> -->
+              <i class="el-icon-date"></i>
+
               <p>Calendar</p>
             </a>
           </li>

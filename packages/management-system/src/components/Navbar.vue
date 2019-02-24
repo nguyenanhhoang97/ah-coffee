@@ -9,8 +9,7 @@
             data-original-title="Sidebar toggle"
             data-placement="right"
           >
-            <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
-            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
+            <i class="el-icon-more"></i>
           </button>
         </div>
         <div class="navbar-toggle d-inline">
@@ -43,14 +42,16 @@
               data-toggle="modal"
               data-target="#searchModal"
             >
-              <i class="tim-icons icon-zoom-split"></i>
+              <!-- <i class="tim-icons icon-zoom-split"></i> -->
+              <i class="el-icon-search"></i>
               <span class="d-lg-none d-md-block">Search</span>
             </button>
           </li>
           <li class="dropdown nav-item">
             <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <div class="notification d-none d-lg-block d-xl-block"></div>
-              <i class="tim-icons icon-sound-wave"></i>
+              <!-- <i class="tim-icons icon-sound-wave"></i> -->
+              <i class="el-icon-bell"></i>
               <p class="d-lg-none">Notifications</p>
             </a>
             <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">

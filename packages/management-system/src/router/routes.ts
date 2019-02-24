@@ -19,6 +19,7 @@ export default [
     name: 'home',
     meta: {
       title: 'AHCoffee',
+      layout: 'default'
     },
     component: () =>
       import(/* webpackChunkName: "routes" */
@@ -30,6 +31,7 @@ export default [
     name: 'about',
     meta: {
       title: 'AHCoffee',
+      layout: 'default'
     },
     component: () =>
       import(/* webpackChunkName: "routes" */

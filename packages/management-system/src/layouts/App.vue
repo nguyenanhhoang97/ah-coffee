@@ -6,14 +6,8 @@
 
 <script>
 import VueExtendLayouts from 'vue-extend-layout';
-
 export default {
   name: 'App',
   components: { VueExtendLayouts }
 };
 </script>
-
-<style lang="scss">
-@import './assets/scss/app.scss';
-@import './assets/css/nucleo-icons.css';
-</style>
