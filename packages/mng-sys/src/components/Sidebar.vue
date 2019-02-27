@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="navbar-minimize-fixed">
+    <div class="navbar-minimize-fixed" style="opacity: 1;">
       <button class="minimize-sidebar btn btn-link btn-just-icon">
-        <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
-        <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        <i class="fas fa-align-center visible-on-sidebar-regular text-muted"></i>
+        <i class="fas fa-align-justify visible-on-sidebar-mini text-muted"></i>
       </button>
     </div>
     <div class="sidebar" data="red">
@@ -70,19 +70,19 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
           icon: 'fas fa-file',
           name: this.$t('page'),
           isParent: true,
-          route: 'contact.create',
+          route: 'page',
           expand1: false,
           expand2: false,
           index: '2',
           childs: [
             {
               name: this.$t('pricing'),
-              route: 'contact.create',
+              route: 'pricing',
               index: '2-1'
             },
             {
               name: this.$t('timeline'),
-              route: 'contact.list',
+              route: 'timeline',
               index: '2-2'
             }
           ]
@@ -91,19 +91,19 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
           icon: 'fas fa-th-large',
           name: this.$t('components'),
           isParent: true,
-          route: 'contact.create',
+          route: 'components',
           expand1: false,
           expand2: false,
           index: '3',
           childs: [
             {
               name: this.$t('buttons'),
-              route: 'contact.create',
+              route: 'buttons',
               index: '3-1'
             },
             {
               name: this.$t('pannels'),
-              route: 'contact.list',
+              route: 'pannels',
               index: '3-2'
             }
           ]
