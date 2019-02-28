@@ -1,0 +1,21 @@
+.modal {
+   .form-control {
+     color: black;
+   }
+}
+textarea.form-control {
+  border: 1px solid #2b3553;
+}
+textarea{
+  .form-control:focus {
+    border-left: 1px solid #e14eca;
+    border-top: 1px solid #e14eca;
+    border-right: 1px solid #e14eca;
+  }
+
+  textarea.form-control:active {
+    border-left: 1px solid #e14eca;
+    border-top: 1px solid #e14eca;
+    border-right: 1px solid #e14eca;
+  }
+}
