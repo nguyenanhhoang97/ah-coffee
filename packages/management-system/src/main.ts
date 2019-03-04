@@ -22,9 +22,23 @@ router.beforeEach((to, from, next) => {
   loadLanguageAsync(lang).then(() => next());
 });
 
-new Vue({
+// new Vue({
+//   router,
+//   store,
+//   i18n,
+//   render: h => h(App)
+// }).$mount('#app');
+
+export const EventBus = new Vue({
+  // eslint-disable-line no-new
+  el: '#app',
+
+  components: {
+    App
+  },
+
   router,
   store,
   i18n,
-  render: h => h(App)
-}).$mount('#app');
+  render: h => h('app')
+});

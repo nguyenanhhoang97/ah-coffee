@@ -95,7 +95,7 @@ export default [
       import(/* webpackChunkName: "routes" */
         /* webpackMode: "lazy" */
         '@/modules/dashboard/index.vue')
-  }
+  },
   {
     path: '/home',
     meta: {},

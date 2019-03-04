@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" data="blue">
+  <div class="sidebar" data="red">
     <div class="sidebar-wrapper">
       <div class="logo">
         <a href="javascript:void(0)" class="simple-text logo-mini">AH</a>

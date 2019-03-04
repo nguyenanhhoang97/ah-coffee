@@ -1,19 +1,19 @@
 <template>
-  <div class="sidebar-mini">
+  <div v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
     <div class="wrapper">
-      <nav-mini />
-      <app-sidebar />
-      <div class="main-panel" data="blue">
-        <app-header />
-        <search-box />
+      <nav-mini/>
+      <app-sidebar/>
+      <div class="main-panel" data="red">
+        <app-header/>
+        <search-box/>
         <div class="content">
           <transition>
             <keep-alive>
-              <router-view />
+              <router-view/>
             </keep-alive>
           </transition>
         </div>
-        <app-footer />
+        <app-footer/>
       </div>
     </div>
   </div>
@@ -21,13 +21,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 import {
   NavMini,
   AppSidebar,
   AppHeader,
   SearchBox,
-  AppFooter,
+  AppFooter
 } from '@/components';
 import '@/assets/scss/style.scss';
 
@@ -37,26 +38,35 @@ import '@/assets/scss/style.scss';
     AppSidebar,
     AppHeader,
     AppFooter,
-    SearchBox,
+    SearchBox
   },
-})
 
+  computed: {
+    ...mapGetters('global', ['getSidebarStyle']),
+  }
+})
 export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
 </style>

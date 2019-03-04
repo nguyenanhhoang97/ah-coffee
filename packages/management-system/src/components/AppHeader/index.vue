@@ -8,6 +8,7 @@
             rel="tooltip"
             data-original-title="Sidebar toggle"
             data-placement="right"
+            @click="handleChangeSidebarStyle"
           >
             <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
             <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
@@ -74,27 +75,6 @@
               </li>
             </ul>
           </li>-->
-          <!-- <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <div class="photo">
-                <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
-              </div>
-              <b class="caret d-none d-lg-block d-xl-block"></b>
-              <p class="d-lg-none">Log out</p>
-            </a>
-            <ul class="dropdown-menu dropdown-navbar">
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a>
-              </li>
-              <li class="dropdown-divider"></li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a>
-              </li>
-            </ul>
-          </li>-->
           <li class="dropdown nav-item">
             <b-dropdown id="ddown-right" right variant="link" no-caret>
               <template slot="button-content">
@@ -128,14 +108,22 @@ import { mapGetters, mapActions } from 'vuex';
 
 @Component({
   computed: {
+    ...mapGetters('global', ['getSidebarStyle']),
     ...mapGetters('session', ['isAuthenticated'])
   },
   methods: {
-    ...mapActions('session', ['logout'])
+    ...mapActions('session', ['logout']),
+    ...mapActions('global', ['setNavBarStyle'])
   }
 })
 export default class AppHeader extends Vue {
   public logout!: any;
+  public setNavBarStyle!: any;
+  public getSidebarStyle!: any;
+
+  public handleChangeSidebarStyle() {
+    this.setNavBarStyle(!this.getSidebarStyle);
+  }
 
   public handleLogOut() {
     try {
@@ -146,3 +134,10 @@ export default class AppHeader extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+#ddown-right__BV_toggle_ {
+  height: auto;
+}
+</style>
+

@@ -1,5 +1,6 @@
 <template>
   <layout main-css="dashboard">
+    {{ navBarStyle }}
     <div class="dashboard">
       <div class="row">
         <div class="col-lg-3 col-md-6">
@@ -620,8 +621,8 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from 'vuex';
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+import { mapActions, mapState, mapGetters } from 'vuex';
 
 import { Layout, AppFooter } from '@/components';
 
@@ -629,8 +630,15 @@ import { Layout, AppFooter } from '@/components';
   components: {
     Layout
   },
+
+  computed: {
+    ...mapState('dashboard', ['navBarStyle']),
+    ...mapGetters('dashboard', ['getSidebarStyle'])
+  },
+
   methods: {}
 })
-
-export default class Dashboard extends Vue {}
+export default class Dashboard extends Vue {
+  public getSidebarStyle!: boolean;
+}
 </script>
