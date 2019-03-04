@@ -29,9 +29,34 @@ export default class AppSidebar extends Vue {
       route: 'dashboard'
     },
     {
-      icon: 'tim-icons icon-chart-pie-36',
-      name: 'Test',
-      route: 'Test'
+      icon: 'tim-icons icon-app',
+      name: 'Manage Categories',
+      route: 'categories'
+    },
+    {
+      icon: 'tim-icons icon-atom',
+      name: 'Manage Products',
+      route: 'products'
+    },
+    {
+      icon: 'tim-icons icon-notes',
+      name: 'Manage Bills',
+      route: 'bills'
+    },
+    {
+      icon: 'tim-icons icon-single-02',
+      name: 'Manage Customers',
+      route: 'customers'
+    },
+    {
+      icon: 'tim-icons icon-single-02',
+      name: 'Manage Employees',
+      route: 'employees'
+    },
+    {
+      icon: 'tim-icons icon-money-coins',
+      name: 'Manage Revenues',
+      route: 'revenues'
     }
   ];
 }

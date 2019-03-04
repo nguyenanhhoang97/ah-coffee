@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import VueElementLoading from 'vue-element-loading';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import App from './App.vue';
 import router from '@/router';
@@ -12,6 +13,7 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('VueElementLoading', VueElementLoading);
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';

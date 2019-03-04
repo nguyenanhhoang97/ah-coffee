@@ -1,6 +1,5 @@
 <template>
   <layout main-css="dashboard">
-    {{ navBarStyle }}
     <div class="dashboard">
       <div class="row">
         <div class="col-lg-3 col-md-6">
@@ -9,22 +8,22 @@
               <div class="row">
                 <div class="col-5">
                   <div class="info-icon text-center icon-warning">
-                    <i class="tim-icons icon-chat-33"></i>
+                    <i class="tim-icons icon-atom"></i>
                   </div>
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">Number</p>
-                    <h3 class="card-title">150GB</h3>
+                    <p class="card-category">{{ $t('label.products') }}</p>
+                    <h3 class="card-title">{{ getStatistics.products }}</h3>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <hr>
+              <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-refresh-01"></i>Update Now
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -34,22 +33,22 @@
               <div class="row">
                 <div class="col-5">
                   <div class="info-icon text-center icon-primary">
-                    <i class="tim-icons icon-shape-star"></i>
+                    <i class="tim-icons icon-notes"></i>
                   </div>
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">Followers</p>
-                    <h3 class="card-title">+45k</h3>
+                    <p class="card-category">{{ $t('label.bills') }}</p>
+                    <h3 class="card-title">{{ getStatistics.bills }}</h3>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <hr>
+              <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-sound-wave"></i>Last Research
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -64,17 +63,17 @@
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">Users</p>
-                    <h3 class="card-title">150,000</h3>
+                    <p class="card-category">{{ $t('label.customers') }}</p>
+                    <h3 class="card-title">{{ getStatistics.customers }}</h3>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <hr>
+              <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-trophy"></i>Customers feedback
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -84,22 +83,22 @@
               <div class="row">
                 <div class="col-5">
                   <div class="info-icon text-center icon-danger">
-                    <i class="tim-icons icon-molecule-40"></i>
+                    <i class="tim-icons icon-money-coins"></i>
                   </div>
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">Errors</p>
-                    <h3 class="card-title">12</h3>
+                    <p class="card-category">{{ $t('label.revenues') }}</p>
+                    <h3 class="card-title">{{ getStatistics.revenues }}</h3>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <hr>
+              <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-watch-time"></i>In the last hours
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -107,7 +106,7 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="card card-tasks">
-            <div class="card-header">
+            <!-- <div class="card-header">
               <h6 class="title d-inline">Tasks(5)</h6>
               <p class="card-category d-inline">today</p>
               <div class="dropdown">
@@ -124,9 +123,14 @@
                   <a class="dropdown-item" href="#pablo">Something else</a>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="card-body">
-              <div class="table-full-width table-responsive">
+              <div>
+                <h1>00:20</h1>
+                <h2>Good morning, Anh Hoang!</h2>
+                <p>Keep your good work</p>
+              </div>
+              <!-- <div class="table-full-width table-responsive">
                 <table class="table">
                   <tbody>
                     <tr>
@@ -299,7 +303,7 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -632,8 +636,7 @@ import { Layout, AppFooter } from '@/components';
   },
 
   computed: {
-    ...mapState('dashboard', ['navBarStyle']),
-    ...mapGetters('dashboard', ['getSidebarStyle'])
+    ...mapGetters('dashboard', ['getStatistics'])
   },
 
   methods: {}

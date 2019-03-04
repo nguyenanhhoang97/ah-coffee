@@ -11,7 +11,11 @@ export default {
   label: {
     loginTitle: 'Log in',
     needHelp: 'Need Help?',
-    registerNew: 'Create Account'
+    registerNew: 'Create Account',
+    products: 'Products',
+    bills: 'bills',
+    customers: 'Customers',
+    revenues: 'Revenues'
   },
   error: {
     notFound: 'Not Found'
