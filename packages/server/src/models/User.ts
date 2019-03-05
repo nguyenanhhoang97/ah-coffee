@@ -4,29 +4,26 @@ import autoIncrement from "mongoose-auto-increment";
 const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-  userId: { type: Number, required: true },
-  fullname: { type: String, default: "", required: true },
+  id: { type: Number, required: true },
   email: { type: String, default: "", required: true },
+  username: { type: String, default: "", required: true },
+  password: { type: String, default: "", required: true },
+  salt: { type: String, required: true },
+  fullname: { type: String, default: "" },
   address: { type: String, default: "" },
+  phone_number: { type: String, default: "" },
+  avatar: { type: String, default: "" },
+  point: { type: Number, default: 0 },
   role: {
     type: String,
-    enum: [
-      "admin",
-      "marketing_manager",
-      "marketing_coordinator",
-      "student",
-      "guest"
-    ],
-    default: "student"
+    enum: ["admin", "manager", "salesperson", "customer"],
+    default: "customer"
   },
-  facultyId: { type: Number, required: true },
-  password: { type: String, default: "", required: true },
   status: {
     type: Number,
     enum: [0, 1],
     default: 0
   },
-  salt: { type: String, required: true },
   createdDate: { type: Date, default: Date.now, required: true },
   updatedDate: { type: Date, default: Date.now, required: true }
 });
@@ -34,9 +31,10 @@ let userSchema = new Schema({
 autoIncrement.initialize(mongoose.connection);
 userSchema.plugin(autoIncrement.plugin, {
   model: "User",
-  field: "userId",
+  field: "id",
   incrementBy: 1
 });
-userSchema.index({ userId: 1 }, { unique: true });
+
+userSchema.index({ id: 1 }, { unique: true });
 
 export const User = mongoose.model("User", userSchema, "users");
