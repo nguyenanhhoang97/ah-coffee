@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 
 const Schema = mongoose.Schema;
 
@@ -14,15 +14,11 @@ let billSchema = new Schema({
 
 autoIncrement.initialize(mongoose.connection);
 billSchema.plugin(autoIncrement.plugin, {
-  model: "Bill",
-  field: "id",
+  model: 'Bill',
+  field: 'id',
   incrementBy: 1
 });
 
 billSchema.index({ id: 1 }, { unique: true });
 
-export const Bill = mongoose.model(
-  "Bill",
-  billSchema,
-  "bills"
-);
+export const Bill = mongoose.model('Bill', billSchema, 'bills');

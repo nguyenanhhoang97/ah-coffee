@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 
 const Schema = mongoose.Schema;
 
@@ -21,11 +21,11 @@ let productSchema = new Schema({
 
 autoIncrement.initialize(mongoose.connection);
 productSchema.plugin(autoIncrement.plugin, {
-  model: "Product",
-  field: "id",
+  model: 'Product',
+  field: 'id',
   incrementBy: 1
 });
 
 productSchema.index({ id: 1 }, { unique: true });
 
-export const Category = mongoose.model("Product", productSchema, "products");
+export const Category = mongoose.model('Product', productSchema, 'products');

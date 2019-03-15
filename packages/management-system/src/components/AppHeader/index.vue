@@ -76,6 +76,12 @@
             </ul>
           </li>-->
           <li class="dropdown nav-item">
+            <b-nav-item-dropdown text="Lang" right>
+              <b-dropdown-item href="#">{{ $t('label.english') }}</b-dropdown-item>
+              <b-dropdown-item href="#">{{ $t('label.vietnamese') }}</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </li>
+          <li class="dropdown nav-item">
             <b-dropdown id="ddown-right" right variant="link" no-caret>
               <template slot="button-content">
                 <div class="photo">

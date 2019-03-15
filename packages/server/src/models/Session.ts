@@ -3,26 +3,20 @@ import autoIncrement from 'mongoose-auto-increment';
 
 const Schema = mongoose.Schema;
 
-let categorySchema = new Schema({
+let sessionSchema = new Schema({
   id: { type: Number, required: true },
-  name: { type: String, required: true },
-  introduction: { type: String, required: true },
-  img_path: { type: String, required: true },
+  token: { type: String, default: '', required: true, unique: true },
   createdDate: { type: Date, default: Date.now, required: true },
   updatedDate: { type: Date, default: Date.now, required: true }
 });
 
 autoIncrement.initialize(mongoose.connection);
-categorySchema.plugin(autoIncrement.plugin, {
-  model: 'Category',
+sessionSchema.plugin(autoIncrement.plugin, {
+  model: 'Session',
   field: 'id',
   incrementBy: 1
 });
 
-categorySchema.index({ id: 1 }, { unique: true });
+sessionSchema.index({ id: 1 }, { unique: true });
 
-export const Category = mongoose.model(
-  'Category',
-  categorySchema,
-  'categories'
-);
+export const Session = mongoose.model('Session', sessionSchema, 'sessions');

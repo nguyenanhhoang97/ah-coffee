@@ -15,7 +15,10 @@ export default {
     products: 'Products',
     bills: 'bills',
     customers: 'Customers',
-    revenues: 'Revenues'
+    revenues: 'Revenues',
+    language: 'Language',
+    english: 'English',
+    vietnamese: 'Vietnamese'
   },
   error: {
     notFound: 'Not Found'
