@@ -8,3 +8,6 @@
   - Shop System (VueJS).
 ### Mar 1, 2019
 - Add template to management system.
+### Mar 16, 2019
+- Server:
+  - Register, login, update user.
