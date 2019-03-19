@@ -8,8 +8,9 @@ let categorySchema = new Schema({
   name: { type: String, required: true },
   introduction: { type: String, required: true },
   img_path: { type: String, required: true },
-  createdDate: { type: Date, default: Date.now, required: true },
-  updatedDate: { type: Date, default: Date.now, required: true }
+  created_by: { type: Number, required: true },
+  created_date: { type: Date, default: Date.now, required: true },
+  updated_date: { type: Date, default: Date.now, required: true }
 });
 
 autoIncrement.initialize(mongoose.connection);

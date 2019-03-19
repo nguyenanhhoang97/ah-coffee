@@ -24,8 +24,8 @@ let userSchema = new Schema({
     enum: [0, 1],
     default: 0
   },
-  createdDate: { type: Date, default: Date.now, required: true },
-  updatedDate: { type: Date, default: Date.now, required: true }
+  created_date: { type: Date, default: Date.now, required: true },
+  updated_date: { type: Date, default: Date.now, required: true }
 });
 
 autoIncrement.initialize(mongoose.connection);

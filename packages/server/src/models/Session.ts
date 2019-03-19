@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 let sessionSchema = new Schema({
   id: { type: Number, required: true },
   token: { type: String, default: '', required: true, unique: true },
-  createdDate: { type: Date, default: Date.now, required: true },
-  updatedDate: { type: Date, default: Date.now, required: true }
+  created_date: { type: Date, default: Date.now, required: true },
+  updated_date: { type: Date, default: Date.now, required: true }
 });
 
 autoIncrement.initialize(mongoose.connection);
