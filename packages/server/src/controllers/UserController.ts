@@ -53,6 +53,18 @@ export class UserController {
             role
           };
           const token = jwt.sign({ data }, jwtChars);
+          Session.findOne({ token }, (error: any, session: any) => {
+            if (error) {
+              return res.status(500).json({ message: err.message });
+            }
+            if (!session) {
+              const newSession = new Session({
+                token,
+                created_by: id
+              });
+              newSession.save();
+            }
+          })
           return res.status(200).json({ token });
         } else {
           return res.status(200).json({ message: 'invalid_login' });

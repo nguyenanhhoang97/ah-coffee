@@ -6,6 +6,12 @@ const Schema = mongoose.Schema;
 let sessionSchema = new Schema({
   id: { type: Number, required: true },
   token: { type: String, default: '', required: true, unique: true },
+  status: {
+    type: Number,
+    enum: [0, 1],
+    default: 1
+  },
+  created_by: { type: Number, required: true },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });
