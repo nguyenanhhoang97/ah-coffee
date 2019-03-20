@@ -9,9 +9,7 @@ import {
   USER_LOGIN,
   USER_UPDATE_PROFILE,
   CATEGORY,
-  CREATE_CATEGORY,
-  GENERAL,
-  CONVERT_BASE64_TO_IMG
+  CREATE_CATEGORY
 } from '../core/constant';
 
 let storage = multer.diskStorage({
@@ -38,7 +36,9 @@ export class Routes {
     // User
     app.route(USER_REGISTER).post(this.userController.registerUser);
     app.route(USER_LOGIN).post(this.userController.userLogin);
-    app.route(USER_UPDATE_PROFILE).post(this.userController.updateUserInfo);
+    app
+      .route(USER_UPDATE_PROFILE)
+      .post(upload.any(), this.userController.updateUserInfo);
 
     // Category
     app.route(CATEGORY).get(this.categoryController.getCategoryList);

@@ -73,7 +73,7 @@ export class UserController {
     }
   }
 
-  public updateUserInfo(req: Request, res: Response) {
+  public updateUserInfo(req: any, res: any) {
     const { body } = req;
     const { authorization } = req.headers;
     if (!authorization) {
@@ -89,6 +89,7 @@ export class UserController {
         }
         const { data } = decoded;
         const { id } = data;
+        const { path } = req.files[0];
         User.findOneAndUpdate(
           { id },
           {
@@ -96,7 +97,8 @@ export class UserController {
               email: body.email,
               fullname: body.fullname,
               address: body.address,
-              phone_number: body.phoneNumber
+              phone_number: body.phoneNumber,
+              avatar: path
             }
           },
           { new: true },

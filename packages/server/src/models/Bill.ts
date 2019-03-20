@@ -8,6 +8,11 @@ let billSchema = new Schema({
   customer_id: { type: Number, required: true },
   salesperson_id: { type: Number, required: true },
   total_price: { type: Number, required: true },
+  status: {
+    type: Number,
+    enum: [0, 1, 2],
+    default: 0
+  },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });

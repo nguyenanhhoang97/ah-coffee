@@ -41,11 +41,23 @@ export class CategoryController {
   }
 
   public getCategoryList(req: Request, res: Response) {
-    Category.find({}, (err: any, category: any) => {
-      if (err) {
-        return res.status(500).json({ message: err.message });
-      }
-      return res.status(200).json({ category });
-    });
+    const { query } = req;
+    const { pageIndex, pageSize } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    Category.find({})
+      .skip(offset)
+      .limit(limit)
+      .exec((err, category) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
+        }
+        Category.count({}, (error, count) => {
+          if (error) {
+            return res.status(500).json({ message: err.message });
+          }
+          return res.status(200).json({ category, total: count });
+        });
+      });
   }
 }
