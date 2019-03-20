@@ -4,23 +4,24 @@ import { UserController } from '../controllers/UserController';
 import { CategoryController } from '../controllers/CategoryController';
 import {
   ROOT,
-  USER,
   USER_REGISTER,
   USER_LOGIN,
   USER_UPDATE_PROFILE,
   CATEGORY,
-  CREATE_CATEGORY
+  CREATE_CATEGORY,
+  UPDATE_CATEGORY,
+  UPDATE_CATEGORY_STATUS
 } from '../core/constant';
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, 'public/images');
   },
   filename(req, file, cb) {
-    cb(null, file.originalname.split(' ').join('_'));
+    cb(null, Date.now() + '-' + file.originalname.split(' ').join('_'));
   }
 });
-let upload = multer({ storage });
+const upload = multer({ storage });
 
 export class Routes {
   public userController: UserController = new UserController();
@@ -45,5 +46,11 @@ export class Routes {
     app
       .route(CREATE_CATEGORY)
       .post(upload.any(), this.categoryController.createCategory);
+    app
+      .route(UPDATE_CATEGORY)
+      .post(upload.any(), this.categoryController.updateCategoryById);
+    app
+      .route(UPDATE_CATEGORY_STATUS)
+      .post(this.categoryController.changeCategoryStatus);
   }
 }

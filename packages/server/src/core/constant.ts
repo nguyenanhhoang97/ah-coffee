@@ -16,6 +16,7 @@ export const USER_UPDATE_AVATAR = USER + '/change-avatar';
 export const CATEGORY = ROOT + '/category';
 export const CREATE_CATEGORY = CATEGORY + '/create';
 export const UPDATE_CATEGORY = CATEGORY + '/update';
+export const UPDATE_CATEGORY_STATUS = UPDATE_CATEGORY + '/status';
 export const DELETE_CATEGORY = CATEGORY + '/delete';
 export const CATEGORY_DETAILS = CATEGORY + '/details';
 // ----PRODUCT

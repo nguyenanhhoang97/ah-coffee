@@ -8,7 +8,13 @@ let categorySchema = new Schema({
   name: { type: String, required: true },
   introduction: { type: String, required: true },
   img_path: { type: String, required: true },
+  status: {
+    type: Number,
+    enum: [0, 1],
+    default: 0
+  },
   created_by: { type: Number, required: true },
+  updated_by: { type: Number, default: '' },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });
