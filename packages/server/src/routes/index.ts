@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import { UserController } from '../controllers/UserController';
 import { CategoryController } from '../controllers/CategoryController';
+import { ProductController } from '../controllers/ProductController';
 import {
   ROOT,
   USER_REGISTER,
@@ -10,7 +11,8 @@ import {
   CATEGORY,
   CREATE_CATEGORY,
   UPDATE_CATEGORY,
-  UPDATE_CATEGORY_STATUS
+  UPDATE_CATEGORY_STATUS,
+  CREATE_PRODUCT
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -26,6 +28,7 @@ const upload = multer({ storage });
 export class Routes {
   public userController: UserController = new UserController();
   public categoryController: CategoryController = new CategoryController();
+  public productController: ProductController = new ProductController();
 
   public routes(app: any): void {
     app.route(ROOT).get((req: Request, res: Response) => {
@@ -52,5 +55,10 @@ export class Routes {
     app
       .route(UPDATE_CATEGORY_STATUS)
       .post(this.categoryController.changeCategoryStatus);
+
+    // Product
+    app
+      .route(CREATE_PRODUCT)
+      .post(upload.any(), this.productController.createProduct);
   }
 }

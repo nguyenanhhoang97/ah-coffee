@@ -9,13 +9,13 @@ let productSchema = new Schema({
   category_id: { type: Number, required: true },
   price: { type: Number, required: true },
   introduction: { type: String, required: true },
-  quantity: { type: Number, required: true },
   status: {
     type: Number,
     enum: [0, 1],
     default: 0
   },
   created_by: { type: Number, required: true },
+  updated_by: { type: Number, default: '' },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });
@@ -29,4 +29,4 @@ productSchema.plugin(autoIncrement.plugin, {
 
 productSchema.index({ id: 1 }, { unique: true });
 
-export const Category = mongoose.model('Product', productSchema, 'products');
+export const Product = mongoose.model('Product', productSchema, 'products');

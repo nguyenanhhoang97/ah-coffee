@@ -7,7 +7,6 @@ export class CategoryController {
   public createCategory(req: any, res: any) {
     const { body } = req;
     const { authorization } = req.headers;
-    console.log(body);
     if (!authorization) {
       return res.status(403).json({ message: 'forbidden' });
     }
@@ -25,7 +24,6 @@ export class CategoryController {
           return res.status(403).json({ message: 'forbidden' });
         }
         const { path } = req.files[0];
-        console.log(path);
         let category = new Category({
           name: body.name,
           introduction: body.introduction,
