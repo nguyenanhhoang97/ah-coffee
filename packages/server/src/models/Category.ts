@@ -16,7 +16,8 @@ let categorySchema = new Schema({
   created_by: { type: Number, required: true },
   updated_by: { type: Number, default: '' },
   created_date: { type: Date, default: Date.now, required: true },
-  updated_date: { type: Date, default: Date.now, required: true }
+  updated_date: { type: Date, default: Date.now, required: true },
+  products: [{ type: Number, ref: 'Product' }]
 });
 
 autoIncrement.initialize(mongoose.connection);
