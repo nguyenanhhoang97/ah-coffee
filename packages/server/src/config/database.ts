@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
+import { MONGODB_URI } from '../core/constant';
 
-let mongoDB: any = process.env.MONGODB_URI || '';
-
-mongoose.connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

@@ -1,14 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 import { UserController } from '../controllers/UserController';
 import { CategoryController } from '../controllers/CategoryController';
+import {
+  ROOT,
+  USER,
+  USER_REGISTER,
+  USER_LOGIN,
+  USER_UPDATE_PROFILE,
+  CATEGORY,
+  CREATE_CATEGORY,
+  GENERAL,
+  CONVERT_BASE64_TO_IMG
+} from '../core/constant';
 
-export const ROOT = '/api/v1';
-export const USER = ROOT + '/user';
-export const USER_REGISTER = USER + '/register';
-export const USER_LOGIN = USER + '/login';
-export const USER_UPDATE_PROFILE = USER + '/update-profile';
-export const CATEGORY = ROOT + '/category';
-export const CREATE_CATEGORY = CATEGORY + '/create';
+let storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, 'public/images');
+  },
+  filename(req, file, cb) {
+    cb(null, file.originalname.split(' ').join('_'));
+  }
+});
+let upload = multer({ storage });
 
 export class Routes {
   public userController: UserController = new UserController();
@@ -28,6 +42,8 @@ export class Routes {
 
     // Category
     app.route(CATEGORY).get(this.categoryController.getCategoryList);
-    app.route(CREATE_CATEGORY).post(this.categoryController.createCategory);
+    app
+      .route(CREATE_CATEGORY)
+      .post(upload.any(), this.categoryController.createCategory);
   }
 }

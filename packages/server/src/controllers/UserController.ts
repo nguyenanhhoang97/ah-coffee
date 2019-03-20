@@ -3,12 +3,13 @@ import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
 import { Session } from '../models/Session';
+import { JWT_CHARS } from '../core/constant';
 
 export class UserController {
   public registerUser(req: Request, res: Response) {
     const { body } = req;
     if (body.constructor === Object && Object.keys(body).length === 0) {
-      return res.status(200).json({ message: 'req_body_check_failed' });
+      return res.status(500).json({ message: 'req_body_check_failed' });
     } else {
       const { password } = body;
       const salt = bcrypt.genSaltSync(10);
@@ -33,9 +34,8 @@ export class UserController {
 
   public userLogin(req: Request, res: Response) {
     const { body } = req;
-    const jwtChars = process.env.JWT_CHARS || '';
     if (body.constructor === Object && Object.keys(body).length === 0) {
-      return res.status(200).json({ message: 'req_body_check_failed' });
+      return res.status(500).json({ message: 'req_body_check_failed' });
     } else {
       const { usrnm, psw } = body;
       User.findOne({ username: usrnm }, (err: any, user: any) => {
@@ -52,7 +52,7 @@ export class UserController {
             avatar,
             role
           };
-          const token = jwt.sign({ data }, jwtChars);
+          const token = jwt.sign({ data }, JWT_CHARS);
           Session.findOne({ token }, (error: any, session: any) => {
             if (error) {
               return res.status(500).json({ message: err.message });
@@ -76,15 +76,14 @@ export class UserController {
   public updateUserInfo(req: Request, res: Response) {
     const { body } = req;
     const { authorization } = req.headers;
-    const jwtChars = process.env.JWT_CHARS || '';
     if (!authorization) {
       return res.status(403).json({ message: 'forbidden' });
     }
     const token: any = authorization;
     if (body.constructor === Object && Object.keys(body).length === 0) {
-      return res.status(200).json({ message: 'req_body_check_failed' });
+      return res.status(500).json({ message: 'req_body_check_failed' });
     } else {
-      jwt.verify(token, jwtChars, (err: any, decoded: any) => {
+      jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
         if (err) {
           return res.status(500).json(err);
         }
