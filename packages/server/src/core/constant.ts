@@ -24,6 +24,7 @@ export const PRODUCT = ROOT + '/product';
 export const GET_PRODUCT_LIST_BY_CATEGORY = PRODUCT + '/get-product-list-by-cate';
 export const CREATE_PRODUCT = PRODUCT + '/create';
 export const UPDATE_PRODUCT = PRODUCT + '/update';
+export const UPDATE_PRODUCT_STATUS = UPDATE_PRODUCT + '/status';
 export const DELETE_PRODUCT = PRODUCT + '/delete';
 export const PRODUCT_DETAILS = PRODUCT + '/details';
 // ----BILL

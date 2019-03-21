@@ -12,8 +12,10 @@ import {
   CREATE_CATEGORY,
   UPDATE_CATEGORY,
   UPDATE_CATEGORY_STATUS,
+  CATEGORY_DETAILS,
   CREATE_PRODUCT,
-  UPDATE_PRODUCT
+  UPDATE_PRODUCT,
+  UPDATE_PRODUCT_STATUS
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -56,11 +58,17 @@ export class Routes {
     app
       .route(UPDATE_CATEGORY_STATUS)
       .post(this.categoryController.changeCategoryStatus);
+    app.route(CATEGORY_DETAILS).get(this.categoryController.getCategoryDetail);
 
     // Product
     app
       .route(CREATE_PRODUCT)
       .post(upload.any(), this.productController.createProduct);
-    app.route(UPDATE_PRODUCT).post(upload.any(), this.productController.updateProductById);
+    app
+      .route(UPDATE_PRODUCT)
+      .post(upload.any(), this.productController.updateProductById);
+    app
+      .route(UPDATE_PRODUCT_STATUS)
+      .post(this.productController.changeProductStatus);
   }
 }

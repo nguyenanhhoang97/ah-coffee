@@ -160,7 +160,7 @@ export class CategoryController {
             }
             return res
               .status(200)
-              .json({ message: 'updated_category_info' } || {});
+              .json({ message: 'updated_category_status' } || {});
           }
         );
       });
