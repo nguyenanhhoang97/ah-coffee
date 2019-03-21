@@ -16,4 +16,4 @@
   - Product Category API
 ### Mar 21, 2019
 - Server:
-  - Product & Bill API
+  - Product API
