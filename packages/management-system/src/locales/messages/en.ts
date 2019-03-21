@@ -6,7 +6,10 @@ export default {
   button: {
     submit: 'Submit',
     send: 'Send',
-    signIn: 'Get Started'
+    signIn: 'Get Started',
+    profile: 'Profile',
+    logout: 'Log Out',
+    login: 'Login'
   },
   label: {
     loginTitle: 'Log in',

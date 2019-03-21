@@ -29,7 +29,7 @@ export const ROOT = '/';
 // export const FORBIDEN = '/403';
 // export const NOT_FOUND = '/404';
 // export const INTERNAL_ERROR_SERVER = '/500';
-// export const LOGIN = '/login';
+export const LOGIN = '/login';
 
 export default [
   // {
@@ -74,21 +74,21 @@ export default [
   //       /* webpackMode: "lazy" */
   //       '@/modules/pages/Error.vue')
   // },
-  // {
-  //   path: LOGIN,
-  //   name: 'Login',
-  //   component: () =>
-  //     import(/* webpackChunkName: "routes" */
-  //       /* webpackMode: "lazy" */
-  //       '@/modules/session/login.vue'),
-  //   meta: {
-  //     title: 'Login'
-  //   }
-  // },
+  {
+    path: LOGIN,
+    name: 'Login',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/session/login.vue'),
+    meta: {
+      title: 'Login'
+    }
+  },
   {
     path: ROOT,
     meta: {
-      // requiresAuth: true
+      requiresAuth: true
     },
     name: 'Dashboard',
     component: () =>

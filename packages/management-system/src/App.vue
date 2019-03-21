@@ -1,21 +1,32 @@
 <template>
-  <div v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
-    <div class="wrapper">
-      <nav-mini/>
-      <app-sidebar/>
-      <div class="main-panel" data="red">
-        <app-header/>
-        <search-box/>
-        <div class="content">
-          <transition>
-            <keep-alive>
-              <router-view/>
-            </keep-alive>
-          </transition>
+  <div>
+    <template v-if="$route.meta.requiresAuth">
+      <div v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
+        <div class="wrapper">
+          <nav-mini/>
+          <app-sidebar/>
+          <div class="main-panel" data="blue">
+            <app-header/>
+            <search-box/>
+            <div class="content">
+              <transition>
+                <keep-alive>
+                  <router-view/>
+                </keep-alive>
+              </transition>
+            </div>
+            <app-footer/>
+          </div>
         </div>
-        <app-footer/>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <transition>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </transition>
+    </template>
   </div>
 </template>
 
@@ -42,7 +53,7 @@ import '@/assets/scss/style.scss';
   },
 
   computed: {
-    ...mapGetters('global', ['getSidebarStyle']),
+    ...mapGetters('global', ['getSidebarStyle'])
   }
 })
 export default class App extends Vue {}

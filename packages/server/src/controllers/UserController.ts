@@ -43,6 +43,9 @@ export class UserController {
         if (err) {
           return res.status(500).json({ message: err.message });
         }
+        if (user === null) {
+          return res.status(200).json({ message: 'invalid_username' });
+        }
         const { password } = user;
         if (bcrypt.compareSync(psw, password)) {
           const { id, username, fullname, avatar, role } = user;
@@ -68,7 +71,7 @@ export class UserController {
           });
           return res.status(200).json({ token });
         } else {
-          return res.status(200).json({ message: 'invalid_login' });
+          return res.status(200).json({ message: 'invalid_password' });
         }
       });
     }

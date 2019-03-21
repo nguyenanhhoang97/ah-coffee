@@ -76,13 +76,35 @@
             </ul>
           </li>-->
           <li class="dropdown nav-item">
-            <b-nav-item-dropdown text="Lang" right>
+            <!-- <b-nav-item-dropdown text="Lang" right>
               <b-dropdown-item href="#">{{ $t('label.english') }}</b-dropdown-item>
               <b-dropdown-item href="#">{{ $t('label.vietnamese') }}</b-dropdown-item>
-            </b-nav-item-dropdown>
+            </b-nav-item-dropdown>-->
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                {{ $t('label.language') }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>{{ $t('label.english') }}</el-dropdown-item>
+                <el-dropdown-item>{{ $t('label.vietnamese') }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </li>
           <li class="dropdown nav-item">
-            <b-dropdown id="ddown-right" right variant="link" no-caret>
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                <div class="photo">
+                  <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
+                </div>
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>{{ $t('button.profile') }}</el-dropdown-item>
+                <el-dropdown-item>{{ $t('button.logout') }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <!-- <b-dropdown id="ddown-right" right variant="link" no-caret>
               <template slot="button-content">
                 <div class="photo">
                   <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
@@ -90,17 +112,17 @@
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item v-b-modal.logoutModal>Logout</b-dropdown-item>
-            </b-dropdown>
+            </b-dropdown>-->
           </li>
 
           <!-- Logout Modal -->
-          <b-modal
+          <!-- <b-modal
             id="logoutModal"
             ref="modal"
             title="Do you want to logout ?"
             size="sm"
             @ok="handleLogOut"
-          ></b-modal>
+          ></b-modal>-->
           <li class="separator d-lg-none"></li>
         </ul>
       </div>
