@@ -12,6 +12,9 @@ export const USER_LOGIN = USER + '/login';
 export const USER_UPDATE_PROFILE = USER + '/update-profile';
 export const USER_UPDATE_PSW = USER + '/change-password';
 export const USER_UPDATE_AVATAR = USER + '/change-avatar';
+export const ADM = USER + '/adm';
+export const ADM_UPDATE_USR_INFO = ADM + '/update-usr-info';
+export const ADM_RESET_USR_PSW = ADM + '/reset-usr-psw';
 // ----CATEGORY
 export const CATEGORY = ROOT + '/category';
 export const CREATE_CATEGORY = CATEGORY + '/create';

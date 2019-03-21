@@ -8,6 +8,9 @@ import {
   USER_REGISTER,
   USER_LOGIN,
   USER_UPDATE_PROFILE,
+  USER_UPDATE_PSW,
+  ADM_UPDATE_USR_INFO,
+  ADM_RESET_USR_PSW,
   CATEGORY,
   CREATE_CATEGORY,
   UPDATE_CATEGORY,
@@ -48,6 +51,9 @@ export class Routes {
     app
       .route(USER_UPDATE_PROFILE)
       .post(upload.any(), this.userController.updateUserInfo);
+    app.route(USER_UPDATE_PSW).post(this.userController.changePassword);
+    app.route(ADM_UPDATE_USR_INFO).post(upload.any(), this.userController.admUpdateUserInfo);
+    app.route(ADM_RESET_USR_PSW).get(this.userController.admResetUserPsw);
 
     // Category
     app.route(CATEGORY).get(this.categoryController.getCategoryList);
