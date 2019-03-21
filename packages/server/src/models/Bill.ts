@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 let billSchema = new Schema({
   id: { type: Number, required: true },
   customer_id: { type: Number, required: true },
-  salesperson_id: { type: Number, required: true },
+  salesperson_id: { type: Number, default: '' },
   total_price: { type: Number, required: true },
   status: {
     type: Number,
