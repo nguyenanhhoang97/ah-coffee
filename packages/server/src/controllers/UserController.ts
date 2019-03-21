@@ -273,4 +273,112 @@ export class UserController {
       );
     });
   }
+
+  public admGetUserList(req: Request, res: Response) {
+    const { query } = req;
+    const { pageIndex, pageSize } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { data } = decoded;
+      const { id, role } = data;
+      if (role !== 'admin') {
+        return res.status(403).json({ message: 'forbidden' });
+      }
+      User.find({})
+        .skip(offset)
+        .limit(limit)
+        .exec((error, user) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          User.count({}, (e, count) => {
+            if (e) {
+              return res.status(500).json({ message: e.message });
+            }
+            return res.status(200).json({ user, total: count });
+          });
+        });
+    });
+  }
+
+  public getCustomerList(req: Request, res: Response) {
+    const { query } = req;
+    const { pageIndex, pageSize } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { data } = decoded;
+      const { id, role } = data;
+      if (role === 'customer') {
+        return res.status(403).json({ message: 'forbidden' });
+      }
+      User.find({role: 'customer'})
+        .skip(offset)
+        .limit(limit)
+        .exec((error, user) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          User.count({role: 'customer'}, (e, count) => {
+            if (e) {
+              return res.status(500).json({ message: e.message });
+            }
+            return res.status(200).json({ user, total: count });
+          });
+        });
+    });
+  }
+
+  public getSalespersonList(req: Request, res: Response) {
+    const { query } = req;
+    const { pageIndex, pageSize } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { data } = decoded;
+      const { id, role } = data;
+      if (role === 'customer' || role === 'salesperson') {
+        return res.status(403).json({ message: 'forbidden' });
+      }
+      User.find({role: 'salesperson'})
+        .skip(offset)
+        .limit(limit)
+        .exec((error, user) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          User.count({role: 'salesperson'}, (e, count) => {
+            if (e) {
+              return res.status(500).json({ message: e.message });
+            }
+            return res.status(200).json({ user, total: count });
+          });
+        });
+    });
+  }
 }
