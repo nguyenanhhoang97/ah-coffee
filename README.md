@@ -10,4 +10,10 @@
 - Add template to management system.
 ### Mar 16, 2019
 - Server:
-  - Register, login, update user.
+  - User API.
+### Mar 20, 2019
+- Server:
+  - Product Category API
+### Mar 21, 2019
+- Server:
+  - Product & Bill API
