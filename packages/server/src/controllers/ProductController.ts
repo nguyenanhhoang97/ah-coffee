@@ -165,4 +165,62 @@ export class ProductController {
       });
     }
   }
+
+  public getProductList(req: Request, res: Response) {
+    const { query } = req;
+    const { pageIndex, pageSize } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    Product.find({ $or: [{ status: 0 }, { status: 1 }] })
+      .skip(offset)
+      .limit(limit)
+      .exec((err, product) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
+        }
+        product.forEach((item: any) => {
+          ProductImg.find({ product_id: item.id}, (e: any, result) => {
+            if (e) {
+              return res.status(500).json({ message: e.message });
+            }
+            item._doc = { ...item._doc, product_imgs: result };
+          });
+        });
+        Product.count({}, (error, count) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          return res.status(200).json({ product, total: count });
+        });
+      });
+  }
+
+  public getProductListByCategoryId(req: Request, res: Response) {
+    const { query } = req;
+    const { pageIndex, pageSize, categoryId } = query;
+    const offset = pageIndex * pageSize;
+    const limit = parseInt(pageSize, 10);
+    Product.find({ category_id: categoryId, $or: [{ status: 0 }, { status: 1 }] })
+      .skip(offset)
+      .limit(limit)
+      .exec((err, product) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
+        }
+        product.forEach((item: any) => {
+          ProductImg.find({ product_id: item.id}, (e: any, result) => {
+            if (e) {
+              return res.status(500).json({ message: e.message });
+            }
+            item._doc = { ...item._doc, product_imgs: result };
+          });
+        });
+        Product.count({}, (error, count) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          return res.status(200).json({ product, total: count });
+        });
+      });
+  }
 }

@@ -13,6 +13,8 @@ import {
   UPDATE_CATEGORY,
   UPDATE_CATEGORY_STATUS,
   CATEGORY_DETAILS,
+  PRODUCT,
+  GET_PRODUCT_LIST_BY_CATEGORY,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   UPDATE_PRODUCT_STATUS
@@ -70,5 +72,9 @@ export class Routes {
     app
       .route(UPDATE_PRODUCT_STATUS)
       .post(this.productController.changeProductStatus);
+    app.route(PRODUCT).get(this.productController.getProductList);
+    app
+      .route(GET_PRODUCT_LIST_BY_CATEGORY)
+      .get(this.productController.getProductListByCategoryId);
   }
 }
