@@ -45,7 +45,7 @@ export class CategoryController {
     const { pageIndex, pageSize } = query;
     const offset = pageIndex * pageSize;
     const limit = parseInt(pageSize, 10);
-    Category.find({})
+    Category.find({ $or: [{ status: 0 }, { status: 1 }] })
       .skip(offset)
       .limit(limit)
       .exec((err, category) => {

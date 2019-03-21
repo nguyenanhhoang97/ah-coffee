@@ -10,7 +10,7 @@ let categorySchema = new Schema({
   img_path: { type: String, required: true },
   status: {
     type: Number,
-    enum: [0, 1],
+    enum: [0, 1, 2],
     default: 0
   },
   created_by: { type: Number, required: true },
