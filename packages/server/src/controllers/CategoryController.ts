@@ -54,7 +54,7 @@ export class CategoryController {
         }
         Category.count({}, (error, count) => {
           if (error) {
-            return res.status(500).json({ message: err.message });
+            return res.status(500).json({ message: error.message });
           }
           return res.status(200).json({ category, total: count });
         });

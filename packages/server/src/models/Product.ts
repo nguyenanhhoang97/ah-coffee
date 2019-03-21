@@ -14,8 +14,8 @@ let productSchema = new Schema({
     enum: [0, 1, 2],
     default: 0
   },
-  created_by: { type: Number, required: true },
-  updated_by: { type: Number, default: '' },
+  created_by: { type: Number, required: true, ref: 'User' },
+  updated_by: { type: Number, default: '', ref: 'User' },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });

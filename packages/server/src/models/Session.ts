@@ -11,7 +11,7 @@ let sessionSchema = new Schema({
     enum: [0, 1],
     default: 1
   },
-  created_by: { type: Number, required: true },
+  created_by: { type: Number, required: true, ref: 'User' },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });
