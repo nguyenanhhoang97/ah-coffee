@@ -1,133 +1,70 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
-    <div class="container-fluid">
-      <div class="navbar-wrapper">
-        <div class="navbar-minimize d-inline">
-          <button
-            class="minimize-sidebar btn btn-link btn-just-icon"
-            rel="tooltip"
-            data-original-title="Sidebar toggle"
-            data-placement="right"
-            @click="handleChangeSidebarStyle"
-          >
-            <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
-            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
-          </button>
-        </div>
-        <div class="navbar-toggle d-inline">
-          <button type="button" class="navbar-toggler">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-          </button>
-        </div>
-        <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
-      </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navigation"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-      </button>
-      <div id="navigation" class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <!-- <li class="search-bar input-group">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-minimize d-inline">
             <button
-              id="search-button"
-              class="btn btn-link"
-              data-toggle="modal"
-              data-target="#searchModal"
+              class="minimize-sidebar btn btn-link btn-just-icon"
+              rel="tooltip"
+              data-original-title="Sidebar toggle"
+              data-placement="right"
+              @click="handleChangeSidebarStyle"
             >
-              <i class="tim-icons icon-zoom-split"></i>
-              <span class="d-lg-none d-md-block">Search</span>
+              <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
+              <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
             </button>
-          </li>
-          <li class="dropdown nav-item">
-            <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <div class="notification d-none d-lg-block d-xl-block"></div>
-              <i class="tim-icons icon-sound-wave"></i>
-              <p class="d-lg-none">Notifications</p>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a>
-              </li>
-              <li class="nav-link">
-                <a
-                  href="javascript:void(0)"
-                  class="nav-item dropdown-item"
-                >Your friend Michael is in town</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a>
-              </li>
-              <li class="nav-link">
-                <a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a>
-              </li>
-            </ul>
-          </li>-->
-          <li class="dropdown nav-item">
-            <!-- <b-nav-item-dropdown text="Lang" right>
-              <b-dropdown-item href="#">{{ $t('label.english') }}</b-dropdown-item>
-              <b-dropdown-item href="#">{{ $t('label.vietnamese') }}</b-dropdown-item>
-            </b-nav-item-dropdown>-->
-            <el-dropdown trigger="click">
-              <span class="el-dropdown-link">
-                {{ $t('label.language') }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>{{ $t('label.english') }}</el-dropdown-item>
-                <el-dropdown-item>{{ $t('label.vietnamese') }}</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </li>
-          <li class="dropdown nav-item">
-            <el-dropdown trigger="click">
-              <span class="el-dropdown-link">
-                <div class="photo">
-                  <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
-                </div>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>{{ $t('button.profile') }}</el-dropdown-item>
-                <el-dropdown-item>{{ $t('button.logout') }}</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <!-- <b-dropdown id="ddown-right" right variant="link" no-caret>
-              <template slot="button-content">
-                <div class="photo">
-                  <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
-                </div>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item v-b-modal.logoutModal>Logout</b-dropdown-item>
-            </b-dropdown>-->
-          </li>
-
-          <!-- Logout Modal -->
-          <!-- <b-modal
-            id="logoutModal"
-            ref="modal"
-            title="Do you want to logout ?"
-            size="sm"
-            @ok="handleLogOut"
-          ></b-modal>-->
-          <li class="separator d-lg-none"></li>
-        </ul>
+          </div>
+          <div class="navbar-toggle d-inline">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navigation"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div id="navigation" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="dropdown nav-item">
+              <el-dropdown trigger="click">
+                <span class="el-dropdown-link">
+                  <div class="photo">
+                    <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
+                  </div>
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>{{ $t('button.profile') }}</el-dropdown-item>
+                  <el-dropdown-item @click.native="handleLogOutDialog">{{ $t('button.logout') }}</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </li>
+            <li class="separator d-lg-none"></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+    <el-dialog :title="$t('label.logoutTitle')" :visible.sync="dialogVisible" width="30%" :before-close="handleCloseLogOutDialog">
+      <span>{{ $t('message.logout_message') }}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="handleLogOut">{{ $t('button.logout') }}</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script lang="ts">
@@ -142,6 +79,11 @@ import { mapGetters, mapActions } from 'vuex';
   methods: {
     ...mapActions('session', ['logout']),
     ...mapActions('global', ['setNavBarStyle'])
+  },
+  data() {
+    return {
+      dialogVisible: false
+    };
   }
 })
 export default class AppHeader extends Vue {
@@ -159,6 +101,14 @@ export default class AppHeader extends Vue {
     } catch (e) {
       throw e;
     }
+  }
+
+  public handleLogOutDialog() {
+    this.$data.dialogVisible = true;
+  }
+
+  public handleCloseLogOutDialog(done: any) {
+    this.$data.dialogVisible = false;
   }
 }
 </script>

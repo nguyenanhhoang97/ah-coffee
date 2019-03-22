@@ -32,7 +32,7 @@ export const actions: ActionTree<SessionState, RootState> = {
         const { token } = response.data;
         if (token === undefined) {
           const { message } = response.data;
-          console.log(message);
+          return message;
         } else {
           localStorage.setItem(ACCESS_TOKEN_KEY, token);
 
@@ -43,7 +43,16 @@ export const actions: ActionTree<SessionState, RootState> = {
         }
       })
       .catch((error: any) => {
-        console.log(error);
+        throw error;
       });
+  },
+
+  logout({ commit }): Promise<any> {
+    return new Promise(resolve => {
+      commit(AUTH_LOGOUT);
+      localStorage.removeItem(ACCESS_TOKEN_KEY);
+      resolve();
+      router.push({ path: '/login' });
+    });
   }
 };

@@ -26,12 +26,12 @@ export default class AppSidebar extends Vue {
     {
       icon: 'tim-icons icon-chart-pie-36',
       name: 'Dashboard',
-      route: 'dashboard'
+      route: '/'
     },
     {
       icon: 'tim-icons icon-app',
-      name: 'Manage Categories',
-      route: 'categories'
+      name: 'Manage Category',
+      route: 'category'
     },
     {
       icon: 'tim-icons icon-atom',
@@ -53,11 +53,11 @@ export default class AppSidebar extends Vue {
       name: 'Manage Employees',
       route: 'employees'
     },
-    {
-      icon: 'tim-icons icon-money-coins',
-      name: 'Manage Revenues',
-      route: 'revenues'
-    }
+    // {
+    //   icon: 'tim-icons icon-money-coins',
+    //   name: 'Manage Revenues',
+    //   route: 'revenues'
+    // }
   ];
 }
 </script>

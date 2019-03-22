@@ -1,35 +1,10 @@
-// import Vue from 'vue';
-// import Router from 'vue-router';
-// import Home from './views/Home.vue';
-
-// Vue.use(Router);
-
-// export default new Router({
-//   mode: 'history',
-//   base: process.env.BASE_URL,
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'home',
-//       component: Home,
-//     },
-//     {
-//       path: '/about',
-//       name: 'about',
-//       // route level code-splitting
-//       // this generates a separate chunk (about.[hash].js) for this route
-//       // which is lazy-loaded when the route is visited.
-//       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-//     },
-//   ],
-// });
-
 // export const ANY = '*';
 export const ROOT = '/';
 // export const FORBIDEN = '/403';
 // export const NOT_FOUND = '/404';
 // export const INTERNAL_ERROR_SERVER = '/500';
 export const LOGIN = '/login';
+export const CATEGORY = '/category';
 
 export default [
   // {
@@ -79,8 +54,8 @@ export default [
     name: 'Login',
     component: () =>
       import(/* webpackChunkName: "routes" */
-        /* webpackMode: "lazy" */
-        '@/modules/session/login.vue'),
+      /* webpackMode: "lazy" */
+      '@/modules/session/login.vue'),
     meta: {
       title: 'Login'
     }
@@ -88,30 +63,25 @@ export default [
   {
     path: ROOT,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: 'Dashboard'
     },
     name: 'Dashboard',
     component: () =>
       import(/* webpackChunkName: "routes" */
-        /* webpackMode: "lazy" */
-        '@/modules/dashboard/index.vue')
+      /* webpackMode: "lazy" */
+      '@/modules/dashboard/index.vue')
   },
   {
-    path: '/home',
-    meta: {},
-    name: 'Home',
+    path: CATEGORY,
+    meta: {
+      requiresAuth: true,
+      title: 'Manage Category'
+    },
+    name: 'Category',
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-      '@/modules/vue/Home.vue')
-  },
-  {
-    path: '/about',
-    meta: {},
-    name: 'About',
-    component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/vue/About.vue')
+      '@/modules/category/index.vue')
   }
 ];

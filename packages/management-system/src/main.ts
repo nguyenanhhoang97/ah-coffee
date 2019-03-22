@@ -8,10 +8,11 @@ import App from './App.vue';
 import router from '@/router';
 import store from '@/store';
 import { i18n, loadLanguageAsync } from '@/locales';
+import locale from 'element-ui/lib/locale/lang/en';
 
 Vue.config.productionTip = false;
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale });
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('VueElementLoading', VueElementLoading);
@@ -23,13 +24,6 @@ router.beforeEach((to, from, next) => {
   const lang = to.params.lang || 'en';
   loadLanguageAsync(lang).then(() => next());
 });
-
-// new Vue({
-//   router,
-//   store,
-//   i18n,
-//   render: h => h(App)
-// }).$mount('#app');
 
 export const EventBus = new Vue({
   // eslint-disable-line no-new

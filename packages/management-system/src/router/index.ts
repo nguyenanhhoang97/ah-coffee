@@ -15,7 +15,7 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
-  document.title = to.meta.title || 'AH Coffee';
+  document.title = to.meta.title + ' | AHCoffee Management System' || 'AH Coffee';
 
   const isLoginPage = to.matched.some(
     (p: any) => p.path.indexOf('/login') === 0

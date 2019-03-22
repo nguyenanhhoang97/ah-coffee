@@ -1,7 +1,11 @@
 export default {
   title: 'AH Coffee',
   message: {
-    title: 'AH Coffee'
+    title: 'AH Coffee',
+    invalid_username: 'Invalid username. Please try again',
+    invalid_password: 'Invalid password. Please try again',
+    login_success: 'You have successfully logged in. Welcome back :)',
+    logout_message: 'Are you sure to logout?'
   },
   button: {
     submit: 'Submit',
@@ -9,7 +13,8 @@ export default {
     signIn: 'Get Started',
     profile: 'Profile',
     logout: 'Log Out',
-    login: 'Login'
+    login: 'Login',
+    newCate: 'Create New Category'
   },
   label: {
     loginTitle: 'Log in',
@@ -21,7 +26,9 @@ export default {
     revenues: 'Revenues',
     language: 'Language',
     english: 'English',
-    vietnamese: 'Vietnamese'
+    vietnamese: 'Vietnamese',
+    logoutTitle: 'Log Out',
+    manageCategory: 'Manage Category'
   },
   error: {
     notFound: 'Not Found'

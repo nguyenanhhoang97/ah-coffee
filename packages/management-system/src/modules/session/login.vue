@@ -14,7 +14,7 @@
                 <div class="card-body">
                   <div class="input-group">
                     <el-input
-                      placeholder="Email"
+                      placeholder="Username"
                       prefix-icon="tim-icons icon-email-85"
                       popper-class="form-control"
                       size="medium"
@@ -68,25 +68,22 @@ export default class Login extends Vue {
   public login!: (data: LoginForm) => Promise<any>;
 
   public async handleLogin() {
-    this.errorMsg = '';
     if (this.loading) {
       return;
     }
-    // const result = await await this.$validator.validateAll();
-    // if (!result) {
-    //   return false;
-    // }
     try {
       this.loading = true;
-      await this.login(this.formData);
+      await this.login(this.formData).then((message: any) => {
+        if (message === 'invalid_username') {
+          const error: any = this.$i18n.t('message.invalid_username');
+          this.$message.error(error);
+        } else if (message === 'invalid_password') {
+          const error: any = this.$i18n.t('message.invalid_password');
+          this.$message.error(error);
+        }
+      });
     } catch (e) {
-      // TODO: Toast error message
-      // throw e;
-      if (e.response.data.message) {
-        this.errorMsg = e.response.data.message;
-      } else {
-        throw e;
-      }
+      throw e;
     }
     this.loading = false;
   }

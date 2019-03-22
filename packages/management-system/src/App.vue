@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="$route.meta.requiresAuth">
-      <div v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
+      <div class="white-content" v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
         <div class="wrapper">
           <nav-mini/>
           <app-sidebar/>
@@ -21,11 +21,15 @@
       </div>
     </template>
     <template v-else>
-      <transition>
-        <keep-alive>
-          <router-view/>
-        </keep-alive>
-      </transition>
+      <div class="white-content">
+        <div class="wrapper">
+          <transition>
+            <keep-alive>
+              <router-view/>
+            </keep-alive>
+          </transition>
+        </div>
+      </div>
     </template>
   </div>
 </template>
