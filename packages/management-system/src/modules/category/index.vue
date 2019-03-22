@@ -1,19 +1,17 @@
 <template>
   <div class="col-lg-12">
-    <div class="card">
+    <div class="card" v-loading="getLoading">
       <div class="card-header">
         <h4 class="card-title">{{ $t('label.manageCategory') }}</h4>
       </div>
       <div class="card-body">
         <el-row>
-          <el-button type="primary" size="mini" icon="el-icon-plus">{{ $t('button.newCate') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-plus" @click="handleCreateCategory">{{ $t('button.newCate') }}</el-button>
         </el-row>
-        <el-table
-          :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-          style="width: 100%"
-        >
-          <el-table-column label="Date" prop="date" sortable></el-table-column>
+        <el-table :data="getCategories.category" style="width: 100%">
           <el-table-column label="Name" prop="name" sortable></el-table-column>
+          <el-table-column label="Introduction" prop="introduction" sortable></el-table-column>
+          <el-table-column label="Status" prop="status" sortable></el-table-column>
           <el-table-column align="right">
             <template slot="header" slot-scope="scope">
               <el-input v-model="search" size="mini" placeholder="Type to search"/>
@@ -32,11 +30,9 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page.sync="currentPage2"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          layout="sizes, prev, pager, next"
-          :total="1000"
+          :current-page.sync="pageIndex"
+          layout="total, sizes, prev, pager, next"
+          :total="getCategories.total"
         ></el-pagination>
       </div>
     </div>
@@ -45,41 +41,55 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapState, mapGetters, mapActions } from 'vuex';
 @Component({
+  methods: {
+    ...mapActions('category', ['categoryList'])
+  },
+
+  computed: {
+    ...mapGetters('category', ['getCategories', 'getLoading'])
+  },
+
   data() {
     return {
-      tableData: [
-        {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        },
-        {
-          date: '2016-05-02',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles'
-        },
-        {
-          date: '2016-05-04',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles'
-        },
-        {
-          date: '2016-05-01',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles'
-        }
-      ],
-      search: ''
+      search: '',
+      pageIndex: 1,
+      pageSize: 10
     };
   }
 })
 export default class Category extends Vue {
-  public handleSizeChange(val: any) {
-    console.log(`${val} items per page`);
+  mounted() {
+    const parameters = {
+      pageIndex: this.$data.pageIndex - 1,
+      pageSize: this.$data.pageSize
+    };
+    this.categoryList(parameters);
   }
+
+  public categoryList!: (data: any) => Promise<any>;
+
+  public handleSizeChange(val: any) {
+    this.$data.pageSize = val;
+    const parameters = {
+      pageIndex: this.$data.pageIndex - 1,
+      pageSize: this.$data.pageSize
+    };
+    this.categoryList(parameters);
+  }
+
   public handleCurrentChange(val: any) {
-    console.log(`current page: ${val}`);
+    this.$data.pageIndex = val;
+    const parameters = {
+      pageIndex: this.$data.pageIndex - 1,
+      pageSize: this.$data.pageSize
+    };
+    this.categoryList(parameters);
+  }
+
+  public handleCreateCategory() {
+    this.$router.push('category/create');
   }
 }
 </script>

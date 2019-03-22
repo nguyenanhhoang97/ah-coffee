@@ -5,6 +5,7 @@ export const ROOT = '/';
 // export const INTERNAL_ERROR_SERVER = '/500';
 export const LOGIN = '/login';
 export const CATEGORY = '/category';
+export const CREATE_CATE = CATEGORY + '/create';
 
 export default [
   // {
@@ -83,5 +84,17 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
       '@/modules/category/index.vue')
+  },
+  {
+    path: CREATE_CATE,
+    meta: {
+      requiresAuth: true,
+      title: 'Create New Category'
+    },
+    name: 'Create New Category',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      '@/modules/category/create.vue')
   }
 ];

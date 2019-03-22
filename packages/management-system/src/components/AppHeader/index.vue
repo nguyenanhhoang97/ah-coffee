@@ -57,7 +57,12 @@
         </div>
       </div>
     </nav>
-    <el-dialog :title="$t('label.logoutTitle')" :visible.sync="dialogVisible" width="30%" :before-close="handleCloseLogOutDialog">
+    <el-dialog
+      :title="$t('label.logoutTitle')"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleCloseLogOutDialog"
+    >
       <span>{{ $t('message.logout_message') }}</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -76,10 +81,12 @@ import { mapGetters, mapActions } from 'vuex';
     ...mapGetters('global', ['getSidebarStyle']),
     ...mapGetters('session', ['isAuthenticated'])
   },
+
   methods: {
     ...mapActions('session', ['logout']),
     ...mapActions('global', ['setNavBarStyle'])
   },
+
   data() {
     return {
       dialogVisible: false

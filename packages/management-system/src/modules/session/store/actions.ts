@@ -1,15 +1,8 @@
 import axios from 'axios';
 import { ActionTree } from 'vuex';
-
 import router from '@/router';
-import { SessionState } from './types';
-import { RootState } from '@/store/types';
 import {
-  ACCESS_TOKEN_KEY,
-  AUTH_HEADER_KEY,
-  API_ENDPOINT
-} from '@/core/constants';
-import {
+  SessionState,
   SET_USER,
   AUTH_LOGOUT,
   AUTH_SUCCESS,
@@ -17,6 +10,12 @@ import {
   AUTH_REQUEST,
   SET_PROFILE
 } from './types';
+import { RootState } from '@/store/types';
+import {
+  ACCESS_TOKEN_KEY,
+  AUTH_HEADER_KEY,
+  API_ENDPOINT
+} from '@/core/constants';
 
 export const actions: ActionTree<SessionState, RootState> = {
   login({ commit }, { username, password }): Promise<any> {
