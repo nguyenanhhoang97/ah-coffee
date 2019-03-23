@@ -7,7 +7,8 @@ import { RootState } from '@/store/types';
 
 export const state: CategoryState = {
   categories: {},
-  loading: false
+  loading: false,
+  updateCateStatus: ''
 };
 
 const namespaced: boolean = true;

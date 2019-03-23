@@ -6,7 +6,12 @@
       </div>
       <div class="card-body">
         <el-row>
-          <el-button type="primary" size="mini" icon="el-icon-plus" @click="handleCreateCategory">{{ $t('button.newCate') }}</el-button>
+          <el-button
+            type="primary"
+            size="mini"
+            icon="el-icon-plus"
+            @click="handleCreateCategory"
+          >{{ $t('button.newCate') }}</el-button>
         </el-row>
         <el-table :data="getCategories.category" style="width: 100%">
           <el-table-column label="Name" prop="name" sortable></el-table-column>
@@ -60,7 +65,9 @@ import { mapState, mapGetters, mapActions } from 'vuex';
   }
 })
 export default class Category extends Vue {
-  mounted() {
+  private categoryList!: (data: any) => Promise<any>;
+
+  private mounted() {
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
@@ -68,9 +75,7 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  public categoryList!: (data: any) => Promise<any>;
-
-  public handleSizeChange(val: any) {
+  private handleSizeChange(val: any) {
     this.$data.pageSize = val;
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
@@ -79,7 +84,7 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  public handleCurrentChange(val: any) {
+  private handleCurrentChange(val: any) {
     this.$data.pageIndex = val;
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
@@ -88,7 +93,7 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  public handleCreateCategory() {
+  private handleCreateCategory() {
     this.$router.push('category/create');
   }
 }

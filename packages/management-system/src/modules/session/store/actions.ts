@@ -35,7 +35,7 @@ export const actions: ActionTree<SessionState, RootState> = {
         } else {
           localStorage.setItem(ACCESS_TOKEN_KEY, token);
 
-          axios.defaults.headers.common[AUTH_HEADER_KEY] = `Bearer ${token}`;
+          axios.defaults.headers.authorization = token;
 
           commit(AUTH_SUCCESS, token);
           router.push({ path: '/' });

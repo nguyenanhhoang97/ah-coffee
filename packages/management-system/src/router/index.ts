@@ -2,9 +2,10 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-
+import axios from 'axios';
 import store from '@/store';
 import routes from './routes';
+import { ACCESS_TOKEN_KEY } from '@/core/constants';
 
 Vue.use(Router);
 
@@ -15,7 +16,8 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
-  document.title = to.meta.title + ' | AHCoffee Management System' || 'AH Coffee';
+  document.title =
+    to.meta.title + ' | AHCoffee Management System' || 'AH Coffee';
 
   const isLoginPage = to.matched.some(
     (p: any) => p.path.indexOf('/login') === 0
@@ -34,6 +36,9 @@ router.beforeEach(async (to, from, next) => {
       }
       return next('login');
     } else {
+      axios.defaults.headers.authorization = localStorage.getItem(
+        ACCESS_TOKEN_KEY
+      );
       next();
     }
   } catch (err) {
