@@ -14,20 +14,50 @@
           >{{ $t('button.newCate') }}</el-button>
         </el-row>
         <el-table :data="getCategories.category" style="width: 100%">
-          <el-table-column label="Name" prop="name" sortable></el-table-column>
-          <el-table-column label="Introduction" prop="introduction" sortable></el-table-column>
-          <el-table-column label="Status" prop="status" sortable></el-table-column>
+          <el-table-column :label="$t('label.numericalOrder')" width="50" type="index"></el-table-column>
+          <el-table-column :label="$t('label.cateName')" prop="name" sortable></el-table-column>
+          <el-table-column :label="$t('label.introduction')" prop="introduction" sortable></el-table-column>
+          <el-table-column :label="$t('label.image')" width="200">
+            <template slot-scope="scope">
+              <img
+                :src="serverUrl+'/'+scope.row.img_path"
+                :alt="scope.row.name"
+                style="height: 65px"
+              >
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('label.status')" sortable width="150">
+            <template slot-scope="scope">
+              <div class="cell" v-if="scope.row.status === 0">
+                <el-tag type="warning">{{$t('tag.pending')}}</el-tag>
+              </div>
+              <div class="cell" v-else>
+                <el-tag type="success">{{$t('tag.available')}}</el-tag>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column align="right">
             <template slot="header" slot-scope="scope">
-              <el-input v-model="search" size="mini" placeholder="Type to search"/>
+              <el-input v-model="search" size="mini" :placeholder="$t('placeholder.search')"/>
             </template>
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
               <el-button
-                size="mini"
+                size="medium"
+                icon="el-icon-edit"
+                @click="handleEdit(scope.$index, scope.row)"
+              ></el-button>
+              <el-button
+                size="medium"
+                type="primary"
+                icon="el-icon-setting"
+                @click="handleChangeCateStatus(scope.$index, scope.row)"
+              ></el-button>
+              <el-button
+                size="medium"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
-              >Delete</el-button>
+                icon="el-icon-delete"
+                @click="handleDeleteCate(scope.$index, scope.row)"
+              ></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -41,33 +71,92 @@
         ></el-pagination>
       </div>
     </div>
+    <el-dialog :title="$t('label.updateCate')" :visible.sync="editDialogFormVisible">
+      <el-form :model="selectedItem">
+        <el-form-item :label="$t('label.cateName')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.name"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.introduction')" :label-width="formLabelWidth">
+          <el-input type="textarea" v-model="selectedItem.introduction"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.uploadImage')" :label-width="formLabelWidth">
+          <input type="file" name="import_file" accept="image/*" @change="selectedFile($event)">
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogFormVisible = false">{{ $t('button.cancel') }}</el-button>
+        <el-button type="primary" @click="handleSaveUpdateCate">{{ $t('button.save') }}</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog :title="$t('label.changeCateStatus')" :visible.sync="chStatusDialogFormVisible">
+      <el-form :model="selectedItem">
+        <el-form-item
+          :label="$t('label.cateStatus')"
+          :label-width="formLabelWidth"
+          v-if="statusList"
+        >
+          <el-select v-model="selectedItem.status" placeholder="Select">
+            <el-option
+              v-for="item in statusList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="chStatusDialogFormVisible = false">{{ $t('button.cancel') }}</el-button>
+        <el-button type="primary" @click="handleSaveChangeCateStatus">{{ $t('button.save') }}</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog :title="$t('label.delCate')" :visible.sync="delDialogFormVisible" width="30%">
+      <span>{{$t('message.del_message')}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="delDialogFormVisible = false">{{$t('button.cancel')}}</el-button>
+        <el-button type="danger" @click="handleDelCate">{{$t('button.delete')}}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapState, mapGetters, mapActions } from 'vuex';
+import { SERVER_URL } from '@/core/constants';
+
 @Component({
   methods: {
-    ...mapActions('category', ['categoryList'])
+    ...mapActions('category', ['categoryList', 'updateCategory', 'changeCateStatus', 'deleteCate'])
   },
 
   computed: {
-    ...mapGetters('category', ['getCategories', 'getLoading'])
+    ...mapGetters('category', ['getCategories', 'getLoading']),
+    ...mapState('category', ['statusList'])
   },
 
   data() {
     return {
       search: '',
       pageIndex: 1,
-      pageSize: 10
+      pageSize: 10,
+      editDialogFormVisible: false,
+      chStatusDialogFormVisible: false,
+      delDialogFormVisible: false,
+      formLabelWidth: '200px',
+      selectedItem: {},
+      serverUrl: SERVER_URL,
+      file: undefined
     };
   }
 })
 export default class Category extends Vue {
-  private categoryList!: (data: any) => Promise<any>;
+  public categoryList!: (data: any) => Promise<any>;
+  public updateCategory!: (data: any) => Promise<any>;
+  public changeCateStatus!: (data: any) => Promise<any>;
+  public deleteCate!: (data: any) => Promise<any>;
 
-  private mounted() {
+  public mounted() {
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
@@ -75,7 +164,15 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  private handleSizeChange(val: any) {
+  public created() {
+    const parameters = {
+      pageIndex: this.$data.pageIndex - 1,
+      pageSize: this.$data.pageSize
+    };
+    this.categoryList(parameters);
+  }
+
+  public handleSizeChange(val: any) {
     this.$data.pageSize = val;
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
@@ -84,7 +181,7 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  private handleCurrentChange(val: any) {
+  public handleCurrentChange(val: any) {
     this.$data.pageIndex = val;
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
@@ -93,8 +190,121 @@ export default class Category extends Vue {
     this.categoryList(parameters);
   }
 
-  private handleCreateCategory() {
+  public handleCreateCategory() {
     this.$router.push('category/create');
+  }
+
+  public handleEdit(index: any, row: any) {
+    this.$data.editDialogFormVisible = true;
+    this.$data.selectedItem = { ...row };
+  }
+
+  public handleChangeCateStatus(index: any, row: any) {
+    this.$data.chStatusDialogFormVisible = true;
+    this.$data.selectedItem = { ...row };
+  }
+
+  public handleDeleteCate(index: any, row: any) {
+    this.$data.delDialogFormVisible = true;
+    this.$data.selectedItem = { ...row };
+  }
+
+  public selectedFile(event: any) {
+    const fileInp = event.target.files[0];
+    this.$data.file = fileInp;
+  }
+
+  public async handleSaveUpdateCate() {
+    const params = {
+      categoryId: this.$data.selectedItem.id,
+      name: this.$data.selectedItem.name,
+      introduction: this.$data.selectedItem.introduction,
+      file: this.$data.file,
+      oldPath: this.$data.selectedItem.img_path
+    };
+    try {
+      await this.updateCategory(params).then((message: any) => {
+        if (message === 'updated_category_info') {
+          const parameters = {
+            pageIndex: 0,
+            pageSize: 10
+          };
+          this.categoryList(parameters);
+          const resMess: any = this.$i18n.t('message.updateCateSuccessMessage');
+          this.$message.success(resMess);
+          this.$data.form = {};
+          this.$data.editDialogFormVisible = false;
+        } else if (message === 'forbidden') {
+          const error: any = this.$i18n.t('message.forbidden');
+          this.$message.error(error);
+        } else if (message === 'req_body_check_failed') {
+          const error: any = this.$i18n.t('message.req_body_check_failed');
+          this.$message.error(error);
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async handleSaveChangeCateStatus() {
+    const params = {
+      categoryId: this.$data.selectedItem.id,
+      cateStatus: this.$data.selectedItem.status
+    };
+    try {
+      await this.changeCateStatus(params).then((message: any) => {
+        if (message === 'updated_category_status') {
+          const parameters = {
+            pageIndex: 0,
+            pageSize: 10
+          };
+          this.categoryList(parameters);
+          const resMess: any = this.$i18n.t('message.updateCateStSuccessMessage');
+          this.$message.success(resMess);
+          this.$data.form = {};
+          this.$data.chStatusDialogFormVisible = false;
+        } else if (message === 'forbidden') {
+          const error: any = this.$i18n.t('message.forbidden');
+          this.$message.error(error);
+        } else if (message === 'req_body_check_failed') {
+          const error: any = this.$i18n.t('message.req_body_check_failed');
+          this.$message.error(error);
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async handleDelCate() {
+    const params = {
+      categoryId: this.$data.selectedItem.id,
+      cateStatus: 2
+    };
+    try {
+      await this.changeCateStatus(params).then((message: any) => {
+        if (message === 'updated_category_status') {
+          const parameters = {
+            pageIndex: 0,
+            pageSize: 10
+          };
+          this.categoryList(parameters);
+          const resMess: any = this.$i18n.t('message.delCateSuccessMessage');
+          this.$message.success(resMess);
+          this.$data.form = {};
+          this.$data.delDialogFormVisible = false;
+        } else if (message === 'forbidden') {
+          const error: any = this.$i18n.t('message.forbidden');
+          this.$message.error(error);
+        } else if (message === 'req_body_check_failed') {
+          const error: any = this.$i18n.t('message.req_body_check_failed');
+          this.$message.error(error);
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
   }
 }
 </script>

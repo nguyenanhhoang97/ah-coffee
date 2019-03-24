@@ -52,7 +52,7 @@ export class CategoryController {
         if (err) {
           return res.status(500).json({ message: err.message });
         }
-        Category.count({}, (error, count) => {
+        Category.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
           if (error) {
             return res.status(500).json({ message: error.message });
           }
@@ -95,7 +95,12 @@ export class CategoryController {
         if (role === 'customer' || role === 'salesperson') {
           return res.status(403).json({ message: 'forbidden' });
         }
-        const { path } = req.files[0];
+        let path;
+        if (req.files.length === 0) {
+          path = body.oldPath;
+        } else {
+          path = req.files[0].path;
+        }
         const { categoryId, name, introduction } = body;
         const updatedDate = Date.now();
         Category.findOneAndUpdate(
@@ -126,6 +131,7 @@ export class CategoryController {
   public changeCategoryStatus(req: any, res: any) {
     const { body } = req;
     const { authorization } = req.headers;
+    // return res.status(200).json(body);
     if (!authorization) {
       return res.status(403).json({ message: 'forbidden' });
     }

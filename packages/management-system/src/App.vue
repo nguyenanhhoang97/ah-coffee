@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="$route.meta.requiresAuth">
-      <div class="white-content" v-bind:class="{ 'sidebar-mini': getSidebarStyle }">
+      <div class="white-content" v-bind:class="{ 'sidebar-mini': getSidebarStyle }" v-loading="getGlobalStatus">
         <div class="wrapper">
           <nav-mini/>
           <app-sidebar/>
@@ -57,7 +57,7 @@ import '@/assets/scss/style.scss';
   },
 
   computed: {
-    ...mapGetters('global', ['getSidebarStyle'])
+    ...mapGetters('global', ['getSidebarStyle', 'getGlobalStatus'])
   }
 })
 export default class App extends Vue {}

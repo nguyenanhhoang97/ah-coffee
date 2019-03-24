@@ -5,5 +5,9 @@ import { RootState } from '@/store/types';
 export const getters: GetterTree<GlobalState, RootState> = {
   getSidebarStyle(state: GlobalState): boolean {
     return state.sidebarStyle;
+  },
+
+  getGlobalStatus(state: GlobalState): boolean {
+    return state.ready;
   }
 };

@@ -9,9 +9,5 @@ export const getters: GetterTree<CategoryState, RootState> = {
 
   getLoading(state: CategoryState): any {
     return state.loading;
-  },
-
-  getUpdateCateStatus(state: CategoryState): any {
-    return state.updateCateStatus;
   }
 };
