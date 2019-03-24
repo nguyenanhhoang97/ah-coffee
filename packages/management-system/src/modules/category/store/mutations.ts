@@ -18,19 +18,19 @@ export const mutations: MutationTree<CategoryState> = {
     state.loading = flag;
   },
 
-  [CREATE_CATEGORY_STATUS](state: CategoryState, createStatus: string) {
-    state.createCateStatus = createStatus;
+  [CREATE_CATEGORY_STATUS](state: CategoryState, status: string) {
+    state.createCateStatus = status;
   },
 
-  [UPDATE_CATEGORY_STATUS](state: CategoryState, updateStatus: string) {
-    state.updateCateStatus = updateStatus;
+  [UPDATE_CATEGORY_STATUS](state: CategoryState, status: string) {
+    state.updateCateStatus = status;
   },
 
-  [CHANGE_ST_CATE_STATUS](state: CategoryState, stCateStatus: string) {
-    state.changeStCateStatus = stCateStatus;
+  [CHANGE_ST_CATE_STATUS](state: CategoryState, status: string) {
+    state.changeStCateStatus = status;
   },
 
-  [DELETE_CATE_STATUS](state: CategoryState, deleteStatus: string) {
-    state.deleteCateStatus = deleteStatus;
+  [DELETE_CATE_STATUS](state: CategoryState, status: string) {
+    state.deleteCateStatus = status;
   }
 };

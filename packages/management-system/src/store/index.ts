@@ -5,6 +5,7 @@ import { global } from '@/modules/global/store';
 import { dashboard } from '@/modules/dashboard/store';
 import { session } from '@/modules/session/store';
 import { category } from '@/modules/category/store';
+import { product } from '@/modules/product/store';
 
 import { RootState } from './types';
 
@@ -18,7 +19,8 @@ const store: StoreOptions<RootState> = {
     global,
     dashboard,
     session,
-    category
+    category,
+    product
   },
   strict: process.env.NODE_ENV !== 'production'
 };

@@ -6,6 +6,8 @@ export const ROOT = '/';
 export const LOGIN = '/login';
 export const CATEGORY = '/category';
 export const CREATE_CATE = CATEGORY + '/create';
+export const PRODUCT = '/product';
+export const CREATE_PRODUCT = PRODUCT + '/create';
 
 export default [
   // {
@@ -96,5 +98,17 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
       '@/modules/category/create.vue')
+  },
+  {
+    path: PRODUCT,
+    meta: {
+      requiresAuth: true,
+      title: 'Manage Product'
+    },
+    name: 'Manage Product',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      '@/modules/product/index.vue')
   }
 ];
