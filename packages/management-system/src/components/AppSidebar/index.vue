@@ -35,23 +35,23 @@ export default class AppSidebar extends Vue {
     },
     {
       icon: 'tim-icons icon-atom',
-      name: 'Manage Products',
-      route: 'products'
+      name: 'Manage Product',
+      route: '/product'
     },
     {
       icon: 'tim-icons icon-notes',
-      name: 'Manage Bills',
-      route: 'bills'
+      name: 'Manage Bill',
+      route: '/bill'
     },
     {
       icon: 'tim-icons icon-single-02',
-      name: 'Manage Customers',
-      route: 'customers'
+      name: 'Manage Customer',
+      route: '/customer'
     },
     {
       icon: 'tim-icons icon-single-02',
-      name: 'Manage Employees',
-      route: 'employees'
+      name: 'Manage Employee',
+      route: '/employee'
     },
     // {
     //   icon: 'tim-icons icon-money-coins',

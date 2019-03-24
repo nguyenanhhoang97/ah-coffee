@@ -8,7 +8,7 @@ import { RootState } from '@/store/types';
 export const state: GlobalState = {
   ready: false,
   dataColor: 'red',
-  sidebarStyle: true
+  sidebarStyle: false
 };
 
 const namespaced: boolean = true;

@@ -72,7 +72,7 @@
       </div>
     </div>
     <el-dialog :title="$t('label.updateCate')" :visible.sync="editDialogFormVisible">
-      <el-form :model="selectedItem">
+      <el-form :model="selectedItem" label-width="200px" label-position="left">
         <el-form-item :label="$t('label.cateName')" :label-width="formLabelWidth">
           <el-input v-model="selectedItem.name"></el-input>
         </el-form-item>
@@ -89,7 +89,7 @@
       </span>
     </el-dialog>
     <el-dialog :title="$t('label.changeCateStatus')" :visible.sync="chStatusDialogFormVisible">
-      <el-form :model="selectedItem">
+      <el-form :model="selectedItem" label-width="200px" label-position="left">
         <el-form-item
           :label="$t('label.cateStatus')"
           :label-width="formLabelWidth"
@@ -148,7 +148,13 @@ import { SERVER_URL } from '@/core/constants';
       serverUrl: SERVER_URL,
       file: undefined
     };
-  }
+  },
+
+  watch: {
+    // call again the method if the route changes
+    // tslint:disable-next-line
+    '$route': 'initCategoryList'
+  },
 })
 export default class Category extends Vue {
   public categoryList!: (data: any) => Promise<any>;
@@ -157,19 +163,15 @@ export default class Category extends Vue {
   public deleteCate!: (data: any) => Promise<any>;
 
   public mounted() {
-    const parameters = {
-      pageIndex: this.$data.pageIndex - 1,
-      pageSize: this.$data.pageSize
-    };
-    this.categoryList(parameters);
+    this.initCategoryList();
   }
 
-  public created() {
+  public async initCategoryList() {
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
     };
-    this.categoryList(parameters);
+    await this.categoryList(parameters);
   }
 
   public handleSizeChange(val: any) {

@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Product } from '../models/Product';
 import { ProductImg } from '../models/ProductImg';
 import { JWT_CHARS } from '../core/constant';
+import { ExecFileSyncOptions } from 'child_process';
 
 export class ProductController {
   public createProduct(req: any, res: any) {
@@ -15,7 +16,7 @@ export class ProductController {
     if (body.constructor === Object && Object.keys(body).length === 0) {
       return res.status(500).json({ message: 'req_body_check_failed' });
     } else {
-      jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
         if (err) {
           return res.status(500).json(err);
         }
@@ -25,32 +26,32 @@ export class ProductController {
           return res.status(403).json({ message: 'forbidden' });
         }
         const { name, categoryId, price, introduction } = body;
+        const { files } = req;
+        // tslint:disable-next-line
+        let imgId: any = [];
+        // tslint:disable-next-line
+        for (let i = 0; i < files.length; i++) {
+          // tslint:disable-next-line
+          let productImg = new ProductImg({
+            path: files[i].path
+          });
+          const res = await productImg.save();
+          // console.log(res._id);
+          imgId.push(res._id);
+        }
+        // tslint:disable-next-line
         let product = new Product({
           name,
           category_id: categoryId,
           price,
           introduction,
-          created_by: id
+          created_by: id,
+          product_imgs: imgId
         });
-        const { files } = req;
         product.save((error: any, result: any) => {
           if (error) {
             return res.status(500).json(error);
           }
-          const productId = result.id;
-          const productName = result.name;
-          files.forEach((item: any) => {
-            let productImg = new ProductImg({
-              product_id: productId,
-              path: item.path,
-              alt_tag: productName
-            });
-            productImg.save((e: any, img: any) => {
-              if (e) {
-                return res.status(500).json(e);
-              }
-            });
-          });
           return res.status(200).json({ message: 'saved' } || {});
         });
       });
@@ -166,33 +167,23 @@ export class ProductController {
     }
   }
 
-  public getProductList(req: Request, res: Response) {
+  public async getProductList(req: Request, res: Response) {
     const { query } = req;
     const { pageIndex, pageSize } = query;
     const offset = pageIndex * pageSize;
     const limit = parseInt(pageSize, 10);
-    Product.find({ $or: [{ status: 0 }, { status: 1 }] })
+    const product = await Product.find({ $or: [{ status: 0 }, { status: 1 }] })
       .skip(offset)
       .limit(limit)
-      .exec((err, product) => {
-        if (err) {
-          return res.status(500).json({ message: err.message });
-        }
-        product.forEach((item: any) => {
-          ProductImg.find({ product_id: item.id}, (e: any, result) => {
-            if (e) {
-              return res.status(500).json({ message: e.message });
-            }
-            item._doc = { ...item._doc, product_imgs: result };
-          });
-        });
-        Product.count({}, (error, count) => {
-          if (error) {
-            return res.status(500).json({ message: error.message });
-          }
-          return res.status(200).json({ product, total: count });
-        });
-      });
+      .populate({
+        path: 'product_imgs'
+      })
+      .populate({
+        path: 'category_id'
+      })
+      .exec();
+    const count = await Product.count({ $or: [{ status: 0 }, { status: 1 }] });
+    return res.status(200).json({ product, total: count });
   }
 
   public getProductListByCategoryId(req: Request, res: Response) {
@@ -200,7 +191,10 @@ export class ProductController {
     const { pageIndex, pageSize, categoryId } = query;
     const offset = pageIndex * pageSize;
     const limit = parseInt(pageSize, 10);
-    Product.find({ category_id: categoryId, $or: [{ status: 0 }, { status: 1 }] })
+    Product.find({
+      category_id: categoryId,
+      $or: [{ status: 0 }, { status: 1 }]
+    })
       .skip(offset)
       .limit(limit)
       .exec((err, product) => {
@@ -208,7 +202,7 @@ export class ProductController {
           return res.status(500).json({ message: err.message });
         }
         product.forEach((item: any) => {
-          ProductImg.find({ product_id: item.id}, (e: any, result) => {
+          ProductImg.find({ product_id: item.id }, (e: any, result) => {
             if (e) {
               return res.status(500).json({ message: e.message });
             }

@@ -31,7 +31,9 @@ export default {
     save: 'Save',
     edit: 'Edit',
     delete: 'Delete',
-    changeStatus: 'Change Status'
+    changeStatus: 'Change Status',
+    close: 'Close',
+    newProduct: 'Create New Product'
   },
   label: {
     loginTitle: 'Log in',
@@ -54,9 +56,25 @@ export default {
     introduction: 'Introduction',
     uploadImage: 'Upload Image (1 image)',
     image: 'Image',
+    images: 'Images',
     status: 'Status',
     numericalOrder: 'No.',
-    cateStatus: 'Category Status'
+    cateStatus: 'Category Status',
+    manageProduct: 'Manage Product',
+    newProduct: 'Create New Product',
+    productDetails: 'Product Details',
+    changeProductStatus: 'Change Product Status',
+    delProduct: 'Delete Product',
+    productName: 'Product Name',
+    uploadImages: 'Upload Images',
+    thumbnailImg: 'Thumbnail Image',
+    price: 'Price',
+    category: 'Category',
+    createdBy: 'Created By',
+    createdAt: 'Created At',
+    updatedBy: 'Updated By',
+    updatedAt: 'Updated At',
+    name: 'Name'
   },
   error: {
     notFound: 'Not Found'
@@ -68,6 +86,7 @@ export default {
   },
   tag: {
     pending: 'Pending',
-    available: 'Available'
+    available: 'Available',
+    notAvailable: 'Not Available'
   }
 };

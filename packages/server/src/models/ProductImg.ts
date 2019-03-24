@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 
 let productImgSchema = new Schema({
   id: { type: Number, required: true },
-  product_id: { type: Number, required: true, ref: 'Product' },
   path: { type: String, required: true },
-  alt_tag: { type: String, required: true },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }
 });
