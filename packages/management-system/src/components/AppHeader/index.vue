@@ -42,7 +42,7 @@
               <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
                   <div class="photo">
-                    <img src="~@/assets/images/noavatar.png" alt="Profile Photo">
+                    <img src="~@/assets/images/avatar/anhhoang.jpg" alt="Profile Photo">
                   </div>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>

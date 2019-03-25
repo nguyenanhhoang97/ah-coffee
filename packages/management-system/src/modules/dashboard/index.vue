@@ -23,7 +23,7 @@
               <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-refresh-01"></i>Update Now
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
               <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-sound-wave"></i>Last Research
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
               <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-trophy"></i>Customers feedback
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -98,13 +98,45 @@
               <!-- <hr>
               <div class="stats">
                 <i class="tim-icons icon-watch-time"></i>In the last hours
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-5">
+          <div class="card card-user">
+            <div class="card-body">
+              <p class="card-text"></p>
+              <div class="author">
+                <div class="block block-one"></div>
+                <div class="block block-two"></div>
+                <div class="block block-three"></div>
+                <div class="block block-four"></div>
+                <a href="javascript:void(0)">
+                  <img class="avatar" src="~@/assets/images/avatar/anhhoang.jpg" alt="...">
+                  <h5 class="title">Anh Hoang Nguyen</h5>
+                </a>
+                <p class="description">Administrator</p>
+              </div>
+              <div
+                class="card-description"
+              >Hello World ( : Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</div>
+            </div>
+            <!-- <div class="card-footer">
+              <div class="button-container">
+                <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                  <i class="fab fa-facebook"></i>
+                </button>
+                <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button href="javascript:void(0)" class="btn btn-icon btn-round btn-google">
+                  <i class="fab fa-google-plus"></i>
+                </button>
+              </div>
+            </div> -->
+          </div>
           <div class="card">
             <div class="card-body">
               <div>

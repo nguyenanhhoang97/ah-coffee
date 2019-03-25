@@ -110,5 +110,17 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
       '@/modules/product/index.vue')
+  },
+  {
+    path: CREATE_PRODUCT,
+    meta: {
+      requiresAuth: true,
+      title: 'Create Product'
+    },
+    name: 'Create Product',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      '@/modules/product/create.vue')
   }
 ];

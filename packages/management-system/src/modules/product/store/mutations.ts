@@ -6,7 +6,7 @@ import {
   CREATE_PRODUCT_STATUS,
   UPDATE_PRODUCT_STATUS,
   CHANGE_ST_PRODUCT_STATUS,
-  DELETE_CATE_STATUS
+  DELETE_PRODUCT_STATUS
 } from './types';
 
 export const mutations: MutationTree<ProductState> = {
@@ -30,7 +30,7 @@ export const mutations: MutationTree<ProductState> = {
     state.changeStProductStatus = status;
   },
 
-  [DELETE_CATE_STATUS](state: ProductState, status: string) {
+  [DELETE_PRODUCT_STATUS](state: ProductState, status: string) {
     state.deleteProductStatus = status;
   }
 };

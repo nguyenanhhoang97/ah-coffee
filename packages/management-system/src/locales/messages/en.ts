@@ -16,7 +16,14 @@ export default {
     filesValid: 'Please choose your files to upload',
     updateCateSuccessMessage: 'Category successfully updated',
     updateCateStSuccessMessage: 'Category status successfully updated',
-    delCateSuccessMessage: 'Category successfully deleted'
+    delCateSuccessMessage: 'Category successfully deleted',
+    productNameValid: 'Please input Product Name',
+    cateSelValid: 'Please select Category',
+    priceValid: 'Please input Product Price',
+    productSavemessage: 'Product successfully created',
+    updateProductStSuccessMessage: 'Product status successfully updated',
+    delProductSuccessMessage: 'Product successfully deleted',
+    updateProductSuccessMessage: 'Product successfully updated',
   },
   button: {
     submit: 'Submit',
@@ -74,7 +81,9 @@ export default {
     createdAt: 'Created At',
     updatedBy: 'Updated By',
     updatedAt: 'Updated At',
-    name: 'Name'
+    name: 'Name',
+    updateProduct: 'Update Product',
+    productStatus: 'Product Status'
   },
   error: {
     notFound: 'Not Found'

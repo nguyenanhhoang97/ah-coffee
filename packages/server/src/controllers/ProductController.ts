@@ -36,7 +36,6 @@ export class ProductController {
             path: files[i].path
           });
           const res = await productImg.save();
-          // console.log(res._id);
           imgId.push(res._id);
         }
         // tslint:disable-next-line
@@ -68,7 +67,7 @@ export class ProductController {
     if (body.constructor === Object && Object.keys(body).length === 0) {
       return res.status(500).json({ message: 'req_body_check_failed' });
     } else {
-      jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
         if (err) {
           return res.status(500).json(err);
         }
@@ -78,47 +77,68 @@ export class ProductController {
           return res.status(403).json({ message: 'forbidden' });
         }
         const { productId, name, categoryId, price, introduction } = body;
-        const updatedDate = Date.now();
-        Product.findOneAndUpdate(
-          { id: productId },
-          {
-            $set: {
-              name,
-              category_id: categoryId,
-              price,
-              introduction,
-              updated_by: id,
-              updated_date: updatedDate
-            }
-          },
-          { new: true },
-          (error: any, product) => {
-            if (error) {
-              return res.status(500).json(error);
-            }
-            ProductImg.deleteMany({ product_id: productId }, e => {
-              if (e) {
-                return res.status(500).json(e);
+        if (req.files.length === 0) {
+          const updatedDate = Date.now();
+          Product.findOneAndUpdate(
+            { id: productId },
+            {
+              $set: {
+                name,
+                category_id: categoryId,
+                price,
+                introduction,
+                updated_by: id,
+                updated_date: updatedDate
               }
-              const { files } = req;
-              files.forEach((item: any) => {
-                let productImg = new ProductImg({
-                  product_id: productId,
-                  path: item.path,
-                  alt_tag: name
-                });
-                productImg.save((err1: any, img: any) => {
-                  if (err1) {
-                    return res.status(500).json(err1);
-                  }
-                });
-              });
+            },
+            { new: true },
+            (error: any, product) => {
+              if (error) {
+                return res.status(500).json(error);
+              }
+              return res
+                .status(200)
+                .json({ message: 'updated_product_info' } || {});
+            }
+          );
+        } else {
+          const { files } = req;
+          // tslint:disable-next-line
+          let imgId: any = [];
+          // tslint:disable-next-line
+          for (let i = 0; i < files.length; i++) {
+            // tslint:disable-next-line
+            let productImg = new ProductImg({
+              path: files[i].path
             });
-            return res
-              .status(200)
-              .json({ message: 'updated_product_info' } || {});
+            const productImgRes = await productImg.save();
+            imgId.push(productImgRes._id);
           }
-        );
+          const updatedDate = Date.now();
+          Product.findOneAndUpdate(
+            { id: productId },
+            {
+              $set: {
+                name,
+                category_id: categoryId,
+                price,
+                introduction,
+                updated_by: id,
+                updated_date: updatedDate,
+                product_imgs: imgId
+              }
+            },
+            { new: true },
+            (error: any, product) => {
+              if (error) {
+                return res.status(500).json(error);
+              }
+              return res
+                .status(200)
+                .json({ message: 'updated_product_info' } || {});
+            }
+          );
+        }
       });
     }
   }
