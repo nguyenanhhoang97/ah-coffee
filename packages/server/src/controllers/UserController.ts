@@ -77,6 +77,27 @@ export class UserController {
     }
   }
 
+  public getCurrentUser(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { data } = decoded;
+      const { id } = data;
+      User.findOne({ id }).exec((error, user) => {
+        if (error) {
+          return res.status(500).json({ message: err.message });
+        }
+        return res.status(200).json({ user });
+      });
+    });
+  }
+
   public updateUserInfo(req: any, res: any) {
     const { body } = req;
     const { authorization } = req.headers;
@@ -93,7 +114,12 @@ export class UserController {
         }
         const { data } = decoded;
         const { id } = data;
-        const { path } = req.files[0];
+        let path;
+        if (req.files.length === 0) {
+          path = body.oldPath;
+        } else {
+          path = req.files[0].path;
+        }
         User.findOneAndUpdate(
           { id },
           {
@@ -120,6 +146,7 @@ export class UserController {
   public changePassword(req: Request, res: Response) {
     const { body } = req;
     const { authorization } = req.headers;
+    // return res.status(200).json({ authorization });
     if (!authorization) {
       return res.status(403).json({ message: 'forbidden' });
     }
@@ -140,7 +167,7 @@ export class UserController {
           }
           const { password } = user;
           if (!bcrypt.compareSync(oldpsw, password)) {
-            return res.status(500).json({ message: 'incorrect_password' });
+            return res.status(200).json({ message: 'incorrect_password' });
           }
           const salt = bcrypt.genSaltSync(10);
           const hashedPass = bcrypt.hashSync(psw, salt);
@@ -332,14 +359,14 @@ export class UserController {
       if (role === 'customer') {
         return res.status(403).json({ message: 'forbidden' });
       }
-      User.find({role: 'customer'})
+      User.find({ role: 'customer' })
         .skip(offset)
         .limit(limit)
         .exec((error, user) => {
           if (error) {
             return res.status(500).json({ message: error.message });
           }
-          User.count({role: 'customer'}, (e, count) => {
+          User.count({ role: 'customer' }, (e, count) => {
             if (e) {
               return res.status(500).json({ message: e.message });
             }
@@ -368,14 +395,14 @@ export class UserController {
       if (role === 'customer' || role === 'salesperson') {
         return res.status(403).json({ message: 'forbidden' });
       }
-      User.find({role: 'salesperson'})
+      User.find({ role: 'salesperson' })
         .skip(offset)
         .limit(limit)
         .exec((error, user) => {
           if (error) {
             return res.status(500).json({ message: error.message });
           }
-          User.count({role: 'salesperson'}, (e, count) => {
+          User.count({ role: 'salesperson' }, (e, count) => {
             if (e) {
               return res.status(500).json({ message: e.message });
             }

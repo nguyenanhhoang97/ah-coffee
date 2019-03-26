@@ -6,6 +6,7 @@ import { ProductController } from '../controllers/ProductController';
 import { SessionController } from '../controllers/SessionController';
 import {
   ROOT,
+  CURRENT_USER,
   USER_REGISTER,
   USER_LOGIN,
   USER_UPDATE_PROFILE,
@@ -53,6 +54,7 @@ export class Routes {
 
     // User
     app.route(USER_REGISTER).post(this.userController.registerUser);
+    app.route(CURRENT_USER).get(this.userController.getCurrentUser);
     app.route(USER_LOGIN).post(this.userController.userLogin);
     app
       .route(USER_UPDATE_PROFILE)

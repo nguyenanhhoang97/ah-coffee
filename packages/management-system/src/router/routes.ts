@@ -8,6 +8,7 @@ export const CATEGORY = '/category';
 export const CREATE_CATE = CATEGORY + '/create';
 export const PRODUCT = '/product';
 export const CREATE_PRODUCT = PRODUCT + '/create';
+export const PROFILE = '/profile';
 
 export default [
   // {
@@ -122,5 +123,17 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
       '@/modules/product/create.vue')
+  },
+  {
+    path: PROFILE,
+    meta: {
+      requiresAuth: true,
+      title: 'Profile'
+    },
+    name: 'Profile',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      '@/modules/profile/index.vue')
   }
 ];

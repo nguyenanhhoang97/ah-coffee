@@ -42,12 +42,12 @@
               <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
                   <div class="photo">
-                    <img src="~@/assets/images/avatar/anhhoang.jpg" alt="Profile Photo">
+                    <img :src="avatar" alt="Profile Photo">
                   </div>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>{{ $t('button.profile') }}</el-dropdown-item>
+                  <el-dropdown-item @click.native="handleProfile">{{ $t('button.profile') }}</el-dropdown-item>
                   <el-dropdown-item @click.native="handleLogOutDialog">{{ $t('button.logout') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -75,6 +75,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters, mapActions } from 'vuex';
+import { SERVER_URL } from '@/core/constants';
 
 @Component({
   computed: {
@@ -84,12 +85,15 @@ import { mapGetters, mapActions } from 'vuex';
 
   methods: {
     ...mapActions('session', ['logout']),
-    ...mapActions('global', ['setNavBarStyle'])
+    ...mapActions('global', ['setNavBarStyle']),
+    ...mapActions('profile', ['currentUser'])
   },
 
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      avatar: '',
+      serverUrl: SERVER_URL
     };
   }
 })
@@ -98,8 +102,29 @@ export default class AppHeader extends Vue {
   public setNavBarStyle!: any;
   public getSidebarStyle!: any;
 
+  public currentUser!: () => Promise<any>;
+
+  public mounted() {
+    this.initCurrentProfile();
+  }
+
+  public async initCurrentProfile() {
+    try {
+      await this.currentUser().then((res: any) => {
+        const avt = this.$data.serverUrl + '/' + res.user.avatar;
+        this.$data.avatar = avt;
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
   public handleChangeSidebarStyle() {
     this.setNavBarStyle(!this.getSidebarStyle);
+  }
+
+  public handleProfile() {
+    this.$router.push('profile');
   }
 
   public handleLogOut() {

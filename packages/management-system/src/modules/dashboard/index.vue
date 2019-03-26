@@ -106,22 +106,23 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="card card-user">
-            <div class="card-body">
+            <div class="card-body" v-if="profile.user">
               <p class="card-text"></p>
               <div class="author">
                 <div class="block block-one"></div>
                 <div class="block block-two"></div>
                 <div class="block block-three"></div>
                 <div class="block block-four"></div>
-                <a href="javascript:void(0)">
-                  <img class="avatar" src="~@/assets/images/avatar/anhhoang.jpg" alt="...">
-                  <h5 class="title">Anh Hoang Nguyen</h5>
-                </a>
-                <p class="description">Administrator</p>
+                <img class="avatar" :src="serverUrl+'/'+profile.user.avatar" alt="...">
+                <h5 class="title">{{ profile.user.fullname }}</h5>
+
+                <el-tag v-if="profile.user.role === 'admin'">Administrator</el-tag>
+                <el-tag v-if="profile.user.role === 'manager'">Manager</el-tag>
+                <el-tag v-if="profile.user.role === 'salesperson'">Salesperson</el-tag>
               </div>
-              <div
+              <!-- <div
                 class="card-description"
-              >Hello World ( : Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</div>
+              >Hello World ( : Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.</div>-->
             </div>
             <!-- <div class="card-footer">
               <div class="button-container">
@@ -135,13 +136,13 @@
                   <i class="fab fa-google-plus"></i>
                 </button>
               </div>
-            </div> -->
+            </div>-->
           </div>
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" v-if="profile.user">
               <div>
                 <h1>{{ time }}</h1>
-                <h2>Welcome back, Anh Hoang!</h2>
+                <h2>Welcome back, {{ profile.user.fullname }}!</h2>
                 <p>Keep your good work</p>
               </div>
             </div>
@@ -450,8 +451,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapActions, mapState, mapGetters } from 'vuex';
-
 import { Layout, AppFooter } from '@/components';
+import { SERVER_URL } from '@/core/constants';
 
 let timerID: any = null;
 
@@ -461,14 +462,31 @@ let timerID: any = null;
   },
 
   computed: {
-    ...mapGetters('dashboard', ['getStatistics'])
+    ...mapGetters('dashboard', ['getStatistics']),
+    ...mapState('profile', ['profile'])
   },
 
-  methods: {}
+  methods: {
+    ...mapActions('profile', ['currentUser'])
+  },
+
+  data() {
+    return {
+      serverUrl: SERVER_URL
+    };
+  },
+
+  watch: {
+    // call again the method if the route changes
+    // tslint:disable-next-line
+    $route: 'initCurrentProfile'
+  }
 })
 export default class Dashboard extends Vue {
   public getSidebarStyle!: boolean;
   public time: string = '';
+
+  public currentUser!: () => Promise<any>;
 
   public created() {
     this.updateTime();
@@ -476,6 +494,7 @@ export default class Dashboard extends Vue {
 
   public mounted() {
     timerID = setInterval(this.updateTime, 1000);
+    this.initCurrentProfile();
   }
 
   public updateTime() {
@@ -484,6 +503,14 @@ export default class Dashboard extends Vue {
     const mins: string = this.zeroPadding(cd.getMinutes(), 2);
     // const secs: string = this.zeroPadding(cd.getSeconds(), 2);
     this.time = `${hours}:${mins}`;
+  }
+
+  public async initCurrentProfile() {
+    try {
+      await this.currentUser();
+    } catch (e) {
+      throw e;
+    }
   }
 
   public zeroPadding(num: number, digit: number) {

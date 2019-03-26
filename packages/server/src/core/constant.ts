@@ -7,6 +7,7 @@ dotenv.load();
 export const ROOT = '/api/v1';
 // ----USER
 export const USER = ROOT + '/user';
+export const CURRENT_USER = USER + '/current-user';
 export const USER_REGISTER = USER + '/register';
 export const USER_LOGIN = USER + '/login';
 export const USER_UPDATE_PROFILE = USER + '/update-profile';

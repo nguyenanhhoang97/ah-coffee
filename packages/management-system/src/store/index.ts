@@ -6,6 +6,7 @@ import { dashboard } from '@/modules/dashboard/store';
 import { session } from '@/modules/session/store';
 import { category } from '@/modules/category/store';
 import { product } from '@/modules/product/store';
+import { profile } from '@/modules/profile/store';
 
 import { RootState } from './types';
 
@@ -20,7 +21,8 @@ const store: StoreOptions<RootState> = {
     dashboard,
     session,
     category,
-    product
+    product,
+    profile
   },
   strict: process.env.NODE_ENV !== 'production'
 };

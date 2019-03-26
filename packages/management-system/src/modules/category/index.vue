@@ -36,7 +36,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column align="right">
+          <el-table-column align="right" width="250">
             <template slot="header" slot-scope="scope">
               <el-input v-model="search" size="mini" :placeholder="$t('placeholder.search')"/>
             </template>

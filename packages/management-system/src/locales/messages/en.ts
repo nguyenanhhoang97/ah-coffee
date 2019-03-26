@@ -24,6 +24,13 @@ export default {
     updateProductStSuccessMessage: 'Product status successfully updated',
     delProductSuccessMessage: 'Product successfully deleted',
     updateProductSuccessMessage: 'Product successfully updated',
+    fullnameValid: 'Please input your fullname',
+    emailValid: 'Please input your email',
+    addressValid: 'Please input your address',
+    phoneNumberValid: 'Please input your phone number',
+    updateProfileSuccessMsg: 'Your profile successfully updated',
+    updatePasswordSuccessMsg: 'Your password successfully updated',
+    incorrectOldPass: 'Incorrect Old Password'
   },
   button: {
     submit: 'Submit',
@@ -83,7 +90,21 @@ export default {
     updatedAt: 'Updated At',
     name: 'Name',
     updateProduct: 'Update Product',
-    productStatus: 'Product Status'
+    productStatus: 'Product Status',
+    yourProfile: 'Your Profile',
+    fullname: 'Fullname',
+    avatar: 'Avatar',
+    email: 'Email',
+    username: 'Username',
+    address: 'Address',
+    phoneNumber: 'Phone Number',
+    role: 'Role',
+    updateYourProfile: 'Update Your Profile Information',
+    changePass: 'Change Password',
+    oldPass: 'Old Password',
+    password: 'Password',
+    newPassword: 'New Password',
+    repeatNewPass: 'Repeat New Password'
   },
   error: {
     notFound: 'Not Found'
