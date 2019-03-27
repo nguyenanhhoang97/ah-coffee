@@ -7,6 +7,7 @@ import { session } from '@/modules/session/store';
 import { category } from '@/modules/category/store';
 import { product } from '@/modules/product/store';
 import { profile } from '@/modules/profile/store';
+import { orderBoard } from '@/modules/orderboard/store';
 
 import { RootState } from './types';
 
@@ -22,7 +23,8 @@ const store: StoreOptions<RootState> = {
     session,
     category,
     product,
-    profile
+    profile,
+    orderBoard
   },
   strict: process.env.NODE_ENV !== 'production'
 };

@@ -104,7 +104,10 @@ export default {
     oldPass: 'Old Password',
     password: 'Password',
     newPassword: 'New Password',
-    repeatNewPass: 'Repeat New Password'
+    repeatNewPass: 'Repeat New Password',
+    orderBoard: 'OrderBoard',
+    productList: 'Product List',
+    addToOrderBoard: 'Add To Orderboard'
   },
   error: {
     notFound: 'Not Found'

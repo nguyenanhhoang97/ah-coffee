@@ -32,6 +32,7 @@ export const actions: ActionTree<ProductState, RootState> = {
             commit(SET_PRODUCTS, response.data);
             commit(LOADING, false);
           }, 1000);
+          return response.data;
         }
       })
       .catch((error: any) => {

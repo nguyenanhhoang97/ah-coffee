@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 import { Product } from '../models/Product';
 import { ProductImg } from '../models/ProductImg';
+import { Category } from '../models/Category';
 import { JWT_CHARS } from '../core/constant';
-import { ExecFileSyncOptions } from 'child_process';
 
 export class ProductController {
   public createProduct(req: any, res: any) {
@@ -174,9 +175,58 @@ export class ProductController {
             }
           },
           { new: true },
-          (error: any, product) => {
+          async (error: any, product: any) => {
             if (error) {
               return res.status(500).json(error);
+            }
+            if (productStatus === 1) {
+              const category: any = await Category.findOne({
+                _id: product.category_id
+              }).exec();
+              const { products } = category;
+              let productId: any = [];
+              if (products.length === 0) {
+                productId.push(product._id);
+                const updateCate = await Category.findOneAndUpdate(
+                  { _id: product.category_id },
+                  {
+                    $set: {
+                      products: productId
+                    }
+                  },
+                  { new: true }
+                );
+              } else {
+                productId = products;
+                productId.push(product._id);
+                const updateCate = await Category.findOneAndUpdate(
+                  { _id: product.category_id },
+                  {
+                    $set: {
+                      products: productId
+                    }
+                  },
+                  { new: true }
+                );
+              }
+            } else {
+              const category: any = await Category.findOne({
+                _id: product.category_id
+              }).exec();
+              const { products } = category;
+              const pIdLst: any = [...products];
+              const newPIdLst = pIdLst.filter(
+                (element: any) => element.toString() !== product._id.toString()
+              );
+              const updateCate = await Category.findOneAndUpdate(
+                { _id: product.category_id },
+                {
+                  $set: {
+                    products: newPIdLst
+                  }
+                },
+                { new: true }
+              );
             }
             return res
               .status(200)

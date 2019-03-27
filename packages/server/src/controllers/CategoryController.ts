@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Category } from '../models/Category';
+import { Product } from '../models/Product';
 import { JWT_CHARS } from '../core/constant';
 
 export class CategoryController {
@@ -40,25 +41,26 @@ export class CategoryController {
     }
   }
 
-  public getCategoryList(req: Request, res: Response) {
+  public async getCategoryList(req: Request, res: Response) {
     const { query } = req;
     const { pageIndex, pageSize } = query;
     const offset = pageIndex * pageSize;
     const limit = parseInt(pageSize, 10);
-    Category.find({ $or: [{ status: 0 }, { status: 1 }] })
+    const category = await Category.find({
+      $or: [{ status: 0 }, { status: 1 }]
+    })
       .skip(offset)
       .limit(limit)
-      .exec((err, category) => {
-        if (err) {
-          return res.status(500).json({ message: err.message });
-        }
-        Category.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
-          if (error) {
-            return res.status(500).json({ message: error.message });
-          }
-          return res.status(200).json({ category, total: count });
-        });
-      });
+      .populate({
+        path: 'products'
+      })
+      .exec();
+    Category.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
+      if (error) {
+        return res.status(500).json({ message: error.message });
+      }
+      return res.status(200).json({ category, total: count });
+    });
   }
 
   public getCategoryDetail(req: Request, res: Response) {

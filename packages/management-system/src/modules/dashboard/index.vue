@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" v-loading="getLoading">
         <div class="col-lg-5">
           <div class="card card-user">
             <div class="card-body" v-if="profile.user">
@@ -463,6 +463,7 @@ let timerID: any = null;
 
   computed: {
     ...mapGetters('dashboard', ['getStatistics']),
+    ...mapGetters('profile', ['getProfile', 'getLoading']),
     ...mapState('profile', ['profile'])
   },
 

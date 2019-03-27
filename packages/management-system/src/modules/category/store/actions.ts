@@ -32,6 +32,7 @@ export const actions: ActionTree<CategoryState, RootState> = {
             commit(SET_CATEGORIES, response.data);
             commit(LOADING, false);
           }, 1000);
+          return response.data;
         }
       })
       .catch((error: any) => {

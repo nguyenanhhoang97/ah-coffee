@@ -9,6 +9,7 @@ export const CREATE_CATE = CATEGORY + '/create';
 export const PRODUCT = '/product';
 export const CREATE_PRODUCT = PRODUCT + '/create';
 export const PROFILE = '/profile';
+export const ORDER_BOARD = '/orderboard';
 
 export default [
   // {
@@ -135,5 +136,17 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
       '@/modules/profile/index.vue')
+  },
+  {
+    path: ORDER_BOARD,
+    meta: {
+      requiresAuth: true,
+      title: 'OrderBoard'
+    },
+    name: 'OrderBoard',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+      '@/modules/orderboard/index.vue')
   }
 ];

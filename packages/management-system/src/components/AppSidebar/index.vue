@@ -29,6 +29,11 @@ export default class AppSidebar extends Vue {
       route: '/'
     },
     {
+      icon: 'tim-icons icon-puzzle-10',
+      name: 'OrderBoard',
+      route: '/orderboard'
+    },
+    {
       icon: 'tim-icons icon-app',
       name: 'Manage Category',
       route: '/category'

@@ -23,6 +23,7 @@ export const SP = USER + '/salesperson';
 export const SP_GET_CUSTOMER_LIST = SP + '/get-customer-list';
 // ----CATEGORY
 export const CATEGORY = ROOT + '/category';
+export const CATEGORY_W_PRODUCT = ROOT + '/category-with-product';
 export const CREATE_CATEGORY = CATEGORY + '/create';
 export const UPDATE_CATEGORY = CATEGORY + '/update';
 export const UPDATE_CATEGORY_STATUS = UPDATE_CATEGORY + '/status';
