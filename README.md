@@ -19,7 +19,7 @@
   - Product API.
 ### Mar 29, 2019
 - Server:
-  - Add multer middleware.
+  - Add Multer middleware.
   - Add populate for schemas.
 - Management System:
   - Manage Category.
