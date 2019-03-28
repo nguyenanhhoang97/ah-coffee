@@ -13,7 +13,17 @@
   - User API.
 ### Mar 20, 2019
 - Server:
-  - Product Category API
+  - Product Category API.
 ### Mar 21, 2019
 - Server:
-  - Product API
+  - Product API.
+### Mar 29, 2019
+- Server:
+  - Add multer middleware.
+  - Add populate for schemas.
+- Management System:
+  - Manage Category.
+  - Manage Product.
+  - Update Profile Information.
+  - Change Password.
+  - Orderboard.
