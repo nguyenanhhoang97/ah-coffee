@@ -107,7 +107,12 @@ export default {
     repeatNewPass: 'Repeat New Password',
     orderBoard: 'OrderBoard',
     productList: 'Product List',
-    addToOrderBoard: 'Add To Orderboard'
+    addToOrderBoard: 'Add To Orderboard',
+    productId: 'Product ID',
+    unitPrice: 'Unit Price',
+    totalPrice: 'Total Price',
+    action: 'Action',
+    quantity: 'Quantity'
   },
   error: {
     notFound: 'Not Found'

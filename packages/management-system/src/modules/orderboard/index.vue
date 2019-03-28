@@ -7,11 +7,31 @@
         </div>
         <div class="card-body">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="productId" label="productId"></el-table-column>
-            <el-table-column prop="productName" label="productName"></el-table-column>
-            <el-table-column prop="quantity" label="quantity"></el-table-column>
-            <el-table-column prop="unitPrice" label="unitPrice"></el-table-column>
-            <el-table-column prop="price" label="price"></el-table-column>
+            <el-table-column prop="_id" :label="$t('label.productId')"></el-table-column>
+            <el-table-column prop="name" :label="$t('label.productName')"></el-table-column>
+            <el-table-column prop="quantity" :label="$t('label.quantity')"></el-table-column>
+            <el-table-column prop="unitPrice" :label="$t('label.unitPrice')"></el-table-column>
+            <el-table-column prop="price" :label="$t('label.totalPrice')"></el-table-column>
+            <el-table-column :label="$t('label.action')" width="250">
+              <template slot-scope="scope">
+                <el-button
+                  size="medium"
+                  icon="el-icon-plus"
+                  @click="plusOrderBoardItem(scope.row)"
+                ></el-button>
+                <el-button
+                  size="medium"
+                  icon="el-icon-minus"
+                  @click="minusOrderBoardItem(scope.row)"
+                ></el-button>
+                <el-button
+                  size="medium"
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="removeOrderBoardItem(scope.row)"
+                ></el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -44,7 +64,11 @@
                       </h4>
                       <span>{{ $t('label.price') }}: {{ product.price }}</span>
                       <div class="bottom clearfix">
-                        <el-button type="text" class="button">{{ $t('label.addToOrderBoard') }}</el-button>
+                        <el-button
+                          type="text"
+                          class="button"
+                          @click="handleSelectProduct(product)"
+                        >{{ $t('label.addToOrderBoard') }}</el-button>
                       </div>
                     </div>
                   </el-card>
@@ -77,16 +101,8 @@ import { mapState, mapGetters, mapActions } from 'vuex';
     return {
       activeName: '',
       cateLst: {},
-      tableData: [
-        {
-          productId: 'asdasdsad23323',
-          productName: 'Capuchino',
-          quantity: 2,
-          unitPrice: 150,
-          price: 300
-        }
-      ],
-      totalPrice: 300,
+      tableData: [],
+      ttPrice: 300,
       form: {}
     };
   },
@@ -118,6 +134,82 @@ export default class OrderBoard extends Vue {
       });
     } catch (e) {
       throw e;
+    }
+  }
+
+  public handleSelectProduct(product: any) {
+    if (this.$data.tableData.length === 0) {
+      const pItm = {
+        _id: product._id,
+        name: product.name,
+        quantity: 1,
+        unitPrice: product.price,
+        price: product.price
+      };
+      this.$data.tableData.push(pItm);
+    } else {
+      // tslint:disable-next-line
+      let pList = this.$data.tableData;
+      let check = false;
+      // tslint:disable-next-line
+      for (let i = 0; i < pList.length; i++) {
+        if (pList[i]._id === product._id) {
+          pList[i].quantity++;
+          pList[i].price = pList[i].unitPrice * pList[i].quantity;
+          check = true;
+          break;
+        }
+      }
+      if (check === false) {
+        const pItm = {
+          _id: product._id,
+          name: product.name,
+          quantity: 1,
+          unitPrice: product.price,
+          price: product.price
+        };
+        this.$data.tableData.push(pItm);
+      }
+    }
+  }
+
+  public removeOrderBoardItem(product: any) {
+    const newPList = this.$data.tableData.filter(
+      (element: any) => element._id.toString() !== product._id.toString()
+    );
+    this.$data.tableData = newPList;
+  }
+
+  public plusOrderBoardItem(product: any) {
+    // tslint:disable-next-line
+    let pList = this.$data.tableData;
+    // tslint:disable-next-line
+    for (let i = 0; i < pList.length; i++) {
+      if (pList[i]._id === product._id) {
+        pList[i].quantity++;
+        pList[i].price = pList[i].unitPrice * pList[i].quantity;
+        break;
+      }
+    }
+  }
+
+  public minusOrderBoardItem(product: any) {
+    // tslint:disable-next-line
+    let pList = this.$data.tableData;
+    // tslint:disable-next-line
+    for (let i = 0; i < pList.length; i++) {
+      if (pList[i]._id === product._id) {
+        if (pList[i].quantity === 1) {
+          const newPList = this.$data.tableData.filter(
+            (element: any) => element._id.toString() !== product._id.toString()
+          );
+          this.$data.tableData = newPList;
+        } else {
+          pList[i].quantity--;
+          pList[i].price = pList[i].unitPrice * pList[i].quantity;
+          break;
+        }
+      }
     }
   }
 }

@@ -22,7 +22,7 @@
               <span class="navbar-toggler-bar bar3"></span>
             </button>
           </div>
-          <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+          <span class="navbar-brand" href="javascript:void(0)">{{ $route.meta.title }}</span>
         </div>
         <button
           class="navbar-toggler"

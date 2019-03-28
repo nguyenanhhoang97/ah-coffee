@@ -6,9 +6,7 @@ import { OrderBoardState } from './types';
 import { RootState } from '@/store/types';
 
 export const state: OrderBoardState = {
-  loading: false,
-  prLst: [],
-  totalPrice: 0
+  loading: false
 };
 
 const namespaced: boolean = true;
