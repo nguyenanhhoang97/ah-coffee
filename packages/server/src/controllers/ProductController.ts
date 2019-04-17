@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import _ from 'lodash';
 import { Product } from '../models/Product';
 import { ProductImg } from '../models/ProductImg';
 import { Category } from '../models/Category';

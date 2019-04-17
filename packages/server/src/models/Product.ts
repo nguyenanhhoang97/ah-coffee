@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import { ProductImg } from '../models/ProductImg';
 
 const Schema = mongoose.Schema;
 

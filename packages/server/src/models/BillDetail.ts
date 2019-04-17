@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 let billDetailSchema = new Schema({
   id: { type: Number, required: true },
-  bill_id: { type: Number, required: true, ref: 'Bill' },
   product_id: { type: Number, required: true, ref: 'Product' },
   unit_price: { type: Number, required: true },
   quantity: { type: Number, required: true },
