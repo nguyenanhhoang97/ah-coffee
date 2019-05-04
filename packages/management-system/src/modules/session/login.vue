@@ -80,6 +80,9 @@ export default class Login extends Vue {
         } else if (message === 'invalid_password') {
           const error: any = this.$i18n.t('message.invalid_password');
           this.$message.error(error);
+        } else if (message === 'invalid_role') {
+          const error: any = this.$i18n.t('message.invalid_role');
+          this.$message.error(error);
         }
       });
     } catch (e) {

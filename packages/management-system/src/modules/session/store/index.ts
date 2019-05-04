@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY } from '@/core/constants';
+import { ACCESS_TOKEN_KEY, USR_ROLE } from '@/core/constants';
 import { Module } from 'vuex';
 import { getters } from './getters';
 import { actions } from './actions';
@@ -8,7 +8,8 @@ import { RootState } from '@/store/types';
 
 export const state: SessionState = {
   token: localStorage.getItem(ACCESS_TOKEN_KEY) || '',
-  status: ''
+  status: '',
+  role: localStorage.getItem(USR_ROLE) || ''
 };
 
 const namespaced: boolean = true;

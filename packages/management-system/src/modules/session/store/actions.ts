@@ -8,13 +8,15 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR,
   AUTH_REQUEST,
-  SET_PROFILE
+  SET_PROFILE,
+  CURRENT_ROLE
 } from './types';
 import { RootState } from '@/store/types';
 import {
   ACCESS_TOKEN_KEY,
   AUTH_HEADER_KEY,
-  API_ENDPOINT
+  API_ENDPOINT,
+  USR_ROLE
 } from '@/core/constants';
 
 export const actions: ActionTree<SessionState, RootState> = {
@@ -28,16 +30,18 @@ export const actions: ActionTree<SessionState, RootState> = {
       }
     })
       .then((response: any) => {
-        const { token } = response.data;
+        const { token, role } = response.data;
         if (token === undefined) {
           const { message } = response.data;
           return message;
         } else {
           localStorage.setItem(ACCESS_TOKEN_KEY, token);
+          localStorage.setItem(USR_ROLE, role);
 
           axios.defaults.headers.authorization = token;
 
           commit(AUTH_SUCCESS, token);
+          commit(CURRENT_ROLE, role);
           router.push({ path: '/' });
         }
       })
@@ -50,6 +54,7 @@ export const actions: ActionTree<SessionState, RootState> = {
     return new Promise(resolve => {
       commit(AUTH_LOGOUT);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
+      localStorage.removeItem(USR_ROLE);
       resolve();
       router.push({ path: '/login' });
     });

@@ -7,6 +7,7 @@ import {
   AUTH_ERROR,
   AUTH_LOGOUT,
   SET_PROFILE,
+  CURRENT_ROLE
 } from './types';
 
 export const mutations: MutationTree<SessionState> = {
@@ -30,4 +31,8 @@ export const mutations: MutationTree<SessionState> = {
   // [SET_PROFILE](state, profile: Profile) {
   //   state.profile = profile;
   // },
+
+  [CURRENT_ROLE](state, role) {
+    state.role = role;
+  }
 };

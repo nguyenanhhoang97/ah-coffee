@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">{{ $t('label.orderBoard') }}</h4>
@@ -14,11 +14,7 @@
             <el-table-column prop="price" :label="$t('label.totalPrice')"></el-table-column>
             <el-table-column :label="$t('label.action')" width="250">
               <template slot-scope="scope">
-                <el-button
-                  size="medium"
-                  icon="el-icon-plus"
-                  @click="plusOrderBoardItem(scope.row)"
-                ></el-button>
+                <el-button size="medium" icon="el-icon-plus" @click="plusOrderBoardItem(scope.row)"></el-button>
                 <el-button
                   size="medium"
                   icon="el-icon-minus"
@@ -33,10 +29,13 @@
               </template>
             </el-table-column>
           </el-table>
+          <br>
+          <h4>Total: $ {{ ttPrice }}</h4>
+          <el-button type="primary" v-if="ttPrice > 0">{{ $t('button.checkout') }}</el-button>
         </div>
       </div>
     </div>
-    <div class="col-lg-4" v-loading="getLoading">
+    <div class="col-lg-5" v-loading="getLoading">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">{{ $t('label.productList') }}</h4>
@@ -52,10 +51,10 @@
             >
               <el-row v-if="item.products">
                 <el-col
-                  :span="16"
+                  :span="8"
                   v-for="product in item.products"
                   :key="product._id"
-                  style="margin-top: 1rem;"
+                  style="margin-top: 1rem"
                 >
                   <el-card :body-style="{ padding: '0px' }">
                     <div style="padding: 14px;">
@@ -102,7 +101,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
       activeName: '',
       cateLst: {},
       tableData: [],
-      ttPrice: 300,
+      ttPrice: 0,
       form: {}
     };
   },
@@ -147,6 +146,7 @@ export default class OrderBoard extends Vue {
         price: product.price
       };
       this.$data.tableData.push(pItm);
+      this.$data.ttPrice = product.price;
     } else {
       // tslint:disable-next-line
       let pList = this.$data.tableData;
@@ -170,6 +170,11 @@ export default class OrderBoard extends Vue {
         };
         this.$data.tableData.push(pItm);
       }
+      let tempTotal = 0;
+      pList.forEach((element: any) => {
+        tempTotal = tempTotal + element.price;
+      });
+      this.$data.ttPrice = tempTotal;
     }
   }
 
@@ -178,6 +183,12 @@ export default class OrderBoard extends Vue {
       (element: any) => element._id.toString() !== product._id.toString()
     );
     this.$data.tableData = newPList;
+    const pList = this.$data.tableData;
+    let tempTotal = 0;
+    pList.forEach((element: any) => {
+      tempTotal = tempTotal + element.price;
+    });
+    this.$data.ttPrice = tempTotal;
   }
 
   public plusOrderBoardItem(product: any) {
@@ -191,6 +202,11 @@ export default class OrderBoard extends Vue {
         break;
       }
     }
+    let tempTotal = 0;
+    pList.forEach((element: any) => {
+      tempTotal = tempTotal + element.price;
+    });
+    this.$data.ttPrice = tempTotal;
   }
 
   public minusOrderBoardItem(product: any) {
@@ -211,6 +227,12 @@ export default class OrderBoard extends Vue {
         }
       }
     }
+    pList = this.$data.tableData;
+    let tempTotal = 0;
+    pList.forEach((element: any) => {
+      tempTotal = tempTotal + element.price;
+    });
+    this.$data.ttPrice = tempTotal;
   }
 }
 </script>

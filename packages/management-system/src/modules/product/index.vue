@@ -95,7 +95,12 @@
         <el-form-item :label="$t('label.productName')" :label-width="formLabelWidth">
           <el-input v-model="selectedItem.name"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.category')" v-if="categories" prop="category" :label-width="formLabelWidth">
+        <el-form-item
+          :label="$t('label.category')"
+          v-if="categories"
+          prop="category"
+          :label-width="formLabelWidth"
+        >
           <el-select v-model="selectedItem.categoryId" placeholder="Select">
             <el-option
               v-for="item in categories.category"
@@ -105,14 +110,24 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('label.introduction')" prop="introduction" :label-width="formLabelWidth">
+        <el-form-item
+          :label="$t('label.introduction')"
+          prop="introduction"
+          :label-width="formLabelWidth"
+        >
           <el-input type="textarea" v-model="selectedItem.introduction"></el-input>
         </el-form-item>
         <el-form-item :label="$t('label.price')" prop="price" :label-width="formLabelWidth">
           <el-input v-model="selectedItem.price"></el-input>
         </el-form-item>
         <el-form-item :label="$t('label.uploadImages')" :label-width="formLabelWidth">
-          <input type="file" name="import_file" accept="image/*" multiple @change="selectedFile($event)">
+          <input
+            type="file"
+            name="import_file"
+            accept="image/*"
+            multiple
+            @change="selectedFile($event)"
+          >
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -278,7 +293,9 @@ export default class Product extends Vue {
             pageSize: 10
           };
           this.productList(parameters);
-          const resMess: any = this.$i18n.t('message.updateProductSuccessMessage');
+          const resMess: any = this.$i18n.t(
+            'message.updateProductSuccessMessage'
+          );
           this.$message.success(resMess);
           this.$data.form = {};
           this.$data.file = undefined;
@@ -310,8 +327,8 @@ export default class Product extends Vue {
       await this.changeProductStatus(params).then((message: any) => {
         if (message === 'updated_product_status') {
           const parameters = {
-            pageIndex: 0,
-            pageSize: 10
+            pageIndex: this.$data.pageIndex - 1,
+            pageSize: this.$data.pageSize
           };
           this.productList(parameters);
           const resMess: any = this.$i18n.t(

@@ -9,5 +9,9 @@ export const getters: GetterTree<SessionState, RootState> = {
 
   token(state): string {
     return state.token;
+  },
+
+  role(state): string {
+    return state.role;
   }
 };

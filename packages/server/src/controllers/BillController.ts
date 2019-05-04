@@ -54,4 +54,62 @@ export class BillController {
       });
     }
   }
+
+  public getBillListBySalepersons(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { query } = req;
+      const { pageIndex, pageSize } = query;
+      const offset = pageIndex * pageSize;
+      const limit = parseInt(pageSize, 10);
+      const { data } = decoded;
+      const { id } = data;
+      const bill = await Bill.find({
+        salesperson_id: id
+      })
+        .skip(offset)
+        .limit(limit)
+        .exec();
+      const count = await Bill.count({
+        salesperson_id: id
+      });
+      return res.status(200).json({ bill, total: count });
+    });
+  }
+
+  public getBillListByCustomer(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { query } = req;
+      const { pageIndex, pageSize } = query;
+      const offset = pageIndex * pageSize;
+      const limit = parseInt(pageSize, 10);
+      const { data } = decoded;
+      const { id } = data;
+      const bill = await Bill.find({
+        customer_id: id
+      })
+        .skip(offset)
+        .limit(limit)
+        .exec();
+      const count = await Bill.count({
+        customer_id: id
+      });
+      return res.status(200).json({ bill, total: count });
+    });
+  }
 }

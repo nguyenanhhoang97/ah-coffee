@@ -56,6 +56,9 @@ export class UserController {
             avatar,
             role
           };
+          if (role === 'customer') {
+            return res.status(200).json({ message: 'invalid_role' });
+          }
           const token = jwt.sign({ data }, JWT_CHARS);
           Session.findOne({ token }, (error: any, session: any) => {
             if (error) {
@@ -69,7 +72,7 @@ export class UserController {
               newSession.save();
             }
           });
-          return res.status(200).json({ token });
+          return res.status(200).json({ token, role });
         } else {
           return res.status(200).json({ message: 'invalid_password' });
         }

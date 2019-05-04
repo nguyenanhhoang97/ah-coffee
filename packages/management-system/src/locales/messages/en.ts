@@ -4,6 +4,7 @@ export default {
     title: 'AH Coffee',
     invalid_username: 'Invalid username. Please try again',
     invalid_password: 'Invalid password. Please try again',
+    invalid_role: 'Invalid role',
     login_success: 'You have successfully logged in. Welcome back :)',
     logout_message: 'Are you sure to logout?',
     cate_save_message: 'Category successfully created',
@@ -47,7 +48,8 @@ export default {
     delete: 'Delete',
     changeStatus: 'Change Status',
     close: 'Close',
-    newProduct: 'Create New Product'
+    newProduct: 'Create New Product',
+    checkout: 'Checkout'
   },
   label: {
     loginTitle: 'Log in',
