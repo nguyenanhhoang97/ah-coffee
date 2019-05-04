@@ -31,7 +31,11 @@
           </el-table>
           <br>
           <h4>Total: $ {{ ttPrice }}</h4>
-          <el-button type="primary" v-if="ttPrice > 0">{{ $t('button.checkout') }}</el-button>
+          <el-button
+            type="primary"
+            v-if="ttPrice > 0"
+            @click="dialogCheckOut = true"
+          >{{ $t('button.checkout') }}</el-button>
         </div>
       </div>
     </div>
@@ -78,6 +82,39 @@
         </div>
       </div>
     </div>
+
+    <el-dialog :title="$t('label.billInfo')" :visible.sync="dialogCheckOut">
+      <el-form :model="form">
+        <el-form-item :label="$t('label.customerId')" label-width="180px">
+          <el-input
+            v-model="customerId"
+            autocomplete="off"
+            :placeholder="$t('placeholder.customerIdOrderBoard')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.paymentMethod')" label-width="180px">
+          <el-select v-model="selectedPaymentMethod" placeholder="Select">
+            <el-option
+              v-for="item in paymentMethod"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          :label="$t('label.ccRC')"
+          label-width="180px"
+          v-if="selectedPaymentMethod == 1"
+        >
+          <el-input v-model="ccRC" autocomplete="off" :placeholder="$t('placeholder.ccRC')"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogCheckOut = false">Cancel</el-button>
+        <el-button type="primary" @click="handleSaveBill">{{ $t('button.save') }}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -93,6 +130,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
   computed: {
     ...mapState('category', ['categories']),
+    ...mapState('orderBoard', ['paymentMethod']),
     ...mapGetters('category', ['getLoading'])
   },
 
@@ -102,7 +140,11 @@ import { mapState, mapGetters, mapActions } from 'vuex';
       cateLst: {},
       tableData: [],
       ttPrice: 0,
-      form: {}
+      form: {},
+      dialogCheckOut: false,
+      selectedPaymentMethod: '',
+      ccRC: '',
+      customerId: ''
     };
   },
 
@@ -134,6 +176,19 @@ export default class OrderBoard extends Vue {
     } catch (e) {
       throw e;
     }
+  }
+
+  public handleSaveBill() {
+    const {
+      customerId,
+      ccRC,
+      tableData: productList,
+      ttPrice: totalPrice
+    } = this.$data;
+    console.log('customerId >>> ', customerId);
+    console.log('ccRC >>> ', ccRC);
+    console.log('productList >>> ', productList);
+    console.log('totalPrice >>> ', totalPrice);
   }
 
   public handleSelectProduct(product: any) {

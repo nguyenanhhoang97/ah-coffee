@@ -114,7 +114,11 @@ export default {
     unitPrice: 'Unit Price',
     totalPrice: 'Total Price',
     action: 'Action',
-    quantity: 'Quantity'
+    quantity: 'Quantity',
+    billInfo: 'Bill Information',
+    paymentMethod: 'Payment Method',
+    customerId: 'Customer Id',
+    ccRC: 'CC Receipt Code'
   },
   error: {
     notFound: 'Not Found'
@@ -122,7 +126,9 @@ export default {
   placeholder: {
     username: 'Username',
     password: 'Password',
-    search: 'Type anthing to search...'
+    search: 'Type anthing to search...',
+    customerIdOrderBoard: 'Touch this field and scan QR code',
+    ccRC: 'Please input CC receipt code'
   },
   tag: {
     pending: 'Pending',
