@@ -5,9 +5,14 @@ const Schema = mongoose.Schema;
 
 let billSchema = new Schema({
   id: { type: Number, required: true },
-  customer_id: { type: Number, default: '', ref: 'User' },
-  salesperson_id: { type: Number, default: '', ref: 'User' },
+  customer_id: { type: Schema.Types.ObjectId, ref: 'User' },
+  salesperson_id: { type: Schema.Types.ObjectId, ref: 'User' },
   total_price: { type: Number, required: true },
+  payment_method: {
+    type: Number,
+    enum: [0, 1],
+    default: 0
+  },
   cc_receipt_code: { type: String, default: ''},
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true },

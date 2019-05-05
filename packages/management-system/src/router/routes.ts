@@ -10,6 +10,7 @@ export const PRODUCT = '/product';
 export const CREATE_PRODUCT = PRODUCT + '/create';
 export const PROFILE = '/profile';
 export const ORDER_BOARD = '/orderboard';
+export const CUSTOMER = '/customer';
 
 export default [
   // {
@@ -58,9 +59,11 @@ export default [
     path: LOGIN,
     name: 'Login',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/session/login.vue'),
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/session/login.vue'
+      ),
     meta: {
       title: 'Login'
     }
@@ -73,9 +76,11 @@ export default [
     },
     name: 'Dashboard',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/dashboard/index.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/dashboard/index.vue'
+      )
   },
   {
     path: CATEGORY,
@@ -85,9 +90,11 @@ export default [
     },
     name: 'Category',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/category/index.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/category/index.vue'
+      )
   },
   {
     path: CREATE_CATE,
@@ -97,9 +104,11 @@ export default [
     },
     name: 'Create New Category',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/category/create.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/category/create.vue'
+      )
   },
   {
     path: PRODUCT,
@@ -109,9 +118,11 @@ export default [
     },
     name: 'Manage Product',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/product/index.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/product/index.vue'
+      )
   },
   {
     path: CREATE_PRODUCT,
@@ -121,9 +132,11 @@ export default [
     },
     name: 'Create Product',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/product/create.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/product/create.vue'
+      )
   },
   {
     path: PROFILE,
@@ -133,9 +146,11 @@ export default [
     },
     name: 'Profile',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/profile/index.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/profile/index.vue'
+      )
   },
   {
     path: ORDER_BOARD,
@@ -145,8 +160,24 @@ export default [
     },
     name: 'OrderBoard',
     component: () =>
-      import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
-      '@/modules/orderboard/index.vue')
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/orderboard/index.vue'
+      )
+  },
+  {
+    path: CUSTOMER,
+    meta: {
+      requiresAuth: true,
+      title: 'Manage Customer'
+    },
+    name: 'Customer',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/customer/index.vue'
+      )
   }
 ];

@@ -24,7 +24,13 @@ export class BillController {
         if (role === 'customer') {
           return res.status(403).json({ message: 'forbidden' });
         }
-        const { productList, customerId, salespersonId, totalPrice, ccRC } = body;
+        const {
+          productList,
+          customerId,
+          totalPrice,
+          paymentMethod,
+          ccRC
+        } = body;
         // tslint:disable-next-line
         let productId: any = [];
         // tslint:disable-next-line
@@ -43,6 +49,7 @@ export class BillController {
           customer_id: customerId,
           salesperson_id: id,
           total_price: totalPrice,
+          payment_method: paymentMethod,
           cc_receipt_code: ccRC,
           item: productId
         });
