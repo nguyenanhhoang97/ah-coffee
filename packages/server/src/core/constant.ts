@@ -21,6 +21,7 @@ export const MNG = USER + '/mng';
 export const MNG_GET_SP_LIST = MNG + '/get-sp-list';
 export const SP = USER + '/salesperson';
 export const SP_GET_CUSTOMER_LIST = SP + '/get-customer-list';
+export const CHANGE_ROLE = USER + '/role';
 // ----CATEGORY
 export const CATEGORY = ROOT + '/category';
 export const CATEGORY_W_PRODUCT = ROOT + '/category-with-product';
