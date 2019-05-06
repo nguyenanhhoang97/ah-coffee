@@ -27,7 +27,8 @@ import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   UPDATE_PRODUCT_STATUS,
-  CHECK_SESSION
+  CHECK_SESSION,
+  CHANGE_ROLE
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -68,6 +69,7 @@ export class Routes {
     app.route(ADM_GET_USR_LIST).get(this.userController.admGetUserList);
     app.route(MNG_GET_SP_LIST).get(this.userController.getSalespersonList);
     app.route(SP_GET_CUSTOMER_LIST).get(this.userController.getCustomerList);
+    app.route(CHANGE_ROLE).get(this.userController.changeRole);
 
     // Category
     app.route(CATEGORY).get(this.categoryController.getCategoryList);

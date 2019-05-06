@@ -202,6 +202,55 @@ export class UserController {
     }
   }
 
+  public changeRole(req: Request, res: Response) {
+    const { body } = req;
+    const { authorization } = req.headers;
+    // return res.status(200).json({ authorization });
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    if (body.constructor === Object && Object.keys(body).length === 0) {
+      return res.status(500).json({ message: 'req_body_check_failed' });
+    } else {
+      jwt.verify(token, JWT_CHARS, (err: any, decoded: any) => {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        const { data } = decoded;
+        const { id } = data;
+        const { role } = body;
+        User.findOne({ id }, (error: any, user: any) => {
+          if (error) {
+            return res.status(500).json({ message: error.message });
+          }
+          User.findOneAndUpdate(
+            { id },
+            {
+              $set: {
+                role
+              }
+            },
+            { new: true },
+            (e: any, result: any) => {
+              if (e) {
+                return res.status(500).json(e);
+              }
+              Session.deleteMany({ created_by: id }, e1 => {
+                if (e1) {
+                  return res.status(500).json(e1);
+                }
+              });
+              return res
+                .status(200)
+                .json({ message: 'updated_role' } || {});
+            }
+          );
+        });
+      });
+    }
+  }
+
   public admUpdateUserInfo(req: any, res: any) {
     const { body } = req;
     const { authorization } = req.headers;

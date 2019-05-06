@@ -11,6 +11,7 @@ export const CREATE_PRODUCT = PRODUCT + '/create';
 export const PROFILE = '/profile';
 export const ORDER_BOARD = '/orderboard';
 export const CUSTOMER = '/customer';
+export const SALESPERSON = '/salesperson';
 
 export default [
   // {
@@ -178,6 +179,20 @@ export default [
         /* webpackChunkName: "routes" */
         /* webpackMode: "lazy" */
         '@/modules/customer/index.vue'
+      )
+  },
+  {
+    path: SALESPERSON,
+    meta: {
+      requiresAuth: true,
+      title: 'Manage Salesperson'
+    },
+    name: 'Salesperson',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/salesperson/index.vue'
       )
   }
 ];

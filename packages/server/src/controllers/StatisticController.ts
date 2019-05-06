@@ -6,39 +6,21 @@ import { Category } from '../models/Category';
 import { Bill } from '../models/Bill';
 
 export class StatisticController {
-  public totalCategory(req: any, res: any) {
-    Category.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
-      if (error) {
-        return res.status(500).json({ message: error.message });
-      }
-      return res.status(200).json({ total: count });
-    });
-  }
-
-  public totalProduct(req: any, res: any) {
-    Product.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
-      if (error) {
-        return res.status(500).json({ message: error.message });
-      }
-      return res.status(200).json({ total: count });
-    });
-  }
-
-  public totalBill(req: any, res: any) {
-    Bill.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
-      if (error) {
-        return res.status(500).json({ message: error.message });
-      }
-      return res.status(200).json({ total: count });
-    });
-  }
-
-  public totalUser(req: any, res: any) {
-    Bill.count({ $or: [{ status: 0 }, { status: 1 }] }, (error, count) => {
-      if (error) {
-        return res.status(500).json({ message: error.message });
-      }
-      return res.status(200).json({ total: count });
-    });
+  public async total(req: any, res: any) {
+    const totalCategory = await Category.count({
+      $or: [{ status: 0 }, { status: 1 }]
+    }).exec();
+    const totalProduct = await Product.count({
+      $or: [{ status: 0 }, { status: 1 }]
+    }).exec();
+    const totalBill = await Bill.count({
+      $or: [{ status: 0 }, { status: 1 }]
+    }).exec();
+    const totalUser = await User.count({
+      $or: [{ status: 0 }, { status: 1 }]
+    }).exec();
+    return res
+      .status(200)
+      .json({ totalCategory, totalProduct, totalBill, totalUser });
   }
 }

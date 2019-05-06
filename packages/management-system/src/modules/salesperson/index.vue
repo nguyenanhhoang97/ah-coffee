@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card" v-loading="getLoading">
       <div class="card-header">
-        <h4 class="card-title">{{ $t('label.mngCus') }}</h4>
+        <h4 class="card-title">{{ $t('label.mngSales') }}</h4>
       </div>
       <div class="card-body">
         <el-row>
@@ -10,10 +10,10 @@
             type="primary"
             size="mini"
             icon="el-icon-plus"
-            @click="handleCreateCustomer"
-          >{{ $t('button.newCus') }}</el-button>
+            @click="handleCreateSalesPerson"
+          >{{ $t('button.newSales') }}</el-button>
         </el-row>
-        <el-table :data="getCustomers.user" style="width: 100%">
+        <el-table :data="getSalespersons.user" style="width: 100%">
           <el-table-column :label="$t('label.numericalOrder')" width="50" type="index"></el-table-column>
           <el-table-column :label="$t('label.email')" prop="email" sortable></el-table-column>
           <el-table-column :label="$t('label.username')" prop="username" sortable></el-table-column>
@@ -39,7 +39,7 @@
           @current-change="handleCurrentChange"
           :current-page.sync="pageIndex"
           layout="total, sizes, prev, pager, next"
-          :total="getCustomers.total"
+          :total="getSalespersons.total"
         ></el-pagination>
       </div>
     </div>
@@ -70,11 +70,11 @@ import { SERVER_URL } from '@/core/constants';
 
 @Component({
   methods: {
-    ...mapActions('customer', ['customerList', 'updateCustomer'])
+    ...mapActions('salesperson', ['salespersonList', 'updateSalesperson'])
   },
 
   computed: {
-    ...mapGetters('customer', ['getCustomers', 'getLoading'])
+    ...mapGetters('salesperson', ['getSalespersons', 'getLoading'])
   },
 
   data() {
@@ -93,23 +93,23 @@ import { SERVER_URL } from '@/core/constants';
   watch: {
     // call again the method if the route changes
     // tslint:disable-next-line
-    $route: 'initCustomerList'
+    $route: 'initSalesPersonList'
   }
 })
 export default class Category extends Vue {
-  public customerList!: (data: any) => Promise<any>;
-  public updateCustomer!: (data: any) => Promise<any>;
+  public salespersonList!: (data: any) => Promise<any>;
+  public updateSalesperson!: (data: any) => Promise<any>;
 
   public mounted() {
-    this.initCustomerList();
+    this.initSalesPersonList();
   }
 
-  public async initCustomerList() {
+  public async initSalesPersonList() {
     const parameters = {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
     };
-    await this.customerList(parameters);
+    await this.salespersonList(parameters);
   }
 
   public handleSizeChange(val: any) {
@@ -118,7 +118,7 @@ export default class Category extends Vue {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
     };
-    this.customerList(parameters);
+    this.salespersonList(parameters);
   }
 
   public handleCurrentChange(val: any) {
@@ -127,11 +127,11 @@ export default class Category extends Vue {
       pageIndex: this.$data.pageIndex - 1,
       pageSize: this.$data.pageSize
     };
-    this.customerList(parameters);
+    this.salespersonList(parameters);
   }
 
-  public handleCreateCustomer() {
-    this.$router.push('customer/create');
+  public handleCreateSalesPerson() {
+    this.$router.push('salesperson/create');
   }
 
   public handleEdit(index: any, row: any) {

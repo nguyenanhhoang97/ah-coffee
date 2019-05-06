@@ -50,7 +50,8 @@ export default {
     close: 'Close',
     newProduct: 'Create New Product',
     checkout: 'Checkout',
-    newCus: 'Create New Customer'
+    newCus: 'Create New Customer',
+    newSales: 'Create New Salesperson'
   },
   label: {
     loginTitle: 'Log in',
@@ -120,7 +121,12 @@ export default {
     paymentMethod: 'Payment Method',
     customerId: 'Customer Id',
     ccRC: 'CC Receipt Code',
+<<<<<<< HEAD
     mngCus: 'Manage Customer'
+=======
+    mngCus: 'Manage Customer',
+    mngSales: 'Manage Salesperson'
+>>>>>>> 78cb2fdbad4b8eb7e7462dc5905da3d92ee7d8a9
   },
   error: {
     notFound: 'Not Found'

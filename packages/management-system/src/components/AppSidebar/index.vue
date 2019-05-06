@@ -55,14 +55,14 @@ export default class AppSidebar extends Vue {
     },
     {
       icon: 'tim-icons icon-single-02',
+      name: 'Manage Salesperson',
+      route: '/salesperson'
+    },
+    {
+      icon: 'tim-icons icon-single-02',
       name: 'Manage Employee',
       route: '/employee'
-    },
-    // {
-    //   icon: 'tim-icons icon-money-coins',
-    //   name: 'Manage Revenues',
-    //   route: 'revenues'
-    // }
+    }
   ];
 }
 </script>
