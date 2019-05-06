@@ -49,7 +49,8 @@ export default {
     changeStatus: 'Change Status',
     close: 'Close',
     newProduct: 'Create New Product',
-    checkout: 'Checkout'
+    checkout: 'Checkout',
+    newCus: 'Create New Customer'
   },
   label: {
     loginTitle: 'Log in',
@@ -118,7 +119,8 @@ export default {
     billInfo: 'Bill Information',
     paymentMethod: 'Payment Method',
     customerId: 'Customer Id',
-    ccRC: 'CC Receipt Code'
+    ccRC: 'CC Receipt Code',
+    mngCus: 'Manage Customer'
   },
   error: {
     notFound: 'Not Found'
