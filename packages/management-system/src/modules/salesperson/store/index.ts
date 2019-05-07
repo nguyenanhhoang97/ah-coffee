@@ -13,7 +13,7 @@ export const state: SalesPersonState = {
 
 const namespaced: boolean = true;
 
-export const customer: Module<SalesPersonState, RootState> = {
+export const salesperson: Module<SalesPersonState, RootState> = {
   namespaced,
   state,
   getters,

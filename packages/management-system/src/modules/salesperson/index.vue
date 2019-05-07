@@ -5,15 +5,7 @@
         <h4 class="card-title">{{ $t('label.mngSales') }}</h4>
       </div>
       <div class="card-body">
-        <el-row>
-          <el-button
-            type="primary"
-            size="mini"
-            icon="el-icon-plus"
-            @click="handleCreateSalesPerson"
-          >{{ $t('button.newSales') }}</el-button>
-        </el-row>
-        <el-table :data="getSalespersons.user" style="width: 100%">
+        <el-table :data="getSalesperson.user" style="width: 100%">
           <el-table-column :label="$t('label.numericalOrder')" width="50" type="index"></el-table-column>
           <el-table-column :label="$t('label.email')" prop="email" sortable></el-table-column>
           <el-table-column :label="$t('label.username')" prop="username" sortable></el-table-column>
@@ -39,7 +31,7 @@
           @current-change="handleCurrentChange"
           :current-page.sync="pageIndex"
           layout="total, sizes, prev, pager, next"
-          :total="getSalespersons.total"
+          :total="getSalesperson.total"
         ></el-pagination>
       </div>
     </div>
@@ -74,7 +66,7 @@ import { SERVER_URL } from '@/core/constants';
   },
 
   computed: {
-    ...mapGetters('salesperson', ['getSalespersons', 'getLoading'])
+    ...mapGetters('salesperson', ['getSalesperson', 'getLoading'])
   },
 
   data() {
