@@ -26,42 +26,56 @@ export default class AppSidebar extends Vue {
     {
       icon: 'tim-icons icon-chart-pie-36',
       name: 'Dashboard',
-      route: '/'
+      route: '/',
+      roles: ['admin', 'manager', 'salesperson']
     },
     {
       icon: 'tim-icons icon-puzzle-10',
       name: 'OrderBoard',
-      route: '/orderboard'
+      route: '/orderboard',
+      roles: ['admin', 'manager', 'salesperson']
     },
     {
       icon: 'tim-icons icon-app',
       name: 'Manage Category',
-      route: '/category'
+      route: '/category',
+      roles: ['admin', 'manager']
     },
     {
       icon: 'tim-icons icon-atom',
       name: 'Manage Product',
-      route: '/product'
+      route: '/product',
+      roles: ['admin', 'manager']
     },
     {
       icon: 'tim-icons icon-notes',
       name: 'Manage Bill',
-      route: '/bill'
+      route: '/bill',
+      roles: ['admin', 'manager']
+    },
+    {
+      icon: 'tim-icons icon-notes',
+      name: 'My Bill',
+      route: '/bill',
+      roles: ['admin', 'manager']
     },
     {
       icon: 'tim-icons icon-single-02',
       name: 'Manage Customer',
-      route: '/customer'
+      route: '/customer',
+      roles: ['admin', 'manager', 'salesperson']
     },
     {
       icon: 'tim-icons icon-single-02',
       name: 'Manage Salesperson',
-      route: '/salesperson'
+      route: '/salesperson',
+      roles: ['admin', 'manager']
     },
     {
       icon: 'tim-icons icon-single-02',
-      name: 'Manage Employee',
-      route: '/employee'
+      name: 'Manage User',
+      route: '/user',
+      roles: ['admin', 'manager', 'salesperson']
     }
   ];
 }
