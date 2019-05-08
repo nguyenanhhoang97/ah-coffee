@@ -56,7 +56,7 @@ export default class AppSidebar extends Vue {
     {
       icon: 'tim-icons icon-notes',
       name: 'My Bill',
-      route: '/bill',
+      route: '/my-bill',
       roles: ['admin', 'manager']
     },
     {

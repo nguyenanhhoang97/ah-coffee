@@ -48,6 +48,8 @@ export const BILL_DETAILS = BILL + '/details';
 // ----SESSION
 export const SESSION = ROOT + '/session';
 export const CHECK_SESSION = SESSION + '/check';
+// ----STATISTIC
+export const TOTAL = ROOT + '/total';
 
 // ENV
 export const JWT_CHARS = process.env.JWT_CHARS;

@@ -14,7 +14,7 @@
                 <div class="col-7">
                   <div class="numbers">
                     <p class="card-category">{{ $t('label.products') }}</p>
-                    <h3 class="card-title">{{ getStatistics.products }}</h3>
+                    <h3 class="card-title">{{ getStatistics.totalProduct }}</h3>
                   </div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
                 <div class="col-7">
                   <div class="numbers">
                     <p class="card-category">{{ $t('label.bills') }}</p>
-                    <h3 class="card-title">{{ getStatistics.bills }}</h3>
+                    <h3 class="card-title">{{ getStatistics.totalBill }}</h3>
                   </div>
                 </div>
               </div>
@@ -63,8 +63,8 @@
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">{{ $t('label.customers') }}</p>
-                    <h3 class="card-title">{{ getStatistics.customers }}</h3>
+                    <p class="card-category">{{ $t('label.users') }}</p>
+                    <h3 class="card-title">{{ getStatistics.totalUser }}</h3>
                   </div>
                 </div>
               </div>
@@ -88,8 +88,8 @@
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">{{ $t('label.revenues') }}</p>
-                    <h3 class="card-title">{{ getStatistics.revenues }}</h3>
+                    <p class="card-category">{{ $t('label.categories') }}</p>
+                    <h3 class="card-title">{{ getStatistics.totalCategory }}</h3>
                   </div>
                 </div>
               </div>
@@ -468,7 +468,8 @@ let timerID: any = null;
   },
 
   methods: {
-    ...mapActions('profile', ['currentUser'])
+    ...mapActions('profile', ['currentUser']),
+    ...mapActions('dashboard', ['total'])
   },
 
   data() {
@@ -488,6 +489,7 @@ export default class Dashboard extends Vue {
   public time: string = '';
 
   public currentUser!: () => Promise<any>;
+  public total!: () => Promise<any>;
 
   public created() {
     this.updateTime();
@@ -509,6 +511,7 @@ export default class Dashboard extends Vue {
   public async initCurrentProfile() {
     try {
       await this.currentUser();
+      await this.total();
     } catch (e) {
       throw e;
     }

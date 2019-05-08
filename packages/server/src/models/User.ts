@@ -22,7 +22,7 @@ let userSchema = new Schema({
   status: {
     type: Number,
     enum: [0, 1],
-    default: 0
+    default: 1
   },
   created_date: { type: Date, default: Date.now, required: true },
   updated_date: { type: Date, default: Date.now, required: true }

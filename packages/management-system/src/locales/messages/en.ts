@@ -122,7 +122,9 @@ export default {
     customerId: 'Customer Id',
     ccRC: 'CC Receipt Code',
     mngCus: 'Manage Customer',
-    mngSales: 'Manage Salesperson'
+    mngSales: 'Manage Salesperson',
+    users: 'Users',
+    categories: 'Categories'
   },
   error: {
     notFound: 'Not Found'
