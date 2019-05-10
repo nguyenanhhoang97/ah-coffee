@@ -31,7 +31,8 @@ export default {
     phoneNumberValid: 'Please input your phone number',
     updateProfileSuccessMsg: 'Your profile successfully updated',
     updatePasswordSuccessMsg: 'Your password successfully updated',
-    incorrectOldPass: 'Incorrect Old Password'
+    incorrectOldPass: 'Incorrect Old Password',
+    createdBillNoti: 'Created Bill Successfully'
   },
   button: {
     submit: 'Submit',

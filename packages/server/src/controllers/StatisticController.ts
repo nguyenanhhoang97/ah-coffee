@@ -13,9 +13,7 @@ export class StatisticController {
     const totalProduct = await Product.count({
       $or: [{ status: 0 }, { status: 1 }]
     }).exec();
-    const totalBill = await Bill.count({
-      $or: [{ status: 0 }, { status: 1 }]
-    }).exec();
+    const totalBill = await Bill.count({}).exec();
     const totalUser = await User.count({
       $or: [{ status: 0 }, { status: 1 }]
     }).exec();

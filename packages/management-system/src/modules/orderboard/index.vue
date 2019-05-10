@@ -191,7 +191,13 @@ export default class OrderBoard extends Vue {
       } = this.$data;
       const params = {productList, customerId, totalPrice, paymentMethod, ccRC };
       await this.createBill(params).then((res: any) => {
-        console.log(res);
+        if (res === 'saved') {
+          const noti: any = this.$i18n.t('message.createdBillNoti');
+          this.$message.success(noti);
+          this.$data.dialogCheckOut = false;
+          this.$data.tableData = [];
+          this.$data.ttPrice = 0;
+        }
       })
     } catch (e) {
       throw e;
