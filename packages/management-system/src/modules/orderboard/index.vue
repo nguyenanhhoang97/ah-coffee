@@ -125,7 +125,8 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 @Component({
   methods: {
     ...mapActions('global', ['setGlobalReady']),
-    ...mapActions('category', ['categoryList'])
+    ...mapActions('category', ['categoryList']),
+    ...mapActions('orderBoard', ['createBill'])
   },
 
   computed: {
@@ -157,6 +158,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default class OrderBoard extends Vue {
   public categoryList!: (data: any) => Promise<any>;
   public productList!: (data: any) => Promise<any>;
+  public createBill!: (data: any) => Promise<any>;
 
   public mounted() {
     this.initCateList();
@@ -178,17 +180,22 @@ export default class OrderBoard extends Vue {
     }
   }
 
-  public handleSaveBill() {
-    const {
-      customerId,
-      ccRC,
-      tableData: productList,
-      ttPrice: totalPrice
-    } = this.$data;
-    console.log('customerId >>> ', customerId);
-    console.log('ccRC >>> ', ccRC);
-    console.log('productList >>> ', productList);
-    console.log('totalPrice >>> ', totalPrice);
+  public async handleSaveBill() {
+    try {
+      const {
+        customerId,
+        ccRC,
+        tableData: productList,
+        ttPrice: totalPrice,
+        selectedPaymentMethod: paymentMethod
+      } = this.$data;
+      const params = {productList, customerId, totalPrice, paymentMethod, ccRC };
+      await this.createBill(params).then((res: any) => {
+        console.log(res);
+      })
+    } catch (e) {
+      throw e;
+    }
   }
 
   public handleSelectProduct(product: any) {

@@ -13,7 +13,8 @@ export const state: OrderBoardState = {
       value: 1,
       label: 'Credit Card'
     }
-  ]
+  ],
+  createBillStatus: ''
 };
 
 const namespaced: boolean = true;

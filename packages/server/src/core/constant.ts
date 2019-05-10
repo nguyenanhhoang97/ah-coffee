@@ -53,5 +53,5 @@ export const TOTAL = ROOT + '/total';
 
 // ENV
 export const JWT_CHARS = process.env.JWT_CHARS;
-export const APP_PORT = process.env.PORT || 3000;
+export const APP_PORT = process.env.PORT || 3001;
 export const MONGODB_URI = process.env.MONGODB_URI || '';

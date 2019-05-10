@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 let billDetailSchema = new Schema({
   id: { type: Number, required: true },
-  product_id: { type: Number, required: true, ref: 'Product' },
+  product_id: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
   unit_price: { type: Number, required: true },
   quantity: { type: Number, required: true },
   created_date: { type: Date, default: Date.now, required: true },

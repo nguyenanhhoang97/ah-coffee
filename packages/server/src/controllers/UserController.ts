@@ -48,13 +48,14 @@ export class UserController {
         }
         const { password } = user;
         if (bcrypt.compareSync(psw, password)) {
-          const { id, username, fullname, avatar, role } = user;
+          const { id, username, fullname, avatar, role, _id } = user;
           const data = {
             id,
             username,
             fullname,
             avatar,
-            role
+            role,
+            _id
           };
           if (role === 'customer') {
             return res.status(200).json({ message: 'invalid_role' });

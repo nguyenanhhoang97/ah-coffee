@@ -5,7 +5,7 @@ import { BillDetail } from '../models/BillDetail';
 import { JWT_CHARS } from '../core/constant';
 
 export class BillController {
-  public createBill(req: any, res: any) {
+  public createBill(req: Request, res: Response) {
     const { body } = req;
     const { authorization } = req.headers;
     if (!authorization) {
@@ -20,7 +20,7 @@ export class BillController {
           return res.status(500).json(err);
         }
         const { data } = decoded;
-        const { role, id } = data;
+        const { role, _id } = data;
         if (role === 'customer') {
           return res.status(403).json({ message: 'forbidden' });
         }
@@ -47,11 +47,11 @@ export class BillController {
         // tslint:disable-next-line
         let bill = new Bill({
           customer_id: customerId,
-          salesperson_id: id,
+          salesperson_id: _id,
           total_price: totalPrice,
           payment_method: paymentMethod,
           cc_receipt_code: ccRC,
-          item: productId
+          items: productId
         });
         bill.save((error: any, result: any) => {
           if (error) {

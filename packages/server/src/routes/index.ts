@@ -5,6 +5,7 @@ import { CategoryController } from '../controllers/CategoryController';
 import { ProductController } from '../controllers/ProductController';
 import { SessionController } from '../controllers/SessionController';
 import { StatisticController } from '../controllers/StatisticController';
+import { BillController } from '../controllers/BillController';
 import {
   ROOT,
   CURRENT_USER,
@@ -30,7 +31,8 @@ import {
   UPDATE_PRODUCT_STATUS,
   CHECK_SESSION,
   CHANGE_ROLE,
-  TOTAL
+  TOTAL,
+  CREATE_BILL
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -49,6 +51,7 @@ export class Routes {
   public productController: ProductController = new ProductController();
   public sessionContrller: SessionController = new SessionController();
   public statisticController: StatisticController = new StatisticController();
+  public billController: BillController = new BillController();
   public routes(app: any): void {
     app.route(ROOT).get((req: Request, res: Response) => {
       res.status(200).send({
@@ -106,5 +109,8 @@ export class Routes {
 
     // Statistic
     app.route(TOTAL).get(this.statisticController.total);
+
+    // Bill
+    app.route(CREATE_BILL).post(this.billController.createBill);
   }
 }
