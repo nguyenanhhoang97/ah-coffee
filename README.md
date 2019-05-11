@@ -5,7 +5,6 @@
 - Init Project
   - NodeJS Server.
   - Management System (VueJS).
-  - Shop System (VueJS).
 ### Mar 1, 2019
 - Add template to management system.
 ### Mar 16, 2019
@@ -27,3 +26,5 @@
   - Update Profile Information.
   - Change Password.
   - Orderboard.
+### Apr 15, 2019
+  - Complete
