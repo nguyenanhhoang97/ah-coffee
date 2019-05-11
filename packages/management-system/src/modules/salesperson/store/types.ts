@@ -6,4 +6,5 @@ export interface SalesPersonState {
   salespersons: any;
   loading: boolean;
   updateSalesPersonStatus: string;
+  roles: any[];
 }

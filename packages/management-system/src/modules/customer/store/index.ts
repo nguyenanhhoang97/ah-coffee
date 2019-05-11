@@ -9,7 +9,17 @@ export const state: CustomerState = {
   customers: {},
   loading: false,
   createCustomerStatus: '',
-  updateCustomerStatus: ''
+  updateCustomerStatus: '',
+  roles: [
+    {
+      value: 'salesperson',
+      label: 'salesperson'
+    },
+    {
+      value: 'customer',
+      label: 'customer'
+    }
+  ]
 };
 
 const namespaced: boolean = true;

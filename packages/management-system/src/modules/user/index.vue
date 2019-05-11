@@ -34,14 +34,14 @@
                   @click="handleEdit(scope.$index, scope.row)"
                 ></el-button>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="Reset User Password" placement="top">
+              <!-- <el-tooltip class="item" effect="dark" content="Reset User Password" placement="top">
                 <el-button
                   size="medium"
                   icon="el-icon-refresh"
                   type="danger"
-                  @click="handleEdit(scope.$index, scope.row)"
+                  @click="handleRsPsw(scope.$index, scope.row)"
                 ></el-button>
-              </el-tooltip>
+              </el-tooltip> -->
               <el-tooltip class="item" effect="dark" content="Remove User" placement="top">
                 <el-button
                   size="medium"
@@ -77,11 +77,7 @@
         <el-form-item :label="$t('label.phoneNumber')" :label-width="formLabelWidth">
           <el-input v-model="selectedItem.phone_number"></el-input>
         </el-form-item>
-        <el-form-item
-          :label="$t('label.role')"
-          :label-width="formLabelWidth"
-          v-if="roles"
-        >
+        <el-form-item :label="$t('label.role')" :label-width="formLabelWidth" v-if="roles">
           <el-select v-model="selectedItem.role" placeholder="Select">
             <el-option
               v-for="item in roles"
@@ -97,6 +93,25 @@
         <el-button type="primary" @click="handleSaveUpdateUser">{{ $t('button.save') }}</el-button>
       </span>
     </el-dialog>
+    <!-- <el-dialog :title="$t('label.warning')" :visible.sync="rsPswDialogVisible" width="30%">
+      <span>{{ $t('message.admRsPswNoti') }}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="rsPswDialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="rsPswDialogVisible = false">Confirm</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog
+      title="New Password"
+      :visible.sync="newPswdialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <span>New Password of This Account: {{ newPsw }}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="newPswdialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="handleSaveRsPsw">Confirm</el-button>
+      </span>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -112,7 +127,7 @@ import { SERVER_URL } from '@/core/constants';
 
   computed: {
     ...mapGetters('user', ['getUsers', 'getLoading']),
-    ...mapState('user', ['roles'])
+    ...mapState('user', ['roles', 'newPsw'])
   },
 
   data() {
@@ -121,9 +136,11 @@ import { SERVER_URL } from '@/core/constants';
       pageIndex: 1,
       pageSize: 10,
       editDialogFormVisible: false,
+      rsPswDialogVisible: false,
+      newPswdialogVisible: false,
       formLabelWidth: '200px',
       selectedItem: {},
-      serverUrl: SERVER_URL,
+      serverUrl: SERVER_URL
     };
   },
 
@@ -176,6 +193,11 @@ export default class User extends Vue {
     this.$data.selectedItem = { ...row };
   }
 
+  public handleRsPsw(index: any, row: any) {
+    this.$data.rsPswDialogVisible = true;
+    this.$data.selectedItem = { ...row };
+  }
+
   public async handleSaveUpdateUser() {
     const params = {
       usrId: this.$data.selectedItem.id,
@@ -210,6 +232,19 @@ export default class User extends Vue {
       throw e;
     }
   }
+
+  // public async handleSaveRsPsw() {
+  //   const params = {
+  //     usrId: this.$data.selectedItem.id
+  //   };
+  //   try {
+  //     await this.updateUser(params).then((new_password: any) => {
+  //       this.$data.rsPswDialogVisible = true;
+  //     });
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 }
 </script>
 

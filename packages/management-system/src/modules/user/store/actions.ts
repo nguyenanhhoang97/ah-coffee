@@ -46,12 +46,7 @@ export const actions: ActionTree<UserState, RootState> = {
     commit(LOADING, true);
     const url = API_ENDPOINT + '/user/register';
     return axios
-      .post(url, {email, username, password, fullname, address, phoneNumber}, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      .post(url, { email, username, password, fullname, address, phoneNumber })
       .then((response: any) => {
         const { message } = response.data;
         if (message !== undefined) {
@@ -110,10 +105,7 @@ export const actions: ActionTree<UserState, RootState> = {
       });
   },
 
-  admResetPassword(
-    { commit },
-    { usrId }
-  ): Promise<any> {
+  admResetPassword({ commit }, { usrId }): Promise<any> {
     commit(LOADING, true);
     const url = API_ENDPOINT + '/user/adm/reset-usr-psw';
     return axios
@@ -133,5 +125,5 @@ export const actions: ActionTree<UserState, RootState> = {
       .catch((error: any) => {
         throw error;
       });
-  },
+  }
 };

@@ -43,23 +43,36 @@
         ></el-pagination>
       </div>
     </div>
-    <!-- <el-dialog :title="$t('label.updateCate')" :visible.sync="editDialogFormVisible">
+    <el-dialog :title="$t('label.updateUser')" :visible.sync="editDialogFormVisible">
       <el-form :model="selectedItem" label-width="200px" label-position="left">
-        <el-form-item :label="$t('label.cateName')" :label-width="formLabelWidth">
-          <el-input v-model="selectedItem.name"></el-input>
+        <el-form-item :label="$t('label.fullname')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.fullname"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.introduction')" :label-width="formLabelWidth">
-          <el-input type="textarea" v-model="selectedItem.introduction"></el-input>
+        <el-form-item :label="$t('label.email')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.email"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.uploadImage')" :label-width="formLabelWidth">
-          <input type="file" name="import_file" accept="image/*" @change="selectedFile($event)">
+        <el-form-item :label="$t('label.address')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.address"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.phoneNumber')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.phone_number"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.role')" :label-width="formLabelWidth" v-if="roles">
+          <el-select v-model="selectedItem.role" placeholder="Select">
+            <el-option
+              v-for="item in roles"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogFormVisible = false">{{ $t('button.cancel') }}</el-button>
-        <el-button type="primary" @click="handleSaveUpdateCate">{{ $t('button.save') }}</el-button>
+        <el-button type="primary" @click="handleSaveUpdateUser">{{ $t('button.save') }}</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 
@@ -74,7 +87,8 @@ import { SERVER_URL } from '@/core/constants';
   },
 
   computed: {
-    ...mapGetters('customer', ['getCustomers', 'getLoading'])
+    ...mapGetters('customer', ['getCustomers', 'getLoading']),
+    ...mapState('customer', ['roles'])
   },
 
   data() {
@@ -144,38 +158,40 @@ export default class Customer extends Vue {
     this.$data.file = fileInp;
   }
 
-  // public async handleSaveUpdateCustomer() {
-  //   const params = {
-  //     categoryId: this.$data.selectedItem.id,
-  //     name: this.$data.selectedItem.name,
-  //     introduction: this.$data.selectedItem.introduction,
-  //     file: this.$data.file,
-  //     oldPath: this.$data.selectedItem.img_path
-  //   };
-  //   try {
-  //     await this.updateCategory(params).then((message: any) => {
-  //       if (message === 'updated_category_info') {
-  //         const parameters = {
-  //           pageIndex: 0,
-  //           pageSize: 10
-  //         };
-  //         this.categoryList(parameters);
-  //         const resMess: any = this.$i18n.t('message.updateCateSuccessMessage');
-  //         this.$message.success(resMess);
-  //         this.$data.form = {};
-  //         this.$data.editDialogFormVisible = false;
-  //       } else if (message === 'forbidden') {
-  //         const error: any = this.$i18n.t('message.forbidden');
-  //         this.$message.error(error);
-  //       } else if (message === 'req_body_check_failed') {
-  //         const error: any = this.$i18n.t('message.req_body_check_failed');
-  //         this.$message.error(error);
-  //       }
-  //     });
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
+  public async handleSaveUpdateUser() {
+    const params = {
+      usrId: this.$data.selectedItem.id,
+      email: this.$data.selectedItem.email,
+      username: this.$data.selectedItem.username,
+      fullname: this.$data.selectedItem.fullname,
+      address: this.$data.selectedItem.address,
+      phoneNumber: this.$data.selectedItem.phone_number,
+      usrRole: this.$data.selectedItem.role
+    };
+    try {
+      await this.updateCustomer(params).then((message: any) => {
+        if (message === 'adm_updated_user_info') {
+          const parameters = {
+            pageIndex: 0,
+            pageSize: 10
+          };
+          this.customerList(parameters);
+          const resMess: any = this.$i18n.t('message.updateUserSuccessMessage');
+          this.$message.success(resMess);
+          this.$data.form = {};
+          this.$data.editDialogFormVisible = false;
+        } else if (message === 'forbidden') {
+          const error: any = this.$i18n.t('message.forbidden');
+          this.$message.error(error);
+        } else if (message === 'req_body_check_failed') {
+          const error: any = this.$i18n.t('message.req_body_check_failed');
+          this.$message.error(error);
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 </script>
 

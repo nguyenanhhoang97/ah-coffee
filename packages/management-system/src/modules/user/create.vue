@@ -2,21 +2,30 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">{{ $t('label.newCate') }}</h4>
+        <h4 class="card-title">{{ $t('label.newUser') }}</h4>
       </div>
       <div class="card-body">
         <el-form ref="form" :model="form" label-width="200px" label-position="left" :rules="rules">
-          <el-form-item :label="$t('label.cateName')" prop="name">
-            <el-input v-model="form.name"></el-input>
+          <el-form-item :label="$t('label.email')" prop="email">
+            <el-input v-model="form.email"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('label.introduction')" prop="introduction">
-            <el-input type="textarea" v-model="form.introduction"></el-input>
+          <el-form-item :label="$t('label.username')" prop="username">
+            <el-input v-model="form.username"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('label.uploadImage')" prop="file">
-            <input type="file" name="import_file" accept="image/*" @change="selectedFile($event)">
+          <el-form-item :label="$t('label.password')" prop="password">
+            <el-input v-model="form.password" type="password"></el-input>
+          </el-form-item>
+          <el-form-item :label="$t('label.fullname')" prop="fullname">
+            <el-input v-model="form.fullname"></el-input>
+          </el-form-item>
+          <el-form-item :label="$t('label.address')" prop="address">
+            <el-input v-model="form.address"></el-input>
+          </el-form-item>
+          <el-form-item :label="$t('label.phoneNumber')" prop="phoneNumber">
+            <el-input v-model="form.phoneNumber"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleSaveCategory('form')">{{$t('button.save')}}</el-button>
+            <el-button type="primary" @click="handleSaveUser('form')">{{$t('button.save')}}</el-button>
             <el-button @click="handleCancel">{{$t('button.cancel')}}</el-button>
           </el-form-item>
         </el-form>
@@ -31,39 +40,63 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 @Component({
   methods: {
-    ...mapActions('category', ['createCategory', 'categoryList'])
+    ...mapActions('user', ['createUser', 'userList'])
   },
 
   computed: {
-    ...mapGetters('category', ['getCategories', 'getLoading'])
+    ...mapGetters('user', ['getUsers', 'getLoading'])
   },
 
   data() {
     return {
       form: {
-        name: '',
-        introduction: '',
-        file: undefined
+        email: '',
+        username: '',
+        password: '',
+        fullname: '',
+        address: '',
+        phoneNumber: ''
       },
       rules: {
-        name: [
+        fullname: [
           {
             required: true,
-            message: this.$i18n.t('message.cateNameValid'),
+            message: this.$i18n.t('message.fullnameValid'),
             trigger: 'blur'
           }
         ],
-        introduction: [
+        username: [
           {
             required: true,
-            message: this.$i18n.t('message.introductionValid'),
+            message: this.$i18n.t('message.usernameValid'),
             trigger: 'blur'
           }
         ],
-        file: [
+        password: [
           {
             required: true,
-            message: this.$i18n.t('message.fileValid'),
+            message: this.$i18n.t('message.pswValid'),
+            trigger: 'blur'
+          }
+        ],
+        email: [
+          {
+            required: true,
+            message: this.$i18n.t('message.emailValid'),
+            trigger: 'blur'
+          }
+        ],
+        address: [
+          {
+            required: true,
+            message: this.$i18n.t('message.addressValid'),
+            trigger: 'blur'
+          }
+        ],
+        phoneNumber: [
+          {
+            required: true,
+            message: this.$i18n.t('message.phoneNumberValid'),
             trigger: 'blur'
           }
         ]
@@ -71,32 +104,32 @@ import { mapState, mapGetters, mapActions } from 'vuex';
     };
   }
 })
-export default class CreateCategory extends Vue {
-  public createCategory!: (data: any) => Promise<any>;
-  public categoryList!: (data: any) => Promise<any>;
+export default class CreateUser extends Vue {
+  public createUser!: (data: any) => Promise<any>;
+  public userList!: (data: any) => Promise<any>;
 
   public selectedFile(event: any) {
     const fileInp = event.target.files[0];
     this.$data.form.file = fileInp;
   }
 
-  public handleSaveCategory(form: any) {
+  public handleSaveUser(form: any) {
     const formRef: any = this.$refs.form;
     formRef.validate(async (valid: any) => {
       if (valid) {
         const params = { ...this.$data.form };
         try {
-          await this.createCategory(params).then((message: any) => {
+          await this.createUser(params).then((message: any) => {
             if (message === 'saved') {
               const parameters = {
                 pageIndex: 0,
                 pageSize: 10
               };
-              this.categoryList(parameters);
-              const resMess: any = this.$i18n.t('message.cate_save_message');
+              this.userList(parameters);
+              const resMess: any = this.$i18n.t('message.createdUsrNoti');
               this.$message.success(resMess);
               this.$data.form = {};
-              this.$router.push('/category');
+              this.$router.push('/user');
             } else if (message === 'forbidden') {
               const error: any = this.$i18n.t('message.forbidden');
               this.$message.error(error);
@@ -116,7 +149,7 @@ export default class CreateCategory extends Vue {
 
   public handleCancel() {
     this.$data.form = {};
-    this.$router.push('/category');
+    this.$router.push('/user');
   }
 }
 </script>

@@ -8,7 +8,17 @@ import { RootState } from '@/store/types';
 export const state: SalesPersonState = {
   salespersons: {},
   loading: false,
-  updateSalesPersonStatus: ''
+  updateSalesPersonStatus: '',
+  roles: [
+    {
+      value: 'salesperson',
+      label: 'salesperson'
+    },
+    {
+      value: 'customer',
+      label: 'customer'
+    }
+  ]
 };
 
 const namespaced: boolean = true;

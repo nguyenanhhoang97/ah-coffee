@@ -44,21 +44,8 @@ export const actions: ActionTree<CustomerState, RootState> = {
   ): Promise<any> {
     commit(LOADING, true);
     const url = API_ENDPOINT + '/user/register';
-    // tslint:disable-next-line
-    let formData = new FormData();
-    formData.append('email', email);
-    formData.append('username', username);
-    formData.append('password', password);
-    formData.append('fullname', fullname);
-    formData.append('address', address);
-    formData.append('phoneNumber', phoneNumber);
     return axios
-      .post(url, formData, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      .post(url, { email, username, password, fullname, address, phoneNumber })
       .then((response: any) => {
         const { message } = response.data;
         if (message !== undefined) {
@@ -78,18 +65,19 @@ export const actions: ActionTree<CustomerState, RootState> = {
 
   updateCustomer(
     { commit },
-    { fullname, email, address, phoneNumber, file, oldPath }
+    { usrId, email, username, fullname, address, phoneNumber, usrRole }
   ): Promise<any> {
     commit(LOADING, true);
-    const url = API_ENDPOINT + '/user/update-profile';
+    const url = API_ENDPOINT + '/user/adm/update-usr-info';
     // tslint:disable-next-line
     let formData = new FormData();
-    formData.append('fullname', fullname);
+    formData.append('usrId', usrId);
     formData.append('email', email);
+    formData.append('username', username);
+    formData.append('fullname', fullname);
     formData.append('address', address);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('file', file);
-    formData.append('oldPath', oldPath);
+    formData.append('usrRole', usrRole);
     return axios
       .post(url, formData, {
         headers: {

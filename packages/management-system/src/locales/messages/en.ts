@@ -27,13 +27,17 @@ export default {
     updateProductSuccessMessage: 'Product successfully updated',
     fullnameValid: 'Please input your fullname',
     emailValid: 'Please input your email',
+    usernameValid: 'Please input your username',
     addressValid: 'Please input your address',
+    pswValid: 'Please input your password',
     phoneNumberValid: 'Please input your phone number',
     updateProfileSuccessMsg: 'Your profile successfully updated',
     updatePasswordSuccessMsg: 'Your password successfully updated',
     incorrectOldPass: 'Incorrect Old Password',
     createdBillNoti: 'Created Bill Successfully',
-    updateUserSuccessMessage: 'Updated User Successfully'
+    updateUserSuccessMessage: 'Updated User Successfully',
+    createdUsrNoti: 'Created User Successfully',
+    admRsPswNoti: 'Are you sure to reset password for this account?'
   },
   button: {
     submit: 'Submit',
@@ -134,7 +138,10 @@ export default {
     staffName: 'Staff Name',
     myBill: 'My Bill',
     updateUser: 'Update User',
-    mngUser: 'Manage User'
+    mngUser: 'Manage User',
+    newUser: 'Create New User',
+    warning: 'Warning',
+    newCus: 'Create New Customer'
   },
   error: {
     notFound: 'Not Found'
