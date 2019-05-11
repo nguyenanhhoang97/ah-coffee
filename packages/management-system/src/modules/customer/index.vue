@@ -96,7 +96,7 @@ import { SERVER_URL } from '@/core/constants';
     $route: 'initCustomerList'
   }
 })
-export default class Category extends Vue {
+export default class Customer extends Vue {
   public customerList!: (data: any) => Promise<any>;
   public updateCustomer!: (data: any) => Promise<any>;
 

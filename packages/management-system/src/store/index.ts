@@ -10,6 +10,7 @@ import { profile } from '@/modules/profile/store';
 import { orderBoard } from '@/modules/orderboard/store';
 import { customer } from '@/modules/customer/store';
 import { salesperson } from '@/modules/salesperson/store';
+import { user } from '@/modules/user/store';
 import { bill } from '@/modules/bill/store';
 import { myBill } from '@/modules/my-bill/store';
 
@@ -31,6 +32,7 @@ const store: StoreOptions<RootState> = {
     orderBoard,
     customer,
     salesperson,
+    user,
     bill,
     myBill
   },

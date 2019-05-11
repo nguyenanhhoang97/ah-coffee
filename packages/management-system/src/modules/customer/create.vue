@@ -71,7 +71,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
     };
   }
 })
-export default class CreateCategory extends Vue {
+export default class CreateCustomer extends Vue {
   public createCategory!: (data: any) => Promise<any>;
   public categoryList!: (data: any) => Promise<any>;
 

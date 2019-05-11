@@ -11,7 +11,10 @@ export const CREATE_PRODUCT = PRODUCT + '/create';
 export const PROFILE = '/profile';
 export const ORDER_BOARD = '/orderboard';
 export const CUSTOMER = '/customer';
+export const CREATE_CUSTOMER = CUSTOMER + '/create';
 export const SALESPERSON = '/salesperson';
+export const USER = '/user';
+export const CREATE_USER = USER + '/create';
 export const BILL = '/bill';
 export const MY_BILL = '/my-bill';
 
@@ -184,6 +187,20 @@ export default [
       )
   },
   {
+    path: CREATE_CUSTOMER,
+    meta: {
+      requiresAuth: true,
+      title: 'Create Customer'
+    },
+    name: 'Create Customer',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/customer/create.vue'
+      )
+  },
+  {
     path: SALESPERSON,
     meta: {
       requiresAuth: true,
@@ -223,6 +240,34 @@ export default [
         /* webpackChunkName: "routes" */
         /* webpackMode: "lazy" */
         '@/modules/my-bill/index.vue'
+      )
+  },
+  {
+    path: USER,
+    meta: {
+      requiresAuth: true,
+      title: 'Manage User'
+    },
+    name: 'Manage User',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/user/index.vue'
+      )
+  },
+  {
+    path: CREATE_USER,
+    meta: {
+      requiresAuth: true,
+      title: 'Create User'
+    },
+    name: 'Create User',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/user/create.vue'
       )
   }
 ];
