@@ -129,7 +129,8 @@ export default {
     mngBill: 'Manage Bill',
     billDetails: 'Bill Details',
     customerName: 'Customer Name',
-    staffName: 'Staff Name'
+    staffName: 'Staff Name',
+    myBill: 'My Bill'
   },
   error: {
     notFound: 'Not Found'

@@ -85,6 +85,15 @@ export class BillController {
       })
         .skip(offset)
         .limit(limit)
+        .populate({
+          path: 'customer_id'
+        })
+        .populate({
+          path: 'salesperson_id'
+        })
+        .populate({
+          path: 'items'
+        })
         .exec();
       const count = await Bill.count({
         salesperson_id: _id

@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card" v-loading="getLoading">
       <div class="card-header">
-        <h4 class="card-title">{{ $t('label.mngBill') }}</h4>
+        <h4 class="card-title">{{ $t('label.myBill') }}</h4>
       </div>
       <div class="card-body">
         <el-table :data="getBills.bill" style="width: 100%" v-if="getBills">
@@ -89,13 +89,13 @@ import { SERVER_URL } from '@/core/constants';
 @Component({
   methods: {
     ...mapActions('global', ['setGlobalReady']),
-    ...mapActions('bill', [
+    ...mapActions('myBill', [
       'billList'
     ])
   },
 
   computed: {
-    ...mapGetters('bill', ['getBills', 'getLoading'])
+    ...mapGetters('myBill', ['getBills', 'getLoading'])
   },
 
   data() {
@@ -116,7 +116,7 @@ import { SERVER_URL } from '@/core/constants';
     $route: 'initBillList'
   }
 })
-export default class Bill extends Vue {
+export default class MyBill extends Vue {
   public loading: boolean = false;
   public tableData: any[] = [];
 

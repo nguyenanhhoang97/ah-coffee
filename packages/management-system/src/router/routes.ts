@@ -13,6 +13,7 @@ export const ORDER_BOARD = '/orderboard';
 export const CUSTOMER = '/customer';
 export const SALESPERSON = '/salesperson';
 export const BILL = '/bill';
+export const MY_BILL = '/my-bill';
 
 export default [
   // {
@@ -208,6 +209,20 @@ export default [
         /* webpackChunkName: "routes" */
         /* webpackMode: "lazy" */
         '@/modules/bill/index.vue'
+      )
+  },
+  {
+    path: MY_BILL,
+    meta: {
+      requiresAuth: true,
+      title: 'My Bill'
+    },
+    name: 'My Bill',
+    component: () =>
+      import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy" */
+        '@/modules/my-bill/index.vue'
       )
   }
 ];

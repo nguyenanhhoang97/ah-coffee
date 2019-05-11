@@ -11,6 +11,7 @@ import { orderBoard } from '@/modules/orderboard/store';
 import { customer } from '@/modules/customer/store';
 import { salesperson } from '@/modules/salesperson/store';
 import { bill } from '@/modules/bill/store';
+import { myBill } from '@/modules/my-bill/store';
 
 import { RootState } from './types';
 
@@ -30,7 +31,8 @@ const store: StoreOptions<RootState> = {
     orderBoard,
     customer,
     salesperson,
-    bill
+    bill,
+    myBill
   },
   strict: process.env.NODE_ENV !== 'production'
 };
