@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card" v-loading="getLoading">
       <div class="card-header">
-        <h4 class="card-title">{{ $t('label.mngCus') }}</h4>
+        <h4 class="card-title">{{ $t('label.mngUser') }}</h4>
       </div>
       <div class="card-body">
         <el-row>
@@ -10,8 +10,8 @@
             type="primary"
             size="mini"
             icon="el-icon-plus"
-            @click="handleCreateCustomer"
-          >{{ $t('button.newCus') }}</el-button>
+            @click="handleCreateUser"
+          >{{ $t('button.newUser') }}</el-button>
         </el-row>
         <el-table :data="getUsers.user" style="width: 100%">
           <el-table-column :label="$t('label.numericalOrder')" width="50" type="index"></el-table-column>
@@ -26,11 +26,30 @@
               <el-input v-model="search" size="mini" :placeholder="$t('placeholder.search')"/>
             </template>
             <template slot-scope="scope">
-              <el-button
-                size="medium"
-                icon="el-icon-edit"
-                @click="handleEdit(scope.$index, scope.row)"
-              ></el-button>
+              <el-tooltip class="item" effect="dark" content="Update User Info" placement="top">
+                <el-button
+                  size="medium"
+                  icon="el-icon-edit"
+                  type="primary"
+                  @click="handleEdit(scope.$index, scope.row)"
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="Reset User Password" placement="top">
+                <el-button
+                  size="medium"
+                  icon="el-icon-refresh"
+                  type="danger"
+                  @click="handleEdit(scope.$index, scope.row)"
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="Remove User" placement="top">
+                <el-button
+                  size="medium"
+                  icon="el-icon-delete"
+                  type="danger"
+                  @click="handleEdit(scope.$index, scope.row)"
+                ></el-button>
+              </el-tooltip>
             </template>
           </el-table-column>
         </el-table>
@@ -44,15 +63,21 @@
         ></el-pagination>
       </div>
     </div>
-    <!-- <el-dialog :title="$t('label.updateCate')" :visible.sync="editDialogFormVisible">
+    <el-dialog :title="$t('label.updateUser')" :visible.sync="editDialogFormVisible">
       <el-form :model="selectedItem" label-width="200px" label-position="left">
-        <el-form-item :label="$t('label.cateName')" :label-width="formLabelWidth">
-          <el-input v-model="selectedItem.name"></el-input>
+        <el-form-item :label="$t('label.fullname')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.fullname"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.introduction')" :label-width="formLabelWidth">
-          <el-input type="textarea" v-model="selectedItem.introduction"></el-input>
+        <el-form-item :label="$t('label.email')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.email"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.uploadImage')" :label-width="formLabelWidth">
+        <el-form-item :label="$t('label.address')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.address"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.phoneNumber')" :label-width="formLabelWidth">
+          <el-input v-model="selectedItem.phone_number"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('label.avatar')" :label-width="formLabelWidth">
           <input type="file" name="import_file" accept="image/*" @change="selectedFile($event)">
         </el-form-item>
       </el-form>
@@ -60,7 +85,7 @@
         <el-button @click="editDialogFormVisible = false">{{ $t('button.cancel') }}</el-button>
         <el-button type="primary" @click="handleSaveUpdateCate">{{ $t('button.save') }}</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 
@@ -97,7 +122,7 @@ import { SERVER_URL } from '@/core/constants';
     $route: 'initUserList'
   }
 })
-export default class Category extends Vue {
+export default class User extends Vue {
   public userList!: (data: any) => Promise<any>;
   public updateUser!: (data: any) => Promise<any>;
 
@@ -131,8 +156,8 @@ export default class Category extends Vue {
     this.userList(parameters);
   }
 
-  public handleCreateCustomer() {
-    this.$router.push('customer/create');
+  public handleCreateUser() {
+    this.$router.push('user/create');
   }
 
   public handleEdit(index: any, row: any) {
@@ -145,38 +170,38 @@ export default class Category extends Vue {
     this.$data.file = fileInp;
   }
 
-  // public async handleSaveUpdateCustomer() {
-  //   const params = {
-  //     categoryId: this.$data.selectedItem.id,
-  //     name: this.$data.selectedItem.name,
-  //     introduction: this.$data.selectedItem.introduction,
-  //     file: this.$data.file,
-  //     oldPath: this.$data.selectedItem.img_path
-  //   };
-  //   try {
-  //     await this.updateCategory(params).then((message: any) => {
-  //       if (message === 'updated_category_info') {
-  //         const parameters = {
-  //           pageIndex: 0,
-  //           pageSize: 10
-  //         };
-  //         this.categoryList(parameters);
-  //         const resMess: any = this.$i18n.t('message.updateCateSuccessMessage');
-  //         this.$message.success(resMess);
-  //         this.$data.form = {};
-  //         this.$data.editDialogFormVisible = false;
-  //       } else if (message === 'forbidden') {
-  //         const error: any = this.$i18n.t('message.forbidden');
-  //         this.$message.error(error);
-  //       } else if (message === 'req_body_check_failed') {
-  //         const error: any = this.$i18n.t('message.req_body_check_failed');
-  //         this.$message.error(error);
-  //       }
-  //     });
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
+  public async handleSaveUpdateUser() {
+    const params = {
+      categoryId: this.$data.selectedItem.id,
+      name: this.$data.selectedItem.name,
+      introduction: this.$data.selectedItem.introduction,
+      file: this.$data.file,
+      oldPath: this.$data.selectedItem.img_path
+    };
+    try {
+      await this.updateUser(params).then((message: any) => {
+        if (message === 'updated_category_info') {
+          const parameters = {
+            pageIndex: 0,
+            pageSize: 10
+          };
+          this.userList(parameters);
+          const resMess: any = this.$i18n.t('message.updateUserSuccessMessage');
+          this.$message.success(resMess);
+          this.$data.form = {};
+          this.$data.editDialogFormVisible = false;
+        } else if (message === 'forbidden') {
+          const error: any = this.$i18n.t('message.forbidden');
+          this.$message.error(error);
+        } else if (message === 'req_body_check_failed') {
+          const error: any = this.$i18n.t('message.req_body_check_failed');
+          this.$message.error(error);
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 </script>
 

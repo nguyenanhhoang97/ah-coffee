@@ -32,7 +32,8 @@ export default {
     updateProfileSuccessMsg: 'Your profile successfully updated',
     updatePasswordSuccessMsg: 'Your password successfully updated',
     incorrectOldPass: 'Incorrect Old Password',
-    createdBillNoti: 'Created Bill Successfully'
+    createdBillNoti: 'Created Bill Successfully',
+    updateUserSuccessMessage: 'Updated User Successfully'
   },
   button: {
     submit: 'Submit',
@@ -52,7 +53,8 @@ export default {
     newProduct: 'Create New Product',
     checkout: 'Checkout',
     newCus: 'Create New Customer',
-    newSales: 'Create New Salesperson'
+    newSales: 'Create New Salesperson',
+    newUser: 'Create New User'
   },
   label: {
     loginTitle: 'Log in',
@@ -130,7 +132,9 @@ export default {
     billDetails: 'Bill Details',
     customerName: 'Customer Name',
     staffName: 'Staff Name',
-    myBill: 'My Bill'
+    myBill: 'My Bill',
+    updateUser: 'Update User',
+    mngUser: 'Manage User'
   },
   error: {
     notFound: 'Not Found'

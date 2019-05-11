@@ -8,4 +8,5 @@ export interface UserState {
   loading: boolean;
   createUserStatus: string;
   updateUserStatus: string;
+  roles: any[];
 }

@@ -9,7 +9,22 @@ export const state: UserState = {
   users: {},
   loading: false,
   createUserStatus: '',
-  updateUserStatus: ''
+  updateUserStatus: '',
+  roles: [
+    { value: 'admin', label: 'admin' },
+    {
+      value: 'manager',
+      label: 'manager'
+    },
+    {
+      value: 'salesperson',
+      label: 'salesperson'
+    },
+    {
+      value: 'customer',
+      label: 'customer'
+    }
+  ]
 };
 
 const namespaced: boolean = true;
