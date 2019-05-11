@@ -288,7 +288,7 @@ export class UserController {
               fullname,
               username,
               address,
-              phoneNumber,
+              phone_number: phoneNumber,
               role: usrRole,
             }
           },

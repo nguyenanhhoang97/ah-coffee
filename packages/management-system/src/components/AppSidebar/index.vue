@@ -62,7 +62,7 @@ export default class AppSidebar extends Vue {
       icon: 'tim-icons icon-notes',
       name: 'My Bill',
       route: '/my-bill',
-      roles: ['admin', 'manager'].indexOf(this.$store.state.session.role) > -1
+      roles: ['admin', 'manager', 'salesperson'].indexOf(this.$store.state.session.role) > -1
     },
     {
       icon: 'tim-icons icon-single-02',
@@ -80,7 +80,7 @@ export default class AppSidebar extends Vue {
       icon: 'tim-icons icon-single-02',
       name: 'Manage User',
       route: '/user',
-      roles: ['admin', 'manager', 'salesperson'].indexOf(this.$store.state.session.role) > -1
+      roles: ['admin'].indexOf(this.$store.state.session.role) > -1
     }
   ];
 }

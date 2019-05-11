@@ -151,295 +151,29 @@
         <div class="col-lg-7">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">Management Table</h5>
+              <h5 class="card-title">Your 10 recent bills</h5>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead class="text-primary">
-                    <tr>
-                      <th class="text-center">#</th>
-                      <th>Name</th>
-                      <th>Job Position</th>
-                      <th>Milestone</th>
-                      <th class="text-right">Salary</th>
-                      <th class="text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/tania.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>Tania Mike</td>
-                      <td>Develop</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">25%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 25%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 99,225</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-icon btn-sm btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-icon btn-sm btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/robi.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>John Doe</td>
-                      <td>CEO</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">77%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 77%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 89,241</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-sm btn-icon btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-sm btn-icon btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/lora.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>Alexa Mike</td>
-                      <td>Design</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">41%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 41%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 92,144</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-icon btn-sm btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-icon btn-sm btn-neutral"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/jana.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>Jana Monday</td>
-                      <td>Marketing</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">50%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 50%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 49,990</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/mike.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>Paul Dickens</td>
-                      <td>Develop</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">100%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 100%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 69,201</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <div class="photo">
-                          <img src="~@/assets/images/avatar/emilyz.jpg" alt="photo">
-                        </div>
-                      </td>
-                      <td>Manuela Rico</td>
-                      <td>Manager</td>
-                      <td class="text-center">
-                        <div class="progress-container progress-sm">
-                          <div class="progress">
-                            <span class="progress-value">15%</span>
-                            <div
-                              class="progress-bar"
-                              role="progressbar"
-                              aria-valuenow="60"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              style="width: 15%;"
-                            ></div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-right">€ 99,201</td>
-                      <td class="text-right">
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-success btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Refresh"
-                        >
-                          <i class="tim-icons icon-refresh-01"></i>
-                        </button>
-                        <button
-                          type="button"
-                          rel="tooltip"
-                          class="btn btn-danger btn-link btn-sm btn-icon"
-                          data-original-title="Tooltip on top"
-                          title="Delete"
-                        >
-                          <i class="tim-icons icon-simple-remove"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <el-table :data="getBills.bill" style="width: 100%" v-if="getBills">
+                <el-table-column :label="$t('label.numericalOrder')" width="50" type="index"></el-table-column>
+                <el-table-column
+                  :label="$t('label.customerName')"
+                  prop="customer_id.fullname"
+                  sortable
+                ></el-table-column>
+                <el-table-column :label="$t('label.totalPrice')" prop="total_price" sortable></el-table-column>
+                <el-table-column :label="$t('label.createdAt')" prop="created_date" sortable></el-table-column>
+                <el-table-column :label="$t('label.paymentMethod')" sortable>
+                  <template slot-scope="scope">
+                    <div class="cell" v-if="scope.row.payment_method === 0">
+                      <el-tag type="info">{{$t('tag.cash')}}</el-tag>
+                    </div>
+                    <div class="cell" v-else>
+                      <el-tag type="success">{{$t('tag.cc')}}</el-tag>
+                    </div>
+                  </template>
+                </el-table-column>
+              </el-table>
             </div>
           </div>
         </div>
@@ -464,11 +198,13 @@ let timerID: any = null;
   computed: {
     ...mapGetters('dashboard', ['getStatistics']),
     ...mapGetters('profile', ['getProfile', 'getLoading']),
-    ...mapState('profile', ['profile'])
+    ...mapState('profile', ['profile']),
+    ...mapGetters('dashboard', ['getBills', 'getLoading'])
   },
 
   methods: {
     ...mapActions('profile', ['currentUser']),
+    ...mapActions('dashboard', ['billList']),
     ...mapActions('dashboard', ['total'])
   },
 
@@ -490,6 +226,7 @@ export default class Dashboard extends Vue {
 
   public currentUser!: () => Promise<any>;
   public total!: () => Promise<any>;
+  public billList!: () => Promise<any>;
 
   public created() {
     this.updateTime();
@@ -506,6 +243,7 @@ export default class Dashboard extends Vue {
     const mins: string = this.zeroPadding(cd.getMinutes(), 2);
     // const secs: string = this.zeroPadding(cd.getSeconds(), 2);
     this.time = `${hours}:${mins}`;
+    this.billList();
   }
 
   public async initCurrentProfile() {

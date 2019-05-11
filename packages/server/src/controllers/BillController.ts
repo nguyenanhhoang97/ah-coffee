@@ -102,6 +102,41 @@ export class BillController {
     });
   }
 
+  public getRecentBills(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { query } = req;
+      const { data } = decoded;
+      const { _id } = data;
+      const bill = await Bill.find({
+        salesperson_id: _id
+      })
+        .sort({ occupation: -1 })
+        .limit(10)
+        .populate({
+          path: 'customer_id'
+        })
+        .populate({
+          path: 'salesperson_id'
+        })
+        .populate({
+          path: 'items'
+        })
+        .exec();
+      const count = await Bill.count({
+        salesperson_id: _id
+      });
+      return res.status(200).json({ bill, total: count });
+    });
+  }
+
   public getBillListByCustomer(req: Request, res: Response) {
     const { authorization } = req.headers;
     if (!authorization) {

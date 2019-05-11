@@ -50,12 +50,14 @@
                 size="medium"
                 type="primary"
                 icon="el-icon-setting"
+                v-show="role == 'admin'"
                 @click="handleChangeCateStatus(scope.$index, scope.row)"
               ></el-button>
               <el-button
                 size="medium"
                 type="danger"
                 icon="el-icon-delete"
+                v-show="role == 'admin'"
                 @click="handleDeleteCate(scope.$index, scope.row)"
               ></el-button>
             </template>
@@ -132,7 +134,8 @@ import { SERVER_URL } from '@/core/constants';
 
   computed: {
     ...mapGetters('category', ['getCategories', 'getLoading']),
-    ...mapState('category', ['statusList'])
+    ...mapState('category', ['statusList']),
+    ...mapState('session', ['role'])
   },
 
   data() {

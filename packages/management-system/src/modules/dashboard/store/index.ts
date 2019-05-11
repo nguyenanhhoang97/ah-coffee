@@ -6,7 +6,9 @@ import { DashboardState } from './types';
 import { RootState } from '@/store/types';
 
 export const state: DashboardState = {
-  statistics: {}
+  statistics: {},
+  bills: {},
+  loading: false
 };
 
 const namespaced: boolean = true;

@@ -34,7 +34,8 @@ import {
   TOTAL,
   CREATE_BILL,
   BIll_LIST,
-  GET_BILL_LIST_BY_SALESPERSON
+  GET_BILL_LIST_BY_SALESPERSON,
+  RECENT_BILL
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -116,5 +117,6 @@ export class Routes {
     app.route(CREATE_BILL).post(this.billController.createBill);
     app.route(BIll_LIST).get(this.billController.getBillList);
     app.route(GET_BILL_LIST_BY_SALESPERSON).get(this.billController.getBillListBySalepersons);
+    app.route(RECENT_BILL).get(this.billController.getRecentBills);
   }
 }

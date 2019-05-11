@@ -47,12 +47,14 @@
                 size="medium"
                 type="primary"
                 icon="el-icon-setting"
+                v-show="role == 'admin'"
                 @click="handleChangeProductStatus(scope.$index, scope.row)"
               ></el-button>
               <el-button
                 size="medium"
                 type="danger"
                 icon="el-icon-delete"
+                v-show="role == 'admin'"
                 @click="handleDeleteProduct(scope.$index, scope.row)"
               ></el-button>
             </template>
@@ -187,7 +189,8 @@ import { SERVER_URL } from '@/core/constants';
   computed: {
     ...mapGetters('product', ['getProducts', 'getLoading']),
     ...mapState('product', ['statusList']),
-    ...mapState('category', ['categories'])
+    ...mapState('category', ['categories']),
+    ...mapState('session', ['role'])
   },
 
   data() {

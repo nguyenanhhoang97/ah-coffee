@@ -40,6 +40,7 @@ export const PRODUCT_DETAILS = PRODUCT + '/details';
 // ----BILL
 export const BILL = ROOT + '/bill';
 export const BIll_LIST = BILL + '/list';
+export const RECENT_BILL = BILL + '/recent';
 export const CREATE_BILL = BILL + '/create';
 export const GET_BILL_LIST_BY_CUSTOMER = BILL + '/get-bill-list-by-customer';
 export const GET_BILL_LIST_BY_SALESPERSON =
