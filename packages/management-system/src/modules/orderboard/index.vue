@@ -189,7 +189,13 @@ export default class OrderBoard extends Vue {
         ttPrice: totalPrice,
         selectedPaymentMethod: paymentMethod
       } = this.$data;
-      const params = {productList, customerId, totalPrice, paymentMethod, ccRC };
+      const params = {
+        productList,
+        customerId,
+        totalPrice,
+        paymentMethod,
+        ccRC
+      };
       await this.createBill(params).then((res: any) => {
         if (res === 'saved') {
           const noti: any = this.$i18n.t('message.createdBillNoti');
@@ -198,7 +204,7 @@ export default class OrderBoard extends Vue {
           this.$data.tableData = [];
           this.$data.ttPrice = 0;
         }
-      })
+      });
     } catch (e) {
       throw e;
     }

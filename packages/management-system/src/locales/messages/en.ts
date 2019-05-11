@@ -125,7 +125,11 @@ export default {
     mngCus: 'Manage Customer',
     mngSales: 'Manage Salesperson',
     users: 'Users',
-    categories: 'Categories'
+    categories: 'Categories',
+    mngBill: 'Manage Bill',
+    billDetails: 'Bill Details',
+    customerName: 'Customer Name',
+    staffName: 'Staff Name'
   },
   error: {
     notFound: 'Not Found'
@@ -140,6 +144,8 @@ export default {
   tag: {
     pending: 'Pending',
     available: 'Available',
-    notAvailable: 'Not Available'
+    notAvailable: 'Not Available',
+    cash: 'Cash',
+    cc: 'Credit Card'
   }
 };

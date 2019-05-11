@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 let billDetailSchema = new Schema({
   id: { type: Number, required: true },
   product_id: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
+  product_name: { type: String, required: true},
   unit_price: { type: Number, required: true },
   quantity: { type: Number, required: true },
   created_date: { type: Date, default: Date.now, required: true },

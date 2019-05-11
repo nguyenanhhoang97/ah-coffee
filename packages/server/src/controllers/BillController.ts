@@ -38,6 +38,7 @@ export class BillController {
           // tslint:disable-next-line
           let billDetail = new BillDetail({
             product_id: productList[i]._id,
+            product_name: productList[i].name,
             unit_price: productList[i].unitPrice,
             quantity: productList[i].quantity
           });
@@ -78,15 +79,15 @@ export class BillController {
       const offset = pageIndex * pageSize;
       const limit = parseInt(pageSize, 10);
       const { data } = decoded;
-      const { id } = data;
+      const { _id } = data;
       const bill = await Bill.find({
-        salesperson_id: id
+        salesperson_id: _id
       })
         .skip(offset)
         .limit(limit)
         .exec();
       const count = await Bill.count({
-        salesperson_id: id
+        salesperson_id: _id
       });
       return res.status(200).json({ bill, total: count });
     });
@@ -107,16 +108,48 @@ export class BillController {
       const offset = pageIndex * pageSize;
       const limit = parseInt(pageSize, 10);
       const { data } = decoded;
-      const { id } = data;
+      const { _id } = data;
       const bill = await Bill.find({
-        customer_id: id
+        customer_id: _id
       })
         .skip(offset)
         .limit(limit)
         .exec();
       const count = await Bill.count({
-        customer_id: id
+        customer_id: _id
       });
+      return res.status(200).json({ bill, total: count });
+    });
+  }
+
+  public getBillList(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(403).json({ message: 'forbidden' });
+    }
+    const token: any = authorization;
+    jwt.verify(token, JWT_CHARS, async (err: any, decoded: any) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      const { query } = req;
+      const { pageIndex, pageSize } = query;
+      const offset = pageIndex * pageSize;
+      const limit = parseInt(pageSize, 10);
+      const bill = await Bill.find({})
+        .skip(offset)
+        .limit(limit)
+        .populate({
+          path: 'customer_id'
+        })
+        .populate({
+          path: 'salesperson_id'
+        })
+        .populate({
+          path: 'items'
+        })
+        .exec();
+      const count = await Bill.count({});
       return res.status(200).json({ bill, total: count });
     });
   }

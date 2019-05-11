@@ -10,6 +10,7 @@ import { profile } from '@/modules/profile/store';
 import { orderBoard } from '@/modules/orderboard/store';
 import { customer } from '@/modules/customer/store';
 import { salesperson } from '@/modules/salesperson/store';
+import { bill } from '@/modules/bill/store';
 
 import { RootState } from './types';
 
@@ -28,7 +29,8 @@ const store: StoreOptions<RootState> = {
     profile,
     orderBoard,
     customer,
-    salesperson
+    salesperson,
+    bill
   },
   strict: process.env.NODE_ENV !== 'production'
 };

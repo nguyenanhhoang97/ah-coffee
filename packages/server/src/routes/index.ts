@@ -32,7 +32,8 @@ import {
   CHECK_SESSION,
   CHANGE_ROLE,
   TOTAL,
-  CREATE_BILL
+  CREATE_BILL,
+  BIll_LIST
 } from '../core/constant';
 
 const storage = multer.diskStorage({
@@ -112,5 +113,6 @@ export class Routes {
 
     // Bill
     app.route(CREATE_BILL).post(this.billController.createBill);
+    app.route(BIll_LIST).get(this.billController.getBillList);
   }
 }
