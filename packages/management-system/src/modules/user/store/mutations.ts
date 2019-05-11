@@ -4,7 +4,8 @@ import {
   SET_USER,
   LOADING,
   CREATE_USER_STATUS,
-  UPDATE_USER_STATUS
+  UPDATE_USER_STATUS,
+  ADM_RESET_PSW_NEW_PSW
 } from './types';
 
 export const mutations: MutationTree<UserState> = {
@@ -22,5 +23,9 @@ export const mutations: MutationTree<UserState> = {
 
   [UPDATE_USER_STATUS](state: UserState, status: string) {
     state.updateUserStatus = status;
+  },
+
+  [ADM_RESET_PSW_NEW_PSW](state: UserState, password: string) {
+    state.newPsw = password;
   }
 };

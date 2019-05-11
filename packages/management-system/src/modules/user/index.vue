@@ -77,13 +77,24 @@
         <el-form-item :label="$t('label.phoneNumber')" :label-width="formLabelWidth">
           <el-input v-model="selectedItem.phone_number"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('label.avatar')" :label-width="formLabelWidth">
-          <input type="file" name="import_file" accept="image/*" @change="selectedFile($event)">
+        <el-form-item
+          :label="$t('label.role')"
+          :label-width="formLabelWidth"
+          v-if="roles"
+        >
+          <el-select v-model="selectedItem.role" placeholder="Select">
+            <el-option
+              v-for="item in roles"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogFormVisible = false">{{ $t('button.cancel') }}</el-button>
-        <el-button type="primary" @click="handleSaveUpdateCate">{{ $t('button.save') }}</el-button>
+        <el-button type="primary" @click="handleSaveUpdateUser">{{ $t('button.save') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -100,7 +111,8 @@ import { SERVER_URL } from '@/core/constants';
   },
 
   computed: {
-    ...mapGetters('user', ['getUsers', 'getLoading'])
+    ...mapGetters('user', ['getUsers', 'getLoading']),
+    ...mapState('user', ['roles'])
   },
 
   data() {
@@ -112,7 +124,6 @@ import { SERVER_URL } from '@/core/constants';
       formLabelWidth: '200px',
       selectedItem: {},
       serverUrl: SERVER_URL,
-      file: undefined
     };
   },
 
@@ -165,22 +176,19 @@ export default class User extends Vue {
     this.$data.selectedItem = { ...row };
   }
 
-  public selectedFile(event: any) {
-    const fileInp = event.target.files[0];
-    this.$data.file = fileInp;
-  }
-
   public async handleSaveUpdateUser() {
     const params = {
-      categoryId: this.$data.selectedItem.id,
-      name: this.$data.selectedItem.name,
-      introduction: this.$data.selectedItem.introduction,
-      file: this.$data.file,
-      oldPath: this.$data.selectedItem.img_path
+      usrId: this.$data.selectedItem.id,
+      email: this.$data.selectedItem.email,
+      username: this.$data.selectedItem.username,
+      fullname: this.$data.selectedItem.fullname,
+      address: this.$data.selectedItem.address,
+      phoneNumber: this.$data.selectedItem.phone_number,
+      usrRole: this.$data.selectedItem.role
     };
     try {
       await this.updateUser(params).then((message: any) => {
-        if (message === 'updated_category_info') {
+        if (message === 'adm_updated_user_info') {
           const parameters = {
             pageIndex: 0,
             pageSize: 10

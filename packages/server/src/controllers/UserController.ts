@@ -268,22 +268,20 @@ export class UserController {
         }
         const { data } = decoded;
         const { id, role } = data;
-        const { path } = req.files[0];
         if (role !== 'admin') {
           return res.status(403).json({ message: 'forbidden' });
         }
         const {
-          userId,
+          usrId,
           email,
           username,
           fullname,
           address,
           phoneNumber,
-          usrRole,
-          usrStatus
+          usrRole
         } = body;
         User.findOneAndUpdate(
-          { id: userId },
+          { id: usrId },
           {
             $set: {
               email,
@@ -291,9 +289,7 @@ export class UserController {
               username,
               address,
               phoneNumber,
-              avatar: path,
               role: usrRole,
-              status: usrStatus
             }
           },
           { new: true },

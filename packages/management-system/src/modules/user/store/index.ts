@@ -10,6 +10,7 @@ export const state: UserState = {
   loading: false,
   createUserStatus: '',
   updateUserStatus: '',
+  newPsw: '',
   roles: [
     { value: 'admin', label: 'admin' },
     {

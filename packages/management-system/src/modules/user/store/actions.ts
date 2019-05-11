@@ -5,7 +5,8 @@ import {
   SET_USER,
   LOADING,
   CREATE_USER_STATUS,
-  UPDATE_USER_STATUS
+  UPDATE_USER_STATUS,
+  ADM_RESET_PSW_NEW_PSW
 } from './types';
 import { RootState } from '@/store/types';
 import { API_ENDPOINT } from '@/core/constants';
@@ -70,18 +71,19 @@ export const actions: ActionTree<UserState, RootState> = {
 
   updateUser(
     { commit },
-    { fullname, email, address, phoneNumber, file, oldPath }
+    { usrId, email, username, fullname, address, phoneNumber, usrRole }
   ): Promise<any> {
     commit(LOADING, true);
-    const url = API_ENDPOINT + '/adm/update-usr-info';
+    const url = API_ENDPOINT + '/user/adm/update-usr-info';
     // tslint:disable-next-line
     let formData = new FormData();
-    formData.append('fullname', fullname);
+    formData.append('usrId', usrId);
     formData.append('email', email);
+    formData.append('username', username);
+    formData.append('fullname', fullname);
     formData.append('address', address);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('file', file);
-    formData.append('oldPath', oldPath);
+    formData.append('usrRole', usrRole);
     return axios
       .post(url, formData, {
         headers: {
@@ -106,5 +108,30 @@ export const actions: ActionTree<UserState, RootState> = {
       .catch((error: any) => {
         throw error;
       });
-  }
+  },
+
+  admResetPassword(
+    { commit },
+    { usrId }
+  ): Promise<any> {
+    commit(LOADING, true);
+    const url = API_ENDPOINT + '/user/adm/reset-usr-psw';
+    return axios
+      .post(url, { usrId })
+      .then((response: any) => {
+        const { new_password } = response.data;
+        if (new_password !== undefined) {
+          commit(ADM_RESET_PSW_NEW_PSW, new_password);
+          commit(LOADING, false);
+          return new_password;
+        } else {
+          commit(ADM_RESET_PSW_NEW_PSW, 'internal_error');
+          commit(LOADING, false);
+          return 'internal_error';
+        }
+      })
+      .catch((error: any) => {
+        throw error;
+      });
+  },
 };
